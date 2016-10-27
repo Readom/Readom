@@ -13,6 +13,9 @@ Motion::Project::App.setup do |app|
   app.name = 'README'
   app.identifier = 'cc.mib.README'
 
+  app.icons = ['icons/icon-1024.png', 'icons/icon-120.png', 'icons/icon-180.png', 'icons/icon-58.png', 'icons/icon-80.png', 'icons/icon-87.png']
+  app.prerendered_icon = false
+
   app.development do
     app.codesign_certificate = MotionProvisioning.certificate(
       type: :development,
