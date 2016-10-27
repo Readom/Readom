@@ -4,14 +4,14 @@ class Readom
 
     AFMotion::JSON.get(listEntry) do |result|
       if result.success?
+        loop_count = 0
         item = result.object.sample
 
-        unless item['url'].nil?
-          title = item['title']
-          url = item['url']
-
-          block.call(title, url)
+        while item['url'].nil? and result.object.size >= loop_count+=1
+          item = result.object.sample
         end
+
+        block.call(item['title'], item['url'])
       end
     end
   end

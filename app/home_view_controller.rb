@@ -4,12 +4,10 @@ class HomeViewController < UIViewController
 
     @layout = HomeLayout.new
     self.view = @layout.view
-
-    @action_button = @layout.action_button
   end
 
   def viewDidLoad
-    @action_button.addTarget(self,
+    @layout.action_button.addTarget(self,
       action: :readom_sample,
       forControlEvents: UIControlEventTouchUpInside)
   end
