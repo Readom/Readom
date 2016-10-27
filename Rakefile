@@ -16,6 +16,9 @@ Motion::Project::App.setup do |app|
   app.icons = ['icons/icon-1024.png', 'icons/icon-120.png', 'icons/icon-180.png', 'icons/icon-58.png', 'icons/icon-80.png', 'icons/icon-87.png']
   app.prerendered_icon = false
 
+  app.deployment_target = '9.0'
+  app.frameworks << 'SafariServices'
+
   app.development do
     app.codesign_certificate = ENV['TRAVIS'] ? nil : MotionProvisioning.certificate(
       type: :development,
