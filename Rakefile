@@ -17,11 +17,11 @@ Motion::Project::App.setup do |app|
   app.prerendered_icon = false
 
   app.development do
-    app.codesign_certificate = MotionProvisioning.certificate(
+    app.codesign_certificate = ENV['TRAVIS'] ? nil : MotionProvisioning.certificate(
       type: :development,
       platform: :ios)
 
-    app.provisioning_profile = MotionProvisioning.profile(
+    app.provisioning_profile = ENV['TRAVIS'] ? nil : MotionProvisioning.profile(
       bundle_identifier: app.identifier,
       app_name: app.name,
       platform: :ios,
