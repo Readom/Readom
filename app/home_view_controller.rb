@@ -1,7 +1,13 @@
 class HomeViewController < UIViewController
-  def loadView
+  def initWithNibName(name, bundle: bundle)
+    super
     self.title = "README"._
+    self.tabBarItem = UITabBarItem.alloc.initWithTitle("README"._, image: nil, tag: 0)
 
+    self
+  end
+
+  def loadView
     @layout = HomeLayout.new
     self.view = @layout.view
   end
