@@ -14,7 +14,7 @@ class HomeViewController < UIViewController
 
 private
   def readom_sample
-    Readom.fetch_item_sample(:topstories) do |title, url|
+    Readom.fetch_item_sample(:topstories) do |id, title, url|
       self.presentViewController(SFSafariViewController.alloc.initWithURL(NSURL.URLWithString url, entersReaderIfAvailable: true),
         animated: true,
         completion: nil)
