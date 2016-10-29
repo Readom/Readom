@@ -11,7 +11,7 @@ class Readom
           item = result.object.sample
         end
 
-        block.call(item['title'], item['url'])
+        block.call(item['id'], item['title'], item['url'])
       end
     end
   end

@@ -1,7 +1,13 @@
 class HomeViewController < UIViewController
-  def loadView
+  def initWithNibName(name, bundle: bundle)
+    super
     self.title = "README"._
+    self.tabBarItem = UITabBarItem.alloc.initWithTitle("README"._, image: nil, tag: 0)
 
+    self
+  end
+
+  def loadView
     @layout = HomeLayout.new
     self.view = @layout.view
   end
@@ -14,7 +20,7 @@ class HomeViewController < UIViewController
 
 private
   def readom_sample
-    Readom.fetch_item_sample(:topstories) do |title, url|
+    Readom.fetch_item_sample(:topstories) do |id, title, url|
       self.presentViewController(SFSafariViewController.alloc.initWithURL(NSURL.URLWithString url, entersReaderIfAvailable: true),
         animated: true,
         completion: nil)
