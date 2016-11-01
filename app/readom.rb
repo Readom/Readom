@@ -15,4 +15,16 @@ class Readom
       end
     end
   end
+
+  def self.fetch_items(list=:newstories, &block)
+    listEntry = 'https://Readom.github.io/HackerNewsJSON/%s.json' % list
+
+    AFMotion::JSON.get(listEntry) do |result|
+      if result.success?
+        result.object.each do |item|
+          block.call(item['id'], item['title'], item['url']) unless item['url'].nil?
+        end
+      end
+    end
+  end
 end
