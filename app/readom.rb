@@ -1,6 +1,6 @@
 class Readom
   def self.fetch_item(item_id, &block)
-    itemEntry = 'https://readom-api.herokuapp.com/news/v0/%s.json' % item_id
+    itemEntry = 'https://readom-api.herokuapp.com/news/v0/item/%s.json' % item_id
 
     AFMotion::JSON.get(itemEntry) do |result|
       if result.success?
@@ -9,7 +9,7 @@ class Readom
         item_title = item['title']
         item_url = item['url']
 
-        block.call(item['id'], item['title'], item['url'])
+        block.call(item)
       end
     end
   end
@@ -22,13 +22,11 @@ class Readom
         loop_count = 0
         item_id = result.object.sample
 
-        if block_given?
+        if block
           fetch_item(item_id) do |item|
             block.call(item['id'], item['title'], item['url'])
           end
         end
-
-        return result.object
       end
     end
   end
@@ -38,15 +36,13 @@ class Readom
 
     AFMotion::JSON.get(listEntry) do |result|
       if result.success?
-        if block_given?
+        if block
           result.object.each do |item_id|
             fetch_item(item_id) do |item|
               block.call(item['id'], item['title'], item['url']) unless item['url'].nil?
             end
           end
         end
-
-        return result.object
       end
     end
   end
