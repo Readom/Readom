@@ -22,9 +22,13 @@ class Readom
         loop_count = 0
         item_id = result.object.sample
 
-        fetch_item(item_id) do |item|
-          block.call(item['id'], item['title'], item['url'])
+        if block_given?
+          fetch_item(item_id) do |item|
+            block.call(item['id'], item['title'], item['url'])
+          end
         end
+
+        return result.object
       end
     end
   end
@@ -34,11 +38,15 @@ class Readom
 
     AFMotion::JSON.get(listEntry) do |result|
       if result.success?
-        result.object.each do |item_id|
-          fetch_item(item_id) do |item|
-            block.call(item['id'], item['title'], item['url']) unless item['url'].nil?
+        if block_given?
+          result.object.each do |item_id|
+            fetch_item(item_id) do |item|
+              block.call(item['id'], item['title'], item['url']) unless item['url'].nil?
+            end
           end
         end
+
+        return result.object
       end
     end
   end
