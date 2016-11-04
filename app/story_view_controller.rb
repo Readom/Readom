@@ -72,17 +72,18 @@ class StoriesLayout < MotionKit::Layout
   end
 
   def title_label_style
-    text "Stories"._
+    text "HackerNews::Best"._
     size_to_fit
 
-    center ['50%', '0% + 90']
+    center ['50%', '0% + 80']
   end
 
   def table_style
+    background_color UIColor.colorWithRed(0.86, green: 0.96, blue: 0.91, alpha: 0.95)
     autoresizing_mask :pin_to_top, :flexible_height, :flexible_width
 
-    width '100% - 10'
-    frame below(:title_label, down: 5, height: '100% - 160')
-    x 5
+    frame below(:title_label, down: 5, height: '100% - 145')
+    x 0
+    width '100%'
   end
 end
