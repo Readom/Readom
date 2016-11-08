@@ -16,19 +16,10 @@ class GiveMeFiveViewController < UIViewController
 
   def viewDidLoad
     super
-
-    #@layout.action_button.addTarget(self,
-    #  action: :give_me_five,
-    #  forControlEvents: UIControlEventTouchUpInside)
   end
 
   def viewDidAppear(animated)
     super
-  end
-
-private
-  def give_me_five
-    puts 'give me five '
   end
 end
 
@@ -43,7 +34,6 @@ class GiveMeFiveLayout < MotionKit::Layout
 
     flow_layout = UICollectionViewFlowLayout.alloc.init
     flow_layout.scrollDirection = UICollectionViewScrollDirectionVertical
-
     collection = UICollectionView.alloc.initWithFrame CGRectZero, collectionViewLayout: flow_layout
     add collection, :collection
   end
@@ -93,8 +83,6 @@ class GiveMeFiveLayout < MotionKit::Layout
     #)
     id, title, url = @data[indexPath.row]
     cell.set(title, url, collectionView)
-#    cell.title = title
-#    cell.url = url
 
     cell
   end
@@ -134,14 +122,6 @@ class GiveMeFiveCollectionCell < UICollectionViewCell
 
   def set(title, url, collectionView)
     @layout.set(title, url, collectionView)
-  end
-
-  def title=(text)
-    @layout.title.text = text
-  end
-
-  def url=(url)
-    @layout.url = url
   end
 end
 
