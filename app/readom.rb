@@ -31,13 +31,13 @@ class Readom
     end
   end
 
-  def self.fetch_items(list=:newstories, &block)
+  def self.fetch_items(list=:newstories, max=10, &block)
     listEntry = 'https://readom-api.herokuapp.com/news/v0/%s.json' % list
 
     AFMotion::JSON.get(listEntry) do |result|
       if result.success?
         if block
-          result.object.each do |item_id|
+          result.object.shuffle[0..max].each do |item_id|
             fetch_item(item_id) do |item|
               block.call(item['id'], item['title'], item['url']) unless item['url'].nil?
             end
