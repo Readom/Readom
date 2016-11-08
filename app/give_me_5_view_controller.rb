@@ -140,18 +140,16 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
 
   def cell_style
     background_color UIColor.whiteColor
-
-    size_to_fit
   end
 
   def title_style
     text_color UIColor.grayColor
     lineBreakMode NSLineBreakByWordWrapping
-    numberOfLines 0
+    numberOfLines 2
 
-    x 5
+    x 2
     y 0
-    width '100% - 10'
+    width '100% - 5'
     height '100% - 25'
   end
 
