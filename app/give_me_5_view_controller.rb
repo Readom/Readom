@@ -50,7 +50,7 @@ class GiveMeFiveLayout < MotionKit::Layout
   end
 
   def collection_style
-    background_color UIColor.colorWithRed(0.71, green: 0.71, blue: 0.76, alpha: 1.0)
+    background_color UIColor.colorWithRed(0.91, green: 0.96, blue: 0.96, alpha: 0.8)
 
     constraints do
       x 0
@@ -66,7 +66,16 @@ class GiveMeFiveLayout < MotionKit::Layout
     set_data unless @data
   end
 
-  private
+private
+  def set_data
+    @data = []
+    Readom.fetch_items(:newstories, GiveMeFiveViewController::GIVE_ME_NUMBER) do |id, title, url|
+      @data << [id, title, url]
+
+      self.collection.reloadData
+    end
+  end
+
   def numberOfSectionsInCollectionView(collectionView)
     1
   end
@@ -88,24 +97,20 @@ class GiveMeFiveLayout < MotionKit::Layout
   end
 
   def collectionView(collectionView, layout: layout, sizeForItemAtIndexPath: indexPath)
-    per_line = 2
+    per_line = 1
     margin = 5
+    first_line_scale = 2
+    total = GiveMeFiveViewController::GIVE_ME_NUMBER
+    lines = (total + first_line_scale - 1) / per_line
+
     full_width = collectionView.bounds.size.width
     per_width = full_width / per_line - margin * 1
 
     full_height = collectionView.bounds.size.height
-    per_height = full_height / 4 - margin * 1
+    per_height = full_height / (lines + first_line_scale) - margin * 1
 
-    indexPath.row == 0 ? [full_width, per_height * 2] : [per_width, per_height]
-  end
-
-  def set_data
-    @data = []
-    Readom.fetch_items(:newstories, GiveMeFiveViewController::GIVE_ME_NUMBER) do |id, title, url|
-      @data << [id, title, url]
-
-      self.collection.reloadData
-    end
+    indexPath.row == 0 ? [full_width, per_height * first_line_scale] : [per_width, per_height]
+    [full_width, per_height]
   end
 end
 
@@ -126,14 +131,12 @@ class GiveMeFiveCollectionCell < UICollectionViewCell
 end
 
 class GiveMeFiveCollectionCellLayout < MK::Layout
-  view :title
-
   @url = nil
   @collectionView = nil
 
   def layout
     root :cell do
-      add UILabel, :title, z_index: 1
+      add UILabel, :title_label, z_index: 1
       add UIButton, :btn_control, z_index: 2
     end
   end
@@ -142,22 +145,20 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
     background_color UIColor.whiteColor
   end
 
-  def title_style
+  def title_label_style
     text_color UIColor.grayColor
     lineBreakMode NSLineBreakByWordWrapping
     numberOfLines 2
 
-    x 2
-    y 0
-    width '100% - 5'
-    height '100% - 25'
+    frame [[2, 2], ['100% - 54', '100% - 4']]
   end
 
   def btn_control_style
-    x 0
-    y 0
-    width '100%'
-    height '100%'
+    frame [['100% - 50', 0], [50, '100%']]
+
+    title 'View'
+
+    background_color UIColor.colorWithRed(0.81, green: 0.76, blue: 0.86, alpha: 0.8)
 
     #addTarget(self,
     #  action: :btn_clicked,
@@ -166,7 +167,7 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
 
   def set(title, url, collectionView)
     @url = url
-    self.get(:title).text = title
+    self.get(:title_label).text = title
     @collectionView = collectionView
   end
 end

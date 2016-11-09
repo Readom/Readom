@@ -32,7 +32,7 @@ class Readom
   end
 
   def self.fetch_items(list=:newstories, max=10, &block)
-    listEntry = 'https://readom-api.herokuapp.com/news/v0/%s.json' % list
+    listEntry = 'https://readom-api.herokuapp.com/news/v0/%s.json?max=%d' % [list, max]
 
     AFMotion::JSON.get(listEntry) do |result|
       if result.success?
