@@ -14,33 +14,14 @@ class Readom
     end
   end
 
-  def self.fetch_item_sample(list=:newstories, &block)
-    listEntry = 'https://readom-api.herokuapp.com/news/v0/%s.sample' % list
-
-    AFMotion::JSON.get(listEntry) do |result|
-      if result.success?
-        loop_count = 0
-        item_id = result.object.sample
-
-        if block
-          fetch_item(item_id) do |item|
-            block.call(item['id'], item['title'], item['url'])
-          end
-        end
-      end
-    end
-  end
-
-  def self.fetch_items(list=:newstories, &block)
-    listEntry = 'https://readom-api.herokuapp.com/news/v0/%s.json' % list
+  def self.fetch_items(list=:newstories, limit=10, &block)
+    listEntry = 'https://readom-api.herokuapp.com/news/v0/%s.json?limit=%d' % [list, limit]
 
     AFMotion::JSON.get(listEntry) do |result|
       if result.success?
         if block
-          result.object.each do |item_id|
-            fetch_item(item_id) do |item|
-              block.call(item['id'], item['title'], item['url']) unless item['url'].nil?
-            end
+          result.object.shuffle.each do |item|
+            block.call(item['id'], item['title'], item['url']) unless item['url'].nil?
           end
         end
       end

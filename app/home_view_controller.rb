@@ -20,12 +20,36 @@ class HomeViewController < UIViewController
 
 private
   def readom_sample
-    Readom.fetch_item_sample(:topstories) do |id, title, url|
-      self.presentViewController(SFSafariViewController.alloc.initWithURL(NSURL.URLWithString url, entersReaderIfAvailable: true),
-        animated: true,
-        completion: nil)
+    Readom.fetch_items(:topstories, 1) do |id, title, url|
+      show(url)
     end
   end
+
+  def show(url, &block)
+    sfsView = SFSafariViewController.alloc.initWithURL(NSURL.URLWithString url, entersReaderIfAvailable: true)
+    sfsView.delegate = self
+    self.presentViewController(sfsView,
+      animated: true,
+      completion: block)
+  end
+
+  # Delegate SFSafariViewController
+  def safariViewController(controller, didCompleteInitialLoad:didLoadSuccessfully)
+    #Tells the delegate that the initial URL load completed.
+    #puts 'sfsView loaded' if didLoadSuccessfully
+  end
+
+  def safariViewController(controller, activityItemsForURL:url, title:title)
+    #Tells the delegate that the user tapped an Action button.
+    #puts 'Action button tapped: url %s, title %s' % [url, title]
+    #return an array of UIActivityViewController
+  end
+
+  def safariViewControllerDidFinish(controller)
+    #Tells the delegate that the user dismissed the view.
+    #puts 'sfsView closed'
+  end
+  # end Delegate
 end
 
 class HomeLayout < MotionKit::Layout

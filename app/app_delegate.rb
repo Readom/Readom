@@ -3,6 +3,7 @@ class AppDelegate
     tab_controller = UITabBarController.alloc.initWithNibName(nil, bundle:nil)
     tab_controller.viewControllers = [
       UINavigationController.alloc.initWithRootViewController(HomeViewController.new),
+      UINavigationController.alloc.initWithRootViewController(GiveMeFiveViewController.new),
       UINavigationController.alloc.initWithRootViewController(StoriesViewController.new)
     ]
 
