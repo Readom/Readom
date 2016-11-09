@@ -12,6 +12,8 @@ class GiveMeFiveViewController < UIViewController
   def loadView
     @layout = GiveMeFiveLayout.new
     self.view = @layout.view
+
+    @layout.vc = self
   end
 
   def viewDidLoad
@@ -26,6 +28,8 @@ end
 class GiveMeFiveLayout < MotionKit::Layout
   view :action_button
   view :collection
+
+  attr_accessor :vc
 
   def layout
     background_color UIColor.colorWithRed(0.81, green: 0.91, blue: 0.86, alpha: 1.0)
@@ -91,7 +95,7 @@ private
     #  reuseIdentifier:GiveMeFiveCollectionCell::IDENTIFIER
     #)
     id, title, url = @data[indexPath.row]
-    cell.set(title, url, collectionView)
+    cell.set(title, url, @vc)
 
     cell
   end
@@ -130,19 +134,19 @@ class GiveMeFiveCollectionCell < UICollectionViewCell
     self
   end
 
-  def set(title, url, collectionView)
-    @layout.set(title, url, collectionView)
+  def set(title, url, targetViewController)
+    @layout.set(title, url, targetViewController)
   end
 end
 
 class GiveMeFiveCollectionCellLayout < MK::Layout
   @url = nil
-  @collectionView = nil
+  @targetViewController = nil
 
   def layout
     root :cell do
       add UILabel, :title_label, z_index: 1
-      add UIButton, :btn_control, z_index: 2
+      add UIButton, :view_button, z_index: 2
     end
   end
 
@@ -163,7 +167,7 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
     end
   end
 
-  def btn_control_style
+  def view_button_style
     constraints do
       #left.equals(:superview, :right).plus(-55)
       left.equals(:title_label, :right).plus(1)
@@ -176,14 +180,28 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
 
     background_color UIColor.colorWithRed(0.81, green: 0.76, blue: 0.86, alpha: 0.8)
 
-    #addTarget(self,
-    #  action: :btn_clicked,
-    #  forControlEvents: UIControlEventTouchUpInside)
+    addTarget(self,
+      action: :view_button_clicked,
+      forControlEvents: UIControlEventTouchUpInside)
   end
 
-  def set(title, url, collectionView)
+  def set(title, url, targetViewController)
     @url = url
     self.get(:title_label).text = title
-    @collectionView = collectionView
+    @targetViewController = targetViewController
+  end
+
+private
+  def view_button_clicked
+    show_in_sfsvc do end
+  end
+
+  def show_in_sfsvc(&block)
+    sfsViewController = SFSafariViewController.alloc.initWithURL(NSURL.URLWithString @url, entersReaderIfAvailable: true)
+    #sfsViewController.delegate = @targetViewController | self
+
+    @targetViewController.presentViewController(sfsViewController,
+      animated: true,
+      completion: block)
   end
 end
