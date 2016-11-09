@@ -1,6 +1,6 @@
 class Readom
-  #HOST = 'https://readom-api.herokuapp.com'
-  HOST = 'http://readom-api.herokuapp.com.mkmd.cn'
+  HOST = 'https://readom-api.herokuapp.com'
+  #HOST = 'http://readom-api.herokuapp.com.mkmd.cn'
 
   def self.fetch_item(item_id, &block)
     itemEntry = '%s/news/v0/item/%s.json' % [Readom::HOST, item_id]
