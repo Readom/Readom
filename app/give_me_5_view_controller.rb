@@ -32,7 +32,7 @@ class GiveMeFiveLayout < MotionKit::Layout
   attr_accessor :vc
 
   def layout
-    background_color UIColor.colorWithRed(0.81, green: 0.91, blue: 0.86, alpha: 1.0)
+    background_color UIColor.colorWithRed(0.90, green: 0.95, blue: 0.95, alpha: 1.0)
 
     add UIButton, :action_button
 
@@ -43,18 +43,25 @@ class GiveMeFiveLayout < MotionKit::Layout
   end
 
   def action_button_style
+    background_color UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 1.0)
+    title_color UIColor.whiteColor
+    contentEdgeInsets [20, 10, 20, 10]
+
     title "GiveMeFive"._
     size_to_fit
+
+    left '25%'
+    width '50%'
+    center_y '100% - 100'
+
 
     addTarget(self,
       action: :set_data,
       forControlEvents: UIControlEventTouchUpInside)
-
-    center ['50%', '100% - 100']
   end
 
   def collection_style
-    background_color UIColor.colorWithRed(0.91, green: 0.96, blue: 0.96, alpha: 0.8)
+    background_color UIColor.colorWithRed(0.96, green: 0.96, blue: 0.96, alpha: 0.5)
 
     constraints do
       left.equals(:superview, :left)
@@ -155,7 +162,7 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
   end
 
   def title_label_style
-    text_color UIColor.grayColor
+    text_color UIColor.colorWithRed(0.25, green: 0.25, blue: 0.25, alpha: 0.5)
     lineBreakMode NSLineBreakByWordWrapping
     numberOfLines 3
 
@@ -168,6 +175,11 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
   end
 
   def view_button_style
+    background_color UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 1.0)
+    title_color UIColor.whiteColor
+
+    title 'VIEW'._
+
     constraints do
       #left.equals(:superview, :right).plus(-55)
       left.equals(:title_label, :right).plus(1)
@@ -175,10 +187,6 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
       top.equals(:superview, :top)
       bottom.equals(:superview, :bottom)
     end
-
-    title 'View'
-
-    background_color UIColor.colorWithRed(0.81, green: 0.76, blue: 0.86, alpha: 0.8)
 
     addTarget(self,
       action: :view_button_clicked,
