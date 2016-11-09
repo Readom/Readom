@@ -20,7 +20,7 @@ class HomeViewController < UIViewController
 
 private
   def readom_sample
-    Readom.fetch_item_sample(:topstories) do |id, title, url|
+    Readom.fetch_items(:topstories, 1) do |id, title, url|
       show(url)
     end
   end

@@ -53,10 +53,10 @@ class GiveMeFiveLayout < MotionKit::Layout
     background_color UIColor.colorWithRed(0.91, green: 0.96, blue: 0.96, alpha: 0.8)
 
     constraints do
-      x 0
-      y 100
+      left.equals(:superview, :left)
       right.equals(:superview, :right)
-      bottom.equals(:superview, :bottom).minus(200)
+      top.equals(:superview, :top).plus(70)
+      bottom.equals(:superview, :bottom).minus(180)
     end
 
     dataSource self
@@ -91,26 +91,32 @@ private
     #  reuseIdentifier:GiveMeFiveCollectionCell::IDENTIFIER
     #)
     id, title, url = @data[indexPath.row]
+    title = '%d:%s' % [indexPath.row, title]
     cell.set(title, url, collectionView)
 
     cell
   end
 
   def collectionView(collectionView, layout: layout, sizeForItemAtIndexPath: indexPath)
-    per_line = 1
-    margin = 5
-    first_line_scale = 2
-    total = GiveMeFiveViewController::GIVE_ME_NUMBER
-    lines = (total + first_line_scale - 1) / per_line
-
     full_width = collectionView.bounds.size.width
-    per_width = full_width / per_line - margin * 1
-
     full_height = collectionView.bounds.size.height
-    per_height = full_height / (lines + first_line_scale) - margin * 1
 
-    indexPath.row == 0 ? [full_width, per_height * first_line_scale] : [per_width, per_height]
-    [full_width, per_height]
+    per_line = 1
+    margin = 10
+    first_line_scale = [2, 1]
+    total = GiveMeFiveViewController::GIVE_ME_NUMBER
+
+    lines = (total - 1 + first_line_scale[0]) / per_line
+
+    per_width = (full_width - margin * (per_line-1)) / per_line
+    per_height = full_height / lines - margin * 1
+
+    first_line_width = Proc.new {|a, b| a < b ? a : b}.call(
+      per_width * first_line_scale[0] + margin * (first_line_scale[0] - 1),
+      full_width
+    )
+
+    indexPath.row == 0 ? [first_line_width, per_height * first_line_scale[1]] : [per_width, per_height]
   end
 end
 
@@ -150,11 +156,22 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
     lineBreakMode NSLineBreakByWordWrapping
     numberOfLines 2
 
-    frame [[2, 2], ['100% - 54', '100% - 4']]
+    constraints do
+      left.equals(:superview, :left)
+      right.equals(:superview, :right).plus(-55)
+      top.equals(:superview, :top)
+      bottom.equals(:superview, :bottom)
+    end
   end
 
   def btn_control_style
-    frame [['100% - 50', 0], [50, '100%']]
+    constraints do
+      left.equals(:superview, :right).plus(-55)
+      #left.equals(:title_label, :right)
+      right.equals(:superview, :right)
+      top.equals(:superview, :top)
+      bottom.equals(:superview, :bottom)
+    end
 
     title 'View'
 
