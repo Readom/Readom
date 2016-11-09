@@ -91,7 +91,6 @@ private
     #  reuseIdentifier:GiveMeFiveCollectionCell::IDENTIFIER
     #)
     id, title, url = @data[indexPath.row]
-    title = '%d:%s' % [indexPath.row, title]
     cell.set(title, url, collectionView)
 
     cell
@@ -103,20 +102,20 @@ private
 
     per_line = 1
     margin = 10
-    first_line_scale = [2, 1]
+    first_line_scale = {:x => 1, :y => 2}
     total = GiveMeFiveViewController::GIVE_ME_NUMBER
 
-    lines = (total - 1 + first_line_scale[0]) / per_line
+    lines = (total - 1 + first_line_scale[:x]) / per_line
 
-    per_width = (full_width - margin * (per_line-1)) / per_line
-    per_height = full_height / lines - margin * 1
+    per_width = (full_width - margin * (per_line - 1)) / per_line
+    per_height = full_height / (lines - 1 + first_line_scale[:y]) - margin * 1
 
     first_line_width = Proc.new {|a, b| a < b ? a : b}.call(
-      per_width * first_line_scale[0] + margin * (first_line_scale[0] - 1),
+      per_width * first_line_scale[:x] + margin * (first_line_scale[:x] - 1),
       full_width
     )
 
-    indexPath.row == 0 ? [first_line_width, per_height * first_line_scale[1]] : [per_width, per_height]
+    indexPath.row == 0 ? [first_line_width, per_height * first_line_scale[:y]] : [per_width, per_height]
   end
 end
 
@@ -154,10 +153,10 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
   def title_label_style
     text_color UIColor.grayColor
     lineBreakMode NSLineBreakByWordWrapping
-    numberOfLines 2
+    numberOfLines 3
 
     constraints do
-      left.equals(:superview, :left)
+      left.equals(:superview, :left).plus(1)
       right.equals(:superview, :right).plus(-55)
       top.equals(:superview, :top)
       bottom.equals(:superview, :bottom)
@@ -166,8 +165,8 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
 
   def btn_control_style
     constraints do
-      left.equals(:superview, :right).plus(-55)
-      #left.equals(:title_label, :right)
+      #left.equals(:superview, :right).plus(-55)
+      left.equals(:title_label, :right).plus(1)
       right.equals(:superview, :right)
       top.equals(:superview, :top)
       bottom.equals(:superview, :bottom)
