@@ -18,9 +18,9 @@ class AppDelegate
 
 private
   def set_style
-    UITabBar.appearance.setTintColor UIColor.yellowColor
-    UITabBar.appearance.setBarTintColor UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 1.0)
-    UITabBar.appearance.setBarStyle UIBarStyleBlack
-    UINavigationBar.appearance.setTitleTextAttributes(NSForegroundColorAttributeName => UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 1.0))
+    #UITabBar.appearance.setTintColor UIColor.whiteColor
+    #UITabBar.appearance.setBarTintColor UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 1.0)
+    #UITabBar.appearance.setBarStyle UIBarStyleBlack
+    #UINavigationBar.appearance.setTitleTextAttributes(NSForegroundColorAttributeName => UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 1.0))
   end
 end
