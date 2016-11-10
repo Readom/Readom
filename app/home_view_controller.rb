@@ -75,6 +75,8 @@ class HomeLayout < MotionKit::Layout
   def action_label_style
     background_color UIColor.whiteColor
     textColor UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 1.0)
+    shadowColor UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 0.75)
+    shadowOffset [1, -1]
 
     textAlignment NSTextAlignmentCenter
     text "README:Go"._
