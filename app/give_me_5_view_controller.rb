@@ -5,7 +5,9 @@ class GiveMeFiveViewController < UIViewController
     super
     self.title = "GiveMeFive"._
     self.tabBarItem = UITabBarItem.alloc.initWithTitle("Give Me 5"._, image: nil, tag: 0)
-    self.edgesForExtendedLayout = UIRectEdgeNone
+    self.edgesForExtendedLayout = UIRectEdgeLeft | UIRectEdgeRight
+    self.extendedLayoutIncludesOpaqueBars = true
+    self.automaticallyAdjustsScrollViewInsets = true
 
     self
   end
@@ -218,6 +220,8 @@ private
   def show_in_sfsvc(&block)
     sfsViewController = SFSafariViewController.alloc.initWithURL(NSURL.URLWithString @url, entersReaderIfAvailable: true)
     #sfsViewController.delegate = @targetViewController | self
+    sfsViewController.preferredBarTintColor = UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 0.25)
+    sfsViewController.preferredControlTintColor = UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 0.25)
 
     @targetViewController.presentViewController(sfsViewController,
       animated: true,
