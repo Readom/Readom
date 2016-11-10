@@ -24,7 +24,12 @@ class Readom
       if result.success?
         if block
           result.object.shuffle.each do |item|
-            block.call(item['id'], item['title'], item['url']) unless item['url'].nil?
+            if item['title'] and item['url'].nil?
+              url = 'https://news.ycombinator.com/item?id=%d' % item['id']
+              block.call(item['id'], item['title'], url)
+            else
+              block.call(item['id'], item['title'], item['url']) unless item['title'].nil?
+            end
           end
         end
       end
