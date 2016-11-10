@@ -52,7 +52,7 @@ class GiveMeFiveLayout < MotionKit::Layout
       left.equals(:superview, :left)
       right.equals(:superview, :right)
       top.equals(:superview, :top).plus(66)
-      bottom.equals(:superview, :bottom).minus(125)
+      bottom.equals(:superview, :bottom).minus(115)
     end
 
     dataSource self
