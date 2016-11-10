@@ -52,7 +52,7 @@ class GiveMeFiveLayout < MotionKit::Layout
       left.equals(:superview, :left)
       right.equals(:superview, :right)
       top.equals(:superview, :top).plus(66)
-      bottom.equals(:superview, :bottom).minus(185)
+      bottom.equals(:superview, :bottom).minus(125)
     end
 
     dataSource self
@@ -75,14 +75,6 @@ class GiveMeFiveLayout < MotionKit::Layout
       left.equals(:superview)
       top.equals(:collection, :bottom).plus(2)
     end
-
-    #width '100%'
-    #frame below(:collection, down: 0)
-
-    #left '25%'
-    #width '50%'
-    #center_y '100% - 95'
-
 
     addTarget(self,
       action: :set_data,
@@ -178,7 +170,6 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
     lineBreakMode NSLineBreakByWordWrapping
     numberOfLines 0
 
-
     constraints do
       left.equals(:superview, :left).plus(2)
       right.equals(:superview, :right).minus(55)
@@ -193,7 +184,6 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
   end
 
   def view_button_style
-    #background_color UIColor.colorWithRed(0.75, green: 0.75, blue: 0.75, alpha: 0.5)
     background_color UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 0.75)
     title_color UIColor.whiteColor
 
@@ -201,7 +191,6 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
     size_to_fit
 
     constraints do
-      #left.equals(:superview, :right).plus(-55)
       left.equals(:title_label, :right).plus(1)
       right.equals(:superview, :right)
       top.equals(:superview, :top)
