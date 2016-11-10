@@ -178,12 +178,18 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
     lineBreakMode NSLineBreakByWordWrapping
     numberOfLines 0
 
+
     constraints do
       left.equals(:superview, :left).plus(2)
       right.equals(:superview, :right).minus(55)
       top.equals(:superview, :top)
       bottom.equals(:superview, :bottom)
     end
+
+    userInteractionEnabled  true
+    tapGesture = UITapGestureRecognizer.alloc.initWithTarget(self, action: :view_button_clicked)
+    tapGesture.numberOfTapsRequired = 2
+    addGestureRecognizer(tapGesture)
   end
 
   def view_button_style
@@ -217,6 +223,7 @@ private
   def view_button_clicked
     show_in_sfsvc do end
   end
+  alias :title_label_clicked :view_button_clicked
 
   def show_in_sfsvc(&block)
     sfsViewController = SFSafariViewController.alloc.initWithURL(NSURL.URLWithString @url, entersReaderIfAvailable: true)
