@@ -38,8 +38,28 @@ class GiveMeFiveLayout < MotionKit::Layout
 
     flow_layout = UICollectionViewFlowLayout.alloc.init
     flow_layout.scrollDirection = UICollectionViewScrollDirectionVertical
+    flow_layout.sectionInset = [2, 0, 2, 0]
+    flow_layout.minimumLineSpacing = 1
+    flow_layout.minimumInteritemSpacing = 1
     collection = UICollectionView.alloc.initWithFrame CGRectZero, collectionViewLayout: flow_layout
     add collection, :collection
+  end
+
+  def collection_style
+    background_color UIColor.colorWithRed(0.96, green: 0.96, blue: 0.96, alpha: 0.5)
+
+    constraints do
+      left.equals(:superview, :left)
+      right.equals(:superview, :right)
+      top.equals(:superview, :top).plus(66)
+      bottom.equals(:superview, :bottom).minus(185)
+    end
+
+    dataSource self
+    delegate self
+    registerClass GiveMeFiveCollectionCell, forCellWithReuseIdentifier: GiveMeFiveCollectionCell::IDENTIFIER
+
+    set_data unless @data
   end
 
   def action_button_style
@@ -50,31 +70,23 @@ class GiveMeFiveLayout < MotionKit::Layout
     title "GiveMeFive"._
     size_to_fit
 
-    left '25%'
-    width '50%'
-    center_y '100% - 100'
+    constraints do
+      width.equals(:superview)
+      left.equals(:superview)
+      top.equals(:collection, :bottom).plus(2)
+    end
+
+    #width '100%'
+    #frame below(:collection, down: 0)
+
+    #left '25%'
+    #width '50%'
+    #center_y '100% - 95'
 
 
     addTarget(self,
       action: :set_data,
       forControlEvents: UIControlEventTouchUpInside)
-  end
-
-  def collection_style
-    background_color UIColor.colorWithRed(0.96, green: 0.96, blue: 0.96, alpha: 0.5)
-
-    constraints do
-      left.equals(:superview, :left)
-      right.equals(:superview, :right)
-      top.equals(:superview, :top).plus(70)
-      bottom.equals(:superview, :bottom).minus(180)
-    end
-
-    dataSource self
-    delegate self
-    registerClass GiveMeFiveCollectionCell, forCellWithReuseIdentifier: GiveMeFiveCollectionCell::IDENTIFIER
-
-    set_data unless @data
   end
 
 private
@@ -112,8 +124,8 @@ private
     full_height = collectionView.bounds.size.height
 
     per_line = 1
-    margin = 10
-    first_line_scale = {:x => 1, :y => 2}
+    margin = 1
+    first_line_scale = {:x => per_line, :y => 2}
     total = GiveMeFiveViewController::GIVE_ME_NUMBER
 
     lines = (total - 1 + first_line_scale[:x]) / per_line
@@ -164,21 +176,23 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
   def title_label_style
     text_color UIColor.colorWithRed(0.25, green: 0.25, blue: 0.25, alpha: 0.5)
     lineBreakMode NSLineBreakByWordWrapping
-    numberOfLines 3
+    numberOfLines 0
 
     constraints do
-      left.equals(:superview, :left).plus(1)
-      right.equals(:superview, :right).plus(-55)
+      left.equals(:superview, :left).plus(2)
+      right.equals(:superview, :right).minus(55)
       top.equals(:superview, :top)
       bottom.equals(:superview, :bottom)
     end
   end
 
   def view_button_style
-    background_color UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 1.0)
+    #background_color UIColor.colorWithRed(0.75, green: 0.75, blue: 0.75, alpha: 0.5)
+    background_color UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 0.75)
     title_color UIColor.whiteColor
 
     title 'VIEW'._
+    size_to_fit
 
     constraints do
       #left.equals(:superview, :right).plus(-55)

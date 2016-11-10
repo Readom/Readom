@@ -66,14 +66,24 @@ class HomeLayout < MotionKit::Layout
     background_image UIImage.imageNamed('icons/icon-180.png'), state:UIControlStateNormal
     size_to_fit
 
-    center ['50%', '50% - 90']
+    constraints do
+      center_x.equals(:superview)
+      center_y.equals(:superview).minus(90)
+    end
   end
 
   def action_label_style
-    text "README:Go"._
     background_color UIColor.whiteColor
+    textColor UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 1.0)
+
+    textAlignment NSTextAlignmentCenter
+    text "README:Go"._
     size_to_fit
 
-    frame below(:action_button, down: 0)
+    constraints do
+      top.equals(:action_button, :bottom).plus(10)
+      left.equals(:action_button)
+      right.equals(:action_button)
+    end
   end
 end
