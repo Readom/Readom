@@ -65,7 +65,7 @@ class StoriesLayout < MotionKit::Layout
   view :table
 
   def layout
-    background_color UIColor.colorWithRed(0.81, green: 0.91, blue: 0.86, alpha: 1.0)
+    background_color UIColor.colorWithRed(0.90, green: 0.95, blue: 0.95, alpha: 1.0)
 
     add UILabel, :title_label
     add UITableView, :table
@@ -79,7 +79,7 @@ class StoriesLayout < MotionKit::Layout
   end
 
   def table_style
-    background_color UIColor.colorWithRed(0.86, green: 0.96, blue: 0.91, alpha: 0.95)
+    background_color UIColor.whiteColor
     autoresizing_mask :pin_to_top, :flexible_height, :flexible_width
 
     frame below(:title_label, down: 5, height: '100% - 145')
