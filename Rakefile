@@ -19,6 +19,8 @@ Motion::Project::App.setup do |app|
   app.deployment_target = '9.0'
   app.frameworks << 'SafariServices'
 
+  app.device_family = [:iphone, :ipad]
+
   app.development do
     app.codesign_certificate = ENV['TRAVIS'] ? nil : MotionProvisioning.certificate(
       type: :development,
