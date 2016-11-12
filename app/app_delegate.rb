@@ -10,6 +10,10 @@ class AppDelegate
     @window.rootViewController = tab_controller
     @window.makeKeyAndVisible
 
+    UITabBar.appearance.setTintColor UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 1.0)
+    UITabBar.appearance.setBarTintColor UIColor.whiteColor
+    UINavigationBar.appearance.setTitleTextAttributes(NSForegroundColorAttributeName => UIColor.colorWithRed(0.35, green: 0.60, blue: 0.80, alpha: 1.0))
+
     true
   end
 end

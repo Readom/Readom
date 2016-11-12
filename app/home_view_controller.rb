@@ -3,7 +3,7 @@ class MiuViewController < UIViewController
     super
     self.title = "README"._
     self.tabBarItem = UITabBarItem.alloc.initWithTitle(""._, image: UIImage.imageNamed("tabbar/One-Finger-50.png"), tag: 0)
-    self.edgesForExtendedLayout = UIRectEdgeNone
+    self.edgesForExtendedLayout = UIRectEdgeAll
 
     self
   end
@@ -21,7 +21,7 @@ class MiuViewController < UIViewController
 
 private
   def readom_sample
-    Readom.fetch_items(:topstories, 1) do |id, title, url|
+    Readom.fetch_items(:topstories, 1) do |id, title, url, by, score, time|
       show(url)
     end
   end

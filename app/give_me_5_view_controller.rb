@@ -5,7 +5,7 @@ class GiveMeFiveViewController < UIViewController
     super
     self.title = "GiveMeFive"._
     self.tabBarItem = UITabBarItem.alloc.initWithTitle("Give Me 5"._, image: UIImage.imageNamed("tabbar/5-50.png"), tag: 0)
-    self.edgesForExtendedLayout = UIRectEdgeLeft | UIRectEdgeRight
+    self.edgesForExtendedLayout = UIRectEdgeLeft | UIRectEdgeRight | UIRectEdgeTop
     self.extendedLayoutIncludesOpaqueBars = true
     self.automaticallyAdjustsScrollViewInsets = true
 
@@ -57,7 +57,7 @@ class GiveMeFiveLayout < MotionKit::Layout
     size_to_fit
 
     constraints do
-      bottom.equals(:superview)
+      bottom.equals(:superview).minus(5)
       width.equals(:superview)
       left.equals(:superview)
     end
@@ -73,8 +73,8 @@ class GiveMeFiveLayout < MotionKit::Layout
     constraints do
       left.equals(:superview, :left)
       right.equals(:superview, :right)
-      top.equals(:superview, :top)
-      bottom.equals(:action_button, :top).minus(3)
+      top.equals(:superview, :top).plus(64)
+      bottom.equals(:action_button, :top).minus(23)
     end
 
     dataSource self
@@ -87,8 +87,8 @@ class GiveMeFiveLayout < MotionKit::Layout
 private
   def set_data
     @data = []
-    Readom.fetch_items(:newstories, GiveMeFiveViewController::GIVE_ME_NUMBER) do |id, title, url|
-      @data << [id, title, url]
+    Readom.fetch_items(:newstories, GiveMeFiveViewController::GIVE_ME_NUMBER) do |id, title, url, by, score, time|
+      @data << [id, title, url, by, score, time]
 
       self.collection.reloadData
     end
@@ -108,8 +108,8 @@ private
     #  UICollectionViewCellStyleDefault,
     #  reuseIdentifier:GiveMeFiveCollectionCell::IDENTIFIER
     #)
-    id, title, url = @data[indexPath.row]
-    cell.set(title, url, @vc)
+    id, title, url, by, score, time = @data[indexPath.row]
+    cell.set(title, url, by, score, time, @vc)
 
     cell
   end
@@ -148,17 +148,24 @@ class GiveMeFiveCollectionCell < UICollectionViewCell
     self
   end
 
-  def set(title, url, targetViewController)
-    @layout.set(title, url, targetViewController)
+  def set(title, url, by, score, time, targetViewController)
+    @layout.set(title, url, by, score, time, targetViewController)
   end
 end
 
 class GiveMeFiveCollectionCellLayout < MK::Layout
   @url = nil
   @targetViewController = nil
+  @by = nil
+  @score = nil
+  @time = nil
 
   def layout
     root :cell do
+      add UILabel, :by_info_label
+      add UILabel, :score_info_label
+      add UILabel, :time_info_label
+
       add UILabel, :title_label, z_index: 1
       add UIButton, :view_button, z_index: 2
     end
@@ -168,16 +175,57 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
     background_color UIColor.whiteColor
   end
 
-  def title_label_style
-    text_color UIColor.colorWithRed(0.25, green: 0.25, blue: 0.25, alpha: 0.5)
-    lineBreakMode NSLineBreakByWordWrapping
-    numberOfLines 0
+  def by_info_label_style
+    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.65, alpha: 1.0)
+    numberOfLines 1
+    font UIFont.fontWithName('Arial', size: 10)
+    text_alignment NSTextAlignmentLeft
 
     constraints do
+      left.equals(:superview, :left).plus(6)
+      right.equals(:superview, :right).minus(48)
+      top.equals(:superview, :top).plus(1)
+      bottom.equals(:superview, :top).plus(12)
+    end
+  end
+
+  def score_info_label_style
+    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.65, alpha: 1.0)
+    numberOfLines 1
+    font UIFont.fontWithName('Arial', size: 12)
+    text_alignment NSTextAlignmentCenter
+
+    constraints do
+      left.equals(:by_info_label,)
+      right.equals(:by_info_label)
+      top.equals(:by_info_label)
+      bottom.equals(:by_info_label)
+    end
+  end
+
+  def time_info_label_style
+    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.65, alpha: 1.0)
+    numberOfLines 1
+    font UIFont.fontWithName('Arial', size: 10)
+    text_alignment NSTextAlignmentRight
+
+    constraints do
+      left.equals(:by_info_label,)
+      right.equals(:by_info_label)
+      top.equals(:by_info_label)
+      bottom.equals(:by_info_label)
+    end
+  end
+
+  def title_label_style
+    text_color UIColor.colorWithRed(0.25, green: 0.25, blue: 0.25, alpha: 1.0)
+    lineBreakMode NSLineBreakByWordWrapping
+    numberOfLines 0
+    constraints do
       left.equals(:superview, :left).plus(2)
-      right.equals(:superview, :right).minus(55)
-      top.equals(:superview, :top)
-      bottom.equals(:superview, :bottom)
+      right.equals(:by_info_label)
+      top.equals(:by_info_label, :bottom)
+      bottom.equals(:superview)
     end
 
     userInteractionEnabled  true
@@ -187,17 +235,21 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
   end
 
   def view_button_style
-    background_color UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 0.75)
+    background_color UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 1.0)
+
     title_color UIColor.whiteColor
+    title_shadow_color UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 0.25)
+    title_shadow_offset [0, 1]
+    title_font UIFont.fontWithName('Arial', size: 16)
 
     title 'VIEW'._
     size_to_fit
 
     constraints do
       left.equals(:title_label, :right).plus(1)
-      right.equals(:superview, :right)
-      top.equals(:superview, :top)
-      bottom.equals(:superview, :bottom)
+      right.equals(:superview)
+      top.equals(:title_label).plus(5)
+      bottom.equals(:title_label).minus(5)
     end
 
     addTarget(self,
@@ -205,10 +257,13 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
       forControlEvents: UIControlEventTouchUpInside)
   end
 
-  def set(title, url, targetViewController)
+  def set(title, url, by, score, time, targetViewController)
     @url = url
     self.get(:title_label).text = title
     @targetViewController = targetViewController
+    self.get(:time_info_label).text = '%s' % Time.at(time).strftime('%b %d, %Y %H:%M:%S %Z')
+    self.get(:score_info_label).text = 'score:%-8d' % score
+    self.get(:by_info_label).text = 'by:%s' % by
   end
 
 private
