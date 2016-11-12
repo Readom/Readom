@@ -1,11 +1,11 @@
 class GiveMeFiveViewController < UIViewController
-  GIVE_ME_NUMBER = 5
+  GIVE_ME_NUMBER = 6
 
   def initWithNibName(name, bundle: bundle)
     super
     self.title = "GiveMeFive"._
     self.tabBarItem = UITabBarItem.alloc.initWithTitle("Give Me 5"._, image: UIImage.imageNamed("tabbar/5-50.png"), tag: 0)
-    self.edgesForExtendedLayout = UIRectEdgeLeft | UIRectEdgeRight | UIRectEdgeTop
+    self.edgesForExtendedLayout = UIRectEdgeAll
     self.extendedLayoutIncludesOpaqueBars = true
     self.automaticallyAdjustsScrollViewInsets = true
 
@@ -57,7 +57,7 @@ class GiveMeFiveLayout < MotionKit::Layout
     size_to_fit
 
     constraints do
-      bottom.equals(:superview).minus(5)
+      bottom.equals(:superview).minus(52)
       width.equals(:superview)
       left.equals(:superview)
     end
