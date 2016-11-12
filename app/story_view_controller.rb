@@ -4,7 +4,7 @@ class StoriesViewController < UIViewController
   def initWithNibName(name, bundle: bundle)
     super
     self.title = "Story"._
-    self.tabBarItem = UITabBarItem.alloc.initWithTitle("Collection"._, image: nil, tag: 0)
+    self.tabBarItem = UITabBarItem.alloc.initWithTitle("Collection"._, image: UIImage.imageNamed("tabbar/Shuffle-50.png"), tag: 0)
 
     self
   end

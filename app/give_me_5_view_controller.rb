@@ -4,7 +4,7 @@ class GiveMeFiveViewController < UIViewController
   def initWithNibName(name, bundle: bundle)
     super
     self.title = "GiveMeFive"._
-    self.tabBarItem = UITabBarItem.alloc.initWithTitle("Give Me 5"._, image: nil, tag: 0)
+    self.tabBarItem = UITabBarItem.alloc.initWithTitle("Give Me 5"._, image: UIImage.imageNamed("tabbar/5-50.png"), tag: 0)
     self.edgesForExtendedLayout = UIRectEdgeLeft | UIRectEdgeRight
     self.extendedLayoutIncludesOpaqueBars = true
     self.automaticallyAdjustsScrollViewInsets = true

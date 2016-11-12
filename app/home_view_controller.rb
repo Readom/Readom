@@ -2,7 +2,7 @@ class MiuViewController < UIViewController
   def initWithNibName(name, bundle: bundle)
     super
     self.title = "README"._
-    self.tabBarItem = UITabBarItem.alloc.initWithTitle("README"._, image: nil, tag: 0)
+    self.tabBarItem = UITabBarItem.alloc.initWithTitle(""._, image: UIImage.imageNamed("tabbar/One-Finger-50.png"), tag: 0)
     self.edgesForExtendedLayout = UIRectEdgeNone
 
     self
