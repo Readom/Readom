@@ -5,6 +5,9 @@ class GiveMeFiveViewController < UIViewController
     super
     self.title = "GiveMeFive"._
     self.tabBarItem = UITabBarItem.alloc.initWithTitle("Give Me 5"._, image: nil, tag: 0)
+    self.edgesForExtendedLayout = UIRectEdgeLeft | UIRectEdgeRight
+    self.extendedLayoutIncludesOpaqueBars = true
+    self.automaticallyAdjustsScrollViewInsets = true
 
     self
   end
@@ -45,14 +48,33 @@ class GiveMeFiveLayout < MotionKit::Layout
     add collection, :collection
   end
 
+  def action_button_style
+    background_color UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 1.0)
+    title_color UIColor.whiteColor
+    contentEdgeInsets [10, 10, 10, 10]
+
+    title "GiveMeFive"._
+    size_to_fit
+
+    constraints do
+      bottom.equals(:superview)
+      width.equals(:superview)
+      left.equals(:superview)
+    end
+
+    addTarget(self,
+      action: :set_data,
+      forControlEvents: UIControlEventTouchUpInside)
+  end
+
   def collection_style
     background_color UIColor.colorWithRed(0.96, green: 0.96, blue: 0.96, alpha: 0.5)
 
     constraints do
       left.equals(:superview, :left)
       right.equals(:superview, :right)
-      top.equals(:superview, :top).plus(66)
-      bottom.equals(:superview, :bottom).minus(115)
+      top.equals(:superview, :top)
+      bottom.equals(:action_button, :top).minus(3)
     end
 
     dataSource self
@@ -60,25 +82,6 @@ class GiveMeFiveLayout < MotionKit::Layout
     registerClass GiveMeFiveCollectionCell, forCellWithReuseIdentifier: GiveMeFiveCollectionCell::IDENTIFIER
 
     set_data unless @data
-  end
-
-  def action_button_style
-    background_color UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 1.0)
-    title_color UIColor.whiteColor
-    contentEdgeInsets [20, 10, 20, 10]
-
-    title "GiveMeFive"._
-    size_to_fit
-
-    constraints do
-      width.equals(:superview)
-      left.equals(:superview)
-      top.equals(:collection, :bottom).plus(2)
-    end
-
-    addTarget(self,
-      action: :set_data,
-      forControlEvents: UIControlEventTouchUpInside)
   end
 
 private
@@ -217,6 +220,8 @@ private
   def show_in_sfsvc(&block)
     sfsViewController = SFSafariViewController.alloc.initWithURL(NSURL.URLWithString @url, entersReaderIfAvailable: true)
     #sfsViewController.delegate = @targetViewController | self
+    sfsViewController.preferredBarTintColor = UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 0.25)
+    sfsViewController.preferredControlTintColor = UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 0.25)
 
     @targetViewController.presentViewController(sfsViewController,
       animated: true,

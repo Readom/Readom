@@ -1,14 +1,15 @@
-class HomeViewController < UIViewController
+class MiuViewController < UIViewController
   def initWithNibName(name, bundle: bundle)
     super
     self.title = "README"._
     self.tabBarItem = UITabBarItem.alloc.initWithTitle("README"._, image: nil, tag: 0)
+    self.edgesForExtendedLayout = UIRectEdgeNone
 
     self
   end
 
   def loadView
-    @layout = HomeLayout.new
+    @layout = MiuLayout.new
     self.view = @layout.view
   end
 
@@ -52,7 +53,7 @@ private
   # end Delegate
 end
 
-class HomeLayout < MotionKit::Layout
+class MiuLayout < MotionKit::Layout
   view :action_button, :action_label
 
   def layout
