@@ -176,7 +176,7 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
   end
 
   def by_info_label_style
-    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.65, alpha: 1.0)
+    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.65, alpha: 0.8)
     numberOfLines 1
     font UIFont.fontWithName('Arial', size: 10)
     text_alignment NSTextAlignmentLeft
@@ -190,7 +190,7 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
   end
 
   def score_info_label_style
-    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.65, alpha: 1.0)
+    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.65, alpha: 0.8)
     numberOfLines 1
     font UIFont.fontWithName('Arial', size: 12)
     text_alignment NSTextAlignmentCenter
@@ -204,14 +204,14 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
   end
 
   def time_info_label_style
-    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.65, alpha: 1.0)
+    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.65, alpha: 0.8)
     numberOfLines 1
     font UIFont.fontWithName('Arial', size: 10)
     text_alignment NSTextAlignmentRight
 
     constraints do
       left.equals(:by_info_label,)
-      right.equals(:by_info_label)
+      right.equals(:superview)
       top.equals(:by_info_label)
       bottom.equals(:by_info_label)
     end
@@ -261,7 +261,7 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
     @url = url
     self.get(:title_label).text = title
     @targetViewController = targetViewController
-    self.get(:time_info_label).text = '%s' % Time.at(time).strftime('%b %d, %Y %H:%M:%S %Z')
+    self.get(:time_info_label).text = '%s' % Time.at(time).strftime('%v %T %Z')
     self.get(:score_info_label).text = 'score:%-8d' % score
     self.get(:by_info_label).text = 'by:%s' % by
   end
