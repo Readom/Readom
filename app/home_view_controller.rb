@@ -3,7 +3,7 @@ class MiuViewController < UIViewController
     super
     self.title = "README"._
     self.tabBarItem = UITabBarItem.alloc.initWithTitle(""._, image: UIImage.imageNamed("tabbar/One-Finger-50.png"), tag: 0)
-    self.edgesForExtendedLayout = UIRectEdgeNone
+    self.edgesForExtendedLayout = UIRectEdgeAll
 
     self
   end
@@ -21,7 +21,7 @@ class MiuViewController < UIViewController
 
 private
   def readom_sample
-    Readom.fetch_items(:topstories, 1) do |id, title, url|
+    Readom.fetch_items(:newstories, 1) do |id, title, url, by, score, time|
       show(url)
     end
   end
@@ -57,7 +57,7 @@ class MiuLayout < MotionKit::Layout
   view :action_button, :action_label
 
   def layout
-    background_color UIColor.whiteColor
+    background_color UIColor.colorWithRed(0.90, green: 0.95, blue: 0.95, alpha: 1.0)
 
     add UIButton, :action_button
     add UILabel, :action_label
@@ -74,7 +74,6 @@ class MiuLayout < MotionKit::Layout
   end
 
   def action_label_style
-    background_color UIColor.whiteColor
     textColor UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 1.0)
     shadowColor UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 0.75)
     shadowOffset [1, -1]
