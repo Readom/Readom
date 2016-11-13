@@ -87,7 +87,7 @@ class GiveMeFiveLayout < MotionKit::Layout
 private
   def set_data
     @data = []
-    Readom.fetch_items(:newstories, GiveMeFiveViewController::GIVE_ME_NUMBER) do |id, title, url, by, score, time|
+    Readom.fetch_items(:topstories, GiveMeFiveViewController::GIVE_ME_NUMBER) do |id, title, url, by, score, time|
       @data << [id, title, url, by, score, time]
 
       self.collection.reloadData
