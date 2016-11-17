@@ -1,11 +1,11 @@
 class GiveMeFiveViewController < UIViewController
-  GIVE_ME_NUMBER = 6
+  GIVE_ME_NUMBER = 12
 
   def initWithNibName(name, bundle: bundle)
     super
     self.title = "GiveMeFive"._
     self.tabBarItem = UITabBarItem.alloc.initWithTitle("Give Me 5"._, image: UIImage.imageNamed("tabbar/5-50.png"), tag: 0)
-    self.edgesForExtendedLayout = UIRectEdgeAll
+    self.edgesForExtendedLayout = UIRectEdgeLeft | UIRectEdgeRight
     self.extendedLayoutIncludesOpaqueBars = true
     self.automaticallyAdjustsScrollViewInsets = true
 
@@ -41,9 +41,9 @@ class GiveMeFiveLayout < MotionKit::Layout
 
     flow_layout = UICollectionViewFlowLayout.alloc.init
     flow_layout.scrollDirection = UICollectionViewScrollDirectionVertical
-    flow_layout.sectionInset = [2, 0, 2, 0]
-    flow_layout.minimumLineSpacing = 1
-    flow_layout.minimumInteritemSpacing = 1
+    flow_layout.sectionInset = [2, 2, 2, 2]
+    flow_layout.minimumLineSpacing = 5
+    flow_layout.minimumInteritemSpacing = 5
     collection = UICollectionView.alloc.initWithFrame CGRectZero, collectionViewLayout: flow_layout
     add collection, :collection
   end
@@ -57,7 +57,7 @@ class GiveMeFiveLayout < MotionKit::Layout
     size_to_fit
 
     constraints do
-      bottom.equals(:superview).minus(52)
+      bottom.equals(:superview)
       width.equals(:superview)
       left.equals(:superview)
     end
@@ -73,8 +73,8 @@ class GiveMeFiveLayout < MotionKit::Layout
     constraints do
       left.equals(:superview, :left)
       right.equals(:superview, :right)
-      top.equals(:superview, :top).plus(64)
-      bottom.equals(:action_button, :top).minus(23)
+      top.equals(:superview, :top)
+      bottom.equals(:action_button, :top).minus(2)
     end
 
     dataSource self
@@ -134,6 +134,8 @@ private
     )
 
     indexPath.row == 0 ? [first_line_width, per_height * first_line_scale[:y]] : [per_width, per_height]
+
+    [290, 120]
   end
 end
 
@@ -162,12 +164,12 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
 
   def layout
     root :cell do
-      add UILabel, :by_info_label
       add UILabel, :score_info_label
+      add UILabel, :by_info_label
       add UILabel, :time_info_label
 
       add UILabel, :title_label, z_index: 1
-      add UIButton, :view_button, z_index: 2
+      #add UIButton, :view_button, z_index: 2
     end
   end
 
@@ -175,45 +177,45 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
     background_color UIColor.whiteColor
   end
 
+  def score_info_label_style
+    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.75, alpha: 1.0)
+    numberOfLines 1
+    #font UIFont.fontWithName('Arial', size: 12)
+    text_alignment NSTextAlignmentRight
+
+    constraints do
+      right.equals(:superview, :right).minus(5)
+      top.equals(:superview, :top).plus(2)
+      width 45
+      height 30
+    end
+  end
+
   def by_info_label_style
-    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.65, alpha: 0.8)
+    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.75, alpha: 1.0)
+    numberOfLines 1
+    font UIFont.fontWithName('Arial', size: 16)
+    text_alignment NSTextAlignmentLeft
+
+    constraints do
+      left.equals(:superview, :left).plus(5)
+      right.equals(:score_info_label, :left)
+      top.equals(:score_info_label, :top)
+      bottom.equals(:score_info_label, :top).plus(18)
+    end
+  end
+
+  def time_info_label_style
+    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.75, alpha: 1.0)
     numberOfLines 1
     font UIFont.fontWithName('Arial', size: 10)
     text_alignment NSTextAlignmentLeft
 
     constraints do
-      left.equals(:superview, :left).plus(6)
-      right.equals(:superview, :right).minus(48)
-      top.equals(:superview, :top).plus(1)
-      bottom.equals(:superview, :top).plus(12)
-    end
-  end
-
-  def score_info_label_style
-    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.65, alpha: 0.8)
-    numberOfLines 1
-    font UIFont.fontWithName('Arial', size: 12)
-    text_alignment NSTextAlignmentCenter
-
-    constraints do
-      left.equals(:by_info_label,)
+      left.equals(:by_info_label)
       right.equals(:by_info_label)
-      top.equals(:by_info_label)
-      bottom.equals(:by_info_label)
-    end
-  end
-
-  def time_info_label_style
-    text_color UIColor.colorWithRed(0.5, green: 0.5, blue: 0.65, alpha: 0.8)
-    numberOfLines 1
-    font UIFont.fontWithName('Arial', size: 10)
-    text_alignment NSTextAlignmentRight
-
-    constraints do
-      left.equals(:by_info_label,)
-      right.equals(:superview)
-      top.equals(:by_info_label)
-      bottom.equals(:by_info_label)
+      top.equals(:by_info_label, :bottom)
+      bottom.equals(:score_info_label)
     end
   end
 
@@ -221,16 +223,17 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
     text_color UIColor.colorWithRed(0.25, green: 0.25, blue: 0.25, alpha: 1.0)
     lineBreakMode NSLineBreakByWordWrapping
     numberOfLines 0
+
     constraints do
-      left.equals(:superview, :left).plus(2)
-      right.equals(:by_info_label)
-      top.equals(:by_info_label, :bottom)
-      bottom.equals(:superview)
+      left.equals(:by_info_label)
+      right.equals(:score_info_label)
+      top.equals(:score_info_label, :bottom).plus(2)
+      bottom.equals(:superview).minus(2)
     end
 
     userInteractionEnabled  true
     tapGesture = UITapGestureRecognizer.alloc.initWithTarget(self, action: :view_button_clicked)
-    tapGesture.numberOfTapsRequired = 2
+    tapGesture.numberOfTapsRequired = 1
     addGestureRecognizer(tapGesture)
   end
 
@@ -248,7 +251,7 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
     constraints do
       left.equals(:title_label, :right).plus(1)
       right.equals(:superview)
-      top.equals(:title_label).plus(5)
+      top.equals(:title_label)
       bottom.equals(:title_label).minus(5)
     end
 
@@ -262,8 +265,8 @@ class GiveMeFiveCollectionCellLayout < MK::Layout
     self.get(:title_label).text = title
     @targetViewController = targetViewController
     self.get(:time_info_label).text = '%s' % Time.at(time).strftime('%v %T %Z')
-    self.get(:score_info_label).text = 'score:%-8d' % score
-    self.get(:by_info_label).text = 'by:%s' % by
+    self.get(:score_info_label).text = '%d' % score
+    self.get(:by_info_label).text = '%s' % by
   end
 
 private

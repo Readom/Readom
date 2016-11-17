@@ -3,9 +3,9 @@ class Readom
   #HOST = 'http://readom-api.herokuapp.com.mkmd.cn'
 
   def self.fetch_item(item_id, &block)
-    itemEntry = '%s/news/v0/item/%s.json' % [Readom::HOST, item_id]
+    itemEntry = 'item/%s.json' % item_id
 
-    AFMotion::JSON.get(itemEntry) do |result|
+    self.session.get(itemEntry) do |result|
       if result.success?
         item = result.object
 
@@ -18,9 +18,9 @@ class Readom
   end
 
   def self.fetch_items(list=:newstories, limit=10, &block)
-    listEntry = '%s/news/v0/%s.json?limit=%d' % [Readom::HOST, list, limit]
+    listEntry = '%s.json?limit=%d' % [list, limit]
 
-    AFMotion::JSON.get(listEntry) do |result|
+    self.session.get(listEntry) do |result|
       if result.success?
         if block
           result.object.shuffle.each do |item|
@@ -33,6 +33,17 @@ class Readom
           end
         end
       end
+    end
+  end
+
+private
+  def self.session
+    @session ||= AFMotion::SessionClient.build("#{HOST}/news/v0/") do
+      session_configuration :default
+
+      header "Accept", "application/json"
+
+      response_serializer :json
     end
   end
 end

@@ -3,7 +3,7 @@ class MiuViewController < UIViewController
     super
     self.title = "README"._
     self.tabBarItem = UITabBarItem.alloc.initWithTitle(""._, image: UIImage.imageNamed("tabbar/One-Finger-50.png"), tag: 0)
-    self.edgesForExtendedLayout = UIRectEdgeAll
+    self.edgesForExtendedLayout = UIRectEdgeLeft | UIRectEdgeRight
 
     self
   end
@@ -64,7 +64,7 @@ class MiuLayout < MotionKit::Layout
   end
 
   def action_button_style
-    background_image UIImage.imageNamed('icons/icon-180.png'), state:UIControlStateNormal
+    background_image UIImage.imageNamed('icon-180.png'), state:UIControlStateNormal
     size_to_fit
 
     constraints do
