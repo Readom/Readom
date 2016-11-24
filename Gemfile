@@ -24,3 +24,4 @@ gem "newclear" # Completely wipe out the simulator and rebuild
 # gem "bubble-wrap"
 
 gem 'motion-provisioning'
+gem 'ib'

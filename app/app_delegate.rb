@@ -9,7 +9,7 @@ class AppDelegate < PM::Delegate
 
   def on_load(app, options)
     cdq.setup # Remove this if you aren't using CDQ
-    open StoryScreen.new(nav_bar: true)
+    open StoryScreen.new(nav_bar: false)
   end
 
   # Remove this if you are only supporting portrait
