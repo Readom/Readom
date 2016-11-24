@@ -13,10 +13,13 @@ Motion::Project::App.setup do |app|
   app.name = 'README'
   app.identifier = 'cc.mib.README'
 
-  app.short_version = '0.1.0'
+  #app.short_version = '0.1.0'
   # Get version from git
   #app.version = (`git rev-list HEAD --count`.strip.to_i).to_s
-  app.version = app.short_version
+  #app.version = app.short_version
+
+  app.version = "1.0"
+  app.short_version = '0.%s' % Time.now.strftime('%Y%m%d.%H%M%S')
 
   # RubyMotion by default selects the latest SDK you have installed,
   # if you would like to specify the SDK to assure consistency across multiple machines,
@@ -33,7 +36,7 @@ Motion::Project::App.setup do |app|
   app.icons = Dir.glob("resources/icons/*.png").map{|icon| icon.split("/").last}
 
   app.device_family = [:iphone, :ipad]
-  app.interface_orientations = [:portrait, :landscape_left, :landscape_right, :portrait_upside_down]
+  app.interface_orientations = [:portrait, :portrait_upside_down, :landscape_left, :landscape_right]
 
   app.files += Dir.glob(File.join(app.project_dir, 'lib/**/*.rb'))
 
@@ -76,6 +79,9 @@ Motion::Project::App.setup do |app|
       app_name: app.name,
       platform: :ios,
       type: :distribution)
+
+    app.short_version = app.version
+    app.version = '0.%s' % Time.now.strftime('%y%m%d.%H%M%S')
     app.entitlements['beta-reports-active'] = true # For TestFlight
 
     # app.seed_id = "YOUR_SEED_ID"
