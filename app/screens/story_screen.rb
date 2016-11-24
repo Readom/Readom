@@ -58,7 +58,7 @@ class StoryScreen < UICollectionViewController
 private
   def set_data
     @data = []
-    Readom.fetch_items(:topstories, 10) do |item|
+    Readom.fetch_items(:topstories, 20) do |item|
       @data << item
 
       self.collectionView.reloadData

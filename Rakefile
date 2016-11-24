@@ -18,7 +18,7 @@ Motion::Project::App.setup do |app|
   #app.version = (`git rev-list HEAD --count`.strip.to_i).to_s
   #app.version = app.short_version
 
-  app.version = "1.0"
+  app.version = "1.0.0"
   app.short_version = '0.%s' % Time.now.strftime('%Y%m%d.%H%M%S')
 
   # RubyMotion by default selects the latest SDK you have installed,
@@ -37,6 +37,8 @@ Motion::Project::App.setup do |app|
 
   app.device_family = [:iphone, :ipad]
   app.interface_orientations = [:portrait, :portrait_upside_down, :landscape_left, :landscape_right]
+  app.info_plist['UILaunchStoryboardName'] = 'LaunchScreen'
+  app.info_plist['ITSAppUsesNonExemptEncryption'] = false
 
   app.files += Dir.glob(File.join(app.project_dir, 'lib/**/*.rb'))
 
