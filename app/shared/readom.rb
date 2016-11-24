@@ -8,10 +8,9 @@ class Readom
       if result.success?
         item = result.object
 
-        item_title = item['title']
-        item_url = item['url']
-
-        block.call(item)
+        if item['title']
+          block.call(item) if block
+        end
       end
     end
   end
@@ -21,14 +20,13 @@ class Readom
 
     self.session.get(listEntry) do |result|
       if result.success?
-        if block
-          result.object.shuffle.each do |item|
-            if item['title'] and item['url'].nil?
-              url = 'https://news.ycombinator.com/item?id=%d' % item['id']
-              block.call(item['id'], item['title'], url, item['by'], item['score'], item['time'])
-            else
-              block.call(item['id'], item['title'], item['url'], item['by'], item['score'], item['time']) unless item['title'].nil?
+        result.object.shuffle.each do |item|
+          if item['title']
+            if item['url'].nil?
+              item['url'] = 'https://news.ycombinator.com/item?id=%d' % item['id']
             end
+
+            block.call(item) if block
           end
         end
       end
