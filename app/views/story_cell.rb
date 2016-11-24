@@ -9,6 +9,8 @@ class StoryCell < UICollectionViewCell
   end
 
   def set(item)
-    @title.text = item['title']
+    unless item.nil?
+      @title.text = item['title']
+    end
   end
 end

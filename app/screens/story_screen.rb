@@ -15,7 +15,14 @@ class StoryScreen < UICollectionViewController
   end
 
   def on_load
+    refresher = UIRefreshControl.new
+    refresher.addTarget(self, action: 'set_data', forControlEvents: UIControlEventValueChanged)
+    @refreshControl = refresher
+
     collectionView.tap do |cv|
+      cv.alwaysBounceVertical = true
+      cv.addSubview(@refreshControl)
+
       cv.registerClass(StoryCell, forCellWithReuseIdentifier: STORY_CELL_ID)
       cv.delegate = self
       cv.dataSource = self
@@ -63,6 +70,8 @@ private
 
       self.collectionView.reloadData
     end
+
+    @refreshControl.endRefreshing
   end
 
   def show_in_sfsvc(url, &block)
