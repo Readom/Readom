@@ -10,7 +10,7 @@ Bundler.require
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings
 
-  app.name = 'Readom'
+  app.name = 'README'
   app.identifier = 'cc.mib.README'
 
   app.short_version = '0.1.0'
