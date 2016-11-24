@@ -11,7 +11,7 @@ Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings
 
   app.name = 'Readom'
-  app.identifier = 'com.your_domain_here.readom'
+  app.identifier = 'cc.mib.README'
 
   app.short_version = '0.1.0'
   # Get version from git
@@ -27,6 +27,7 @@ Motion::Project::App.setup do |app|
   # Target OS - Set this to the lowest version you want to support in the App Store
   # app.deployment_target = '7.1'
   # app.deployment_target = '8.0'
+  app.deployment_target = '9.0'
 
   app.icons = Dir.glob("resources/icon*.png").map{|icon| icon.split("/").last}
 
@@ -39,6 +40,7 @@ Motion::Project::App.setup do |app|
   # Or use all *.ttf fonts in the /resources/fonts directory:
   # app.fonts = Dir.glob("resources/fonts/*.ttf").map{|font| "fonts/#{font.split('/').last}"}
   # app.frameworks += %w(QuartzCore CoreGraphics MediaPlayer MessageUI CoreData)
+  app.frameworks << 'SafariServices'
 
   # app.vendor_project('vendor/Flurry', :static)
   # app.vendor_project('vendor/DSLCalendarView', :static, :cflags => '-fobjc-arc') # Using arc
@@ -51,17 +53,31 @@ Motion::Project::App.setup do |app|
   end
 
   app.development do
-    app.codesign_certificate = "iPhone Developer: YOURNAME"
-    app.provisioning_profile = "signing/readom.mobileprovision"
+    app.codesign_certificate = ENV['TRAVIS'] ? nil : MotionProvisioning.certificate(
+      type: :development,
+      platform: :ios)
+
+    app.provisioning_profile = ENV['TRAVIS'] ? nil : MotionProvisioning.profile(
+      bundle_identifier: app.identifier,
+      app_name: app.name,
+      platform: :ios,
+      type: :development)
   end
 
   app.release do
     app.entitlements['get-task-allow'] = false
-    app.codesign_certificate = 'iPhone Distribution: YOURNAME'
-    app.provisioning_profile = "signing/readom.mobileprovision"
+    app.codesign_certificate = MotionProvisioning.certificate(
+      type: :distribution,
+      platform: :ios)
+
+    app.provisioning_profile = MotionProvisioning.profile(
+      bundle_identifier: app.identifier,
+      app_name: app.name,
+      platform: :ios,
+      type: :distribution)
     app.entitlements['beta-reports-active'] = true # For TestFlight
 
-    app.seed_id = "YOUR_SEED_ID"
+    # app.seed_id = "YOUR_SEED_ID"
     app.entitlements['application-identifier'] = app.seed_id + '.' + app.identifier
     app.entitlements['keychain-access-groups'] = [ app.seed_id + '.' + app.identifier ]
   end
