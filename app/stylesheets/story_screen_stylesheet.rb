@@ -29,7 +29,7 @@ class StoryScreenStylesheet < ApplicationStylesheet
     end
   end
 
-  def switch_list_btn(st)
+  def switch_topic_btn(st)
     st.frame = {w: 24, h: 24, l: screen.bounds.origin.x + screen.bounds.size.width - 25, t: screen.bounds.origin.y + screen.bounds.size.height - 60}
   end
 

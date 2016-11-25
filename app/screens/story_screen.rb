@@ -31,10 +31,10 @@ class StoryScreen < UICollectionViewController
       find(cv).apply_style :collection_view
     end
 
-    @switch_list_btn = screen.append!(UIButton, :switch_list_btn)
-    @switch_list_btn.setAttributedTitle(:'bars'.awesome_icon(size: 24, color: [255, 102, 0].uicolor), forState:UIControlStateNormal)
-    @switch_list_btn.addTarget(self,
-      action: :switch_list,
+    @switch_topic_btn = screen.append!(UIButton, :switch_topic_btn)
+    @switch_topic_btn.setAttributedTitle(:'bars'.awesome_icon(size: 24, color: [255, 102, 0].uicolor), forState:UIControlStateNormal)
+    @switch_topic_btn.addTarget(self,
+      action: :switch_topic,
       forControlEvents: UIControlEventTouchUpInside)
 
     @refresh_btn = screen.append!(UIButton, :refresh_btn)
@@ -78,7 +78,7 @@ private
   def set_data
     @data ||= []
 
-    Readom.fetch_items(:topstories, 20) do |items|
+    Readom.fetch_items(current_topic, 20) do |items|
       @data = items.sort{|x, y| y['score'] <=> x['score']}
 
       self.collectionView.reloadData
@@ -86,7 +86,22 @@ private
     end
   end
 
-  def switch_list
+  def switch_topic
+    @current_topic_idx += 1
+    if @current_topic_idx >= topics.size
+      @current_topic_idx = 0
+    end
+
+    set_data
+  end
+
+  def current_topic
+    @current_topic_idx ||= 0
+    topics[@current_topic_idx]
+  end
+
+  def topics
+    [:topstories, :beststories, :newstories, :askstories, :showstories, :jobstories]
   end
 
   def show_in_sfsvc(url, &block)
