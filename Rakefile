@@ -83,7 +83,7 @@ Motion::Project::App.setup do |app|
       platform: :ios,
       type: :distribution)
 
-    app.short_version = '1.0.0'
+    app.short_version = '1.0.1'
     app.version = '0.%s' % Time.now.strftime('%y%m.%d%H%M')
     app.entitlements['beta-reports-active'] = true # For TestFlight
 
