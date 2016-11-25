@@ -10,14 +10,14 @@ class StoryScreenStylesheet < ApplicationStylesheet
   end
 
   def collection_view(st)
-    st.view.contentInset = [@margin, @margin, @margin, @margin]
+    st.view.contentInset = [@margin, 0, @margin, 0]
     st.background_color = color.white
 
     images = ['Costa Rican Frog.jpg', 'Pensive Parakeet.jpg', 'Boston City Flow.jpg']
     bg_image = UIImage.imageNamed images.sample
     bg_image.gaussian_blur(radius: 5)
     bg_image.darken(brightness: -0.8, saturation: -0.2)
-    bg_image.scale_to_fill(screen.bounds.size, position: :center)
+    bg_image.scale_to_fill(window.bounds.size, position: :center)
     st.background_color = bg_image.uicolor
 
     st.view.collectionViewLayout.tap do |cl|
