@@ -14,7 +14,7 @@ class StoryCell < UICollectionViewCell
       @title.text = item['title']
       @info.attributedText = :'star-o'.awesome_icon(size: 9) + '%d' % item['score'] +
         ' ' + :user.awesome_icon(size: 9) + '%s' % item['by'] +
-        ' ' + :'clock-o'.awesome_icon(size: 9) + '%s' % Time.at(item['time']).strftime('%v %T %Z')
+        ' ' + :'clock-o'.awesome_icon(size: 9) + '%s' % Time.at(item['time']).ago_in_words
     end
   end
 end

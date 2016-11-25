@@ -19,7 +19,7 @@ Motion::Project::App.setup do |app|
   #app.version = app.short_version
 
   app.version = "1.0.0"
-  app.short_version = '0.%s' % Time.now.strftime('%Y%m%d.%H%M%S')
+  app.short_version = '0.%s' % Time.now.strftime('%Y%m%d.%H%M')
 
   # RubyMotion by default selects the latest SDK you have installed,
   # if you would like to specify the SDK to assure consistency across multiple machines,
@@ -83,7 +83,7 @@ Motion::Project::App.setup do |app|
       type: :distribution)
 
     app.short_version = app.version
-    app.version = '0.%s' % Time.now.strftime('%y%m%d.%H%M%S')
+    app.version = '0.%s' % Time.now.strftime('%y%m%d.%H%M')
     app.entitlements['beta-reports-active'] = true # For TestFlight
 
     # app.seed_id = "YOUR_SEED_ID"
