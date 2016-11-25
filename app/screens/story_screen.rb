@@ -74,7 +74,7 @@ class StoryScreen < UICollectionViewController
   def collectionView(view, didSelectItemAtIndexPath: index_path)
     cell = view.cellForItemAtIndexPath(index_path)
     # puts "Selected at section: #{index_path.section}, row: #{index_path.row}"
-    show_in_sfsvc(@data[index_path.row]['url']) do end
+    show_in_sfsvc(@data[index_path.row]) do end
   end
 
   # Remove the following if you're only using portrait
@@ -116,9 +116,10 @@ private
     [:topstories, :beststories, :newstories, :askstories, :showstories, :jobstories]
   end
 
-  def show_in_sfsvc(url, &block)
-    sfsViewController = SFSafariViewController.alloc.initWithURL(NSURL.URLWithString url, entersReaderIfAvailable: true)
-    #sfsViewController.delegate = @targetViewController | self
+  def show_in_sfsvc(item, &block)
+    sfsViewController = ReadomSafariViewController.alloc.initWithURL(NSURL.URLWithString item['url'], entersReaderIfAvailable: true)
+    sfsViewController.delegate = sfsViewController
+    sfsViewController.item = item
     sfsViewController.preferredBarTintColor = [255, 102, 0].uicolor
     sfsViewController.preferredControlTintColor = color.white
 
