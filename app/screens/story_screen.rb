@@ -47,6 +47,10 @@ class StoryScreen < UICollectionViewController
       action: :set_data,
       forControlEvents: UIControlEventTouchUpInside)
 
+    @version_label = screen.append!(UILabel, :version_label)
+    @version_label.attributedText = :anchor.awesome_icon(size: 9) + app.short_version
+    @version_label.sizeToFit
+
     set_data unless @data
   end
 
