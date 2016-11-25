@@ -82,9 +82,9 @@ private
   def set_data
     @data ||= []
 
-    @notification.displayNotificationWithMessage('Loading %s' % current_topic, forDuration: 0.8)
-
     Readom.fetch_items(current_topic, 20) do |items|
+      @notification.displayNotificationWithMessage('%s' % current_topic, forDuration: 0.8)
+
       @data = items.sort{|x, y| y['time'] <=> x['time']}
 
       self.collectionView.reloadData
