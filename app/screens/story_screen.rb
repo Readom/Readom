@@ -15,11 +15,13 @@ class StoryScreen < UICollectionViewController
   end
 
   def on_load
+    @notification = CWStatusBarNotification.new
+    @notification.notificationLabelBackgroundColor = [255, 102, 0].uicolor
+    @notification.notificationLabelTextColor = color.white
+
     refresher = UIRefreshControl.new
     refresher.addTarget(self, action: 'set_data', forControlEvents: UIControlEventValueChanged)
     @refreshControl = refresher
-
-    @notification = CWStatusBarNotification.new
 
     collectionView.tap do |cv|
       cv.alwaysBounceVertical = true
@@ -80,6 +82,8 @@ private
   def set_data
     @data ||= []
 
+    @notification.displayNotificationWithMessage('Loading %s' % current_topic, forDuration: 0.8)
+
     Readom.fetch_items(current_topic, 20) do |items|
       @data = items.sort{|x, y| y['time'] <=> x['time']}
 
@@ -94,7 +98,7 @@ private
       @current_topic_idx = 0
     end
 
-    @notification.displayNotificationWithMessage('Switch to %s' % current_topic, forDuration: 1.0)
+    @notification.displayNotificationWithMessage('Switch to %s' % current_topic, forDuration: 1.5)
 
     set_data
   end
