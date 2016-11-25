@@ -67,7 +67,7 @@ private
     @data ||= []
 
     Readom.fetch_items(:topstories, 20) do |items|
-      @data = items
+      @data = items.sort{|x, y| y['score'] <=> x['score']}
 
       self.collectionView.reloadData
       @refreshControl.endRefreshing

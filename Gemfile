@@ -25,3 +25,6 @@ gem "newclear" # Completely wipe out the simulator and rebuild
 
 gem 'motion-provisioning'
 gem 'ib'
+
+gem 'motion-awesome'
+gem 'sugarcube', :require => %w(sugarcube-awesome sugarcube-attributedstring)
