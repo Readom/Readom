@@ -51,6 +51,7 @@ private
       session_configuration :default
 
       header "Accept", "application/json"
+      header "X-App-Version", "%s/%s" % [app.short_version, app.version]
 
       response_serializer :json
     end
