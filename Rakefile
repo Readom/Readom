@@ -32,7 +32,7 @@ Motion::Project::App.setup do |app|
   # app.deployment_target = '8.0'
   app.deployment_target = '9.0'
 
-  app.resources_dirs += %w(resources/icons resources/splash)
+  app.resources_dirs += %w(resources/icons resources/splash resources/backgrounds)
   app.icons = Dir.glob("resources/icons/*.png").map{|icon| icon.split("/").last}
 
   app.device_family = [:iphone, :ipad]

@@ -13,6 +13,12 @@ class StoryScreenStylesheet < ApplicationStylesheet
     st.view.contentInset = [@margin, @margin, @margin, @margin]
     st.background_color = color.white
 
+    images = ['Costa Rican Frog.jpg', 'Pensive Parakeet.jpg', 'Boston City Flow.jpg']
+    bg_image = UIImage.imageNamed images.sample
+    bg_image.darken(brightness: -0.8, saturation: -0.2)
+    bg_color = bg_image.uicolor
+    st.background_color = bg_color
+
     st.view.collectionViewLayout.tap do |cl|
       cl.itemSize = [cell_size[:w], cell_size[:h]]
       #cl.scrollDirection = UICollectionViewScrollDirectionHorizontal
