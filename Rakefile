@@ -56,6 +56,7 @@ Motion::Project::App.setup do |app|
   #   pod 'JGProgressHUD'
   #   pod 'SVProgressHUD'
   #   pod "FontasticIcons"
+    pod 'CWStatusBarNotification'
   end
 
   app.development do

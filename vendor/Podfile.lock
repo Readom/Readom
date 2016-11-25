@@ -20,18 +20,21 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - CWStatusBarNotification (2.3.5)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.0)
+  - CWStatusBarNotification
   - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  CWStatusBarNotification: 3d2738b25c3207f60cc50201388d3c96182545ff
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: 14dadcc31bf5bc743d8a732e126fee927df5e0c5
+PODFILE CHECKSUM: 7d5035c95d0cc17bf2fc7de68a8f93468ab67cb8
 
 COCOAPODS: 1.1.1

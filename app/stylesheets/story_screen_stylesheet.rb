@@ -30,10 +30,10 @@ class StoryScreenStylesheet < ApplicationStylesheet
   end
 
   def switch_topic_btn(st)
-    st.frame = {w: 24, h: 24, l: screen.bounds.origin.x + screen.bounds.size.width - 25, t: screen.bounds.origin.y + screen.bounds.size.height - 60}
+    st.frame = {w: 24, h: 24, l: screen.bounds.origin.x + screen.bounds.size.width - 25, t: 30}
   end
 
   def refresh_btn(st)
-    st.frame = {w: 24, h: 24, l: screen.bounds.origin.x + screen.bounds.size.width - 25, t: screen.bounds.origin.y + screen.bounds.size.height - 30}
+    st.frame = {w: 24, h: 24, l: screen.bounds.origin.x + screen.bounds.size.width - 25, t: 60}
   end
 end

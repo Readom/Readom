@@ -19,6 +19,8 @@ class StoryScreen < UICollectionViewController
     refresher.addTarget(self, action: 'set_data', forControlEvents: UIControlEventValueChanged)
     @refreshControl = refresher
 
+    @notification = CWStatusBarNotification.new
+
     collectionView.tap do |cv|
       cv.alwaysBounceVertical = true
       cv.addSubview(@refreshControl)
@@ -79,7 +81,7 @@ private
     @data ||= []
 
     Readom.fetch_items(current_topic, 20) do |items|
-      @data = items.sort{|x, y| y['score'] <=> x['score']}
+      @data = items.sort{|x, y| y['time'] <=> x['time']}
 
       self.collectionView.reloadData
       @refreshControl.endRefreshing
@@ -91,6 +93,8 @@ private
     if @current_topic_idx >= topics.size
       @current_topic_idx = 0
     end
+
+    @notification.displayNotificationWithMessage('Switch to %s' % current_topic, forDuration: 1.0)
 
     set_data
   end
