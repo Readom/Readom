@@ -47,6 +47,10 @@ class StoryScreen < UICollectionViewController
       action: :set_data,
       forControlEvents: UIControlEventTouchUpInside)
 
+    @version_label = screen.append!(UILabel, :version_label)
+    @version_label.attributedText = :anchor.awesome_icon(size: 9) + app.short_version
+    @version_label.sizeToFit
+
     set_data unless @data
   end
 
@@ -70,7 +74,7 @@ class StoryScreen < UICollectionViewController
   def collectionView(view, didSelectItemAtIndexPath: index_path)
     cell = view.cellForItemAtIndexPath(index_path)
     # puts "Selected at section: #{index_path.section}, row: #{index_path.row}"
-    show_in_sfsvc(@data[index_path.row]['url']) do end
+    show_in_sfsvc(@data[index_path.row]) do end
   end
 
   # Remove the following if you're only using portrait
@@ -82,8 +86,8 @@ private
   def set_data
     @data ||= []
 
-    Readom.fetch_items(current_topic, 20) do |items|
-      @notification.displayNotificationWithMessage('%s' % current_topic, forDuration: 0.8)
+    Readom.fetch_items(current_topic, 24) do |items|
+      @notification.displayNotificationWithMessage('%s' % current_topic, forDuration: 2.4)
 
       @data = items.sort{|x, y| y['time'] <=> x['time']}
 
@@ -112,11 +116,12 @@ private
     [:topstories, :beststories, :newstories, :askstories, :showstories, :jobstories]
   end
 
-  def show_in_sfsvc(url, &block)
-    sfsViewController = SFSafariViewController.alloc.initWithURL(NSURL.URLWithString url, entersReaderIfAvailable: true)
-    #sfsViewController.delegate = @targetViewController | self
-    #sfsViewController.preferredBarTintColor = UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 0.25)
-    #sfsViewController.preferredControlTintColor = UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 0.25)
+  def show_in_sfsvc(item, &block)
+    sfsViewController = ReadomSafariViewController.alloc.initWithURL(NSURL.URLWithString item['url'], entersReaderIfAvailable: true)
+    sfsViewController.delegate = sfsViewController
+    sfsViewController.item = item
+    sfsViewController.preferredBarTintColor = [255, 102, 0].uicolor
+    sfsViewController.preferredControlTintColor = color.white
 
     self.presentViewController(sfsViewController,
       animated: true,

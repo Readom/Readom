@@ -17,17 +17,13 @@
 @interface AppDelegate: UIViewController
 @end
 
-@interface HomeScreen: UIViewController
--(IBAction) on_load;
--(IBAction) nav_left_button;
--(IBAction) nav_right_button;
-
-@end
-
 @interface StoryScreen: UICollectionViewController
 -(IBAction) on_load;
 -(IBAction) numberOfSectionsInCollectionView:(id) view;
 -(IBAction) set_data;
+-(IBAction) switch_topic;
+-(IBAction) current_topic;
+-(IBAction) topics;
 
 @end
 
@@ -48,16 +44,11 @@
 
 @end
 
-@interface HomeScreenStylesheet: ApplicationStylesheet
--(IBAction) setup;
--(IBAction) root_view:(id) st;
--(IBAction) hello_world:(id) st;
-
-@end
-
 @interface StoryScreenStylesheet: ApplicationStylesheet
 -(IBAction) setup;
 -(IBAction) collection_view:(id) st;
+-(IBAction) switch_topic_btn:(id) st;
+-(IBAction) refresh_btn:(id) st;
 
 @end
 

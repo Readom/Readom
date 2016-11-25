@@ -6,9 +6,6 @@
 @implementation AppDelegate
 @end
 
-@implementation HomeScreen
-@end
-
 @implementation StoryScreen
 @end
 
@@ -22,9 +19,6 @@
 @end
 
 @implementation ApplicationStylesheet
-@end
-
-@implementation HomeScreenStylesheet
 @end
 
 @implementation StoryScreenStylesheet

@@ -10,14 +10,14 @@ class StoryScreenStylesheet < ApplicationStylesheet
   end
 
   def collection_view(st)
-    st.view.contentInset = [@margin, @margin, @margin, @margin]
+    st.view.contentInset = [@margin, 0, @margin, 0]
     st.background_color = color.white
 
     images = ['Costa Rican Frog.jpg', 'Pensive Parakeet.jpg', 'Boston City Flow.jpg']
     bg_image = UIImage.imageNamed images.sample
     bg_image.gaussian_blur(radius: 5)
     bg_image.darken(brightness: -0.8, saturation: -0.2)
-    bg_image.scale_to_fill(screen.bounds.size, position: :center)
+    bg_image.scale_to_fill(window.bounds.size, position: :center)
     st.background_color = bg_image.uicolor
 
     st.view.collectionViewLayout.tap do |cl|
@@ -36,5 +36,10 @@ class StoryScreenStylesheet < ApplicationStylesheet
 
   def refresh_btn(st)
     st.frame = {w: 28, h: 28, l: screen.bounds.origin.x + screen.bounds.size.width - 30, t: 60}
+  end
+
+  def version_label(st)
+    st.font = UIFont.fontWithName('Arial', size: 9)
+    st.frame = {w: 36, h: 10, l: screen.bounds.origin.x + screen.bounds.size.width - 36, t: 20}
   end
 end
