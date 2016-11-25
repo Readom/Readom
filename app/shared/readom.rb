@@ -20,15 +20,27 @@ class Readom
 
     self.session.get(listEntry) do |result|
       if result.success?
-        result.object.shuffle.each do |item|
+        items = result.object.shuffle.map do |item|
           if item['title']
             if item['url'].nil?
               item['url'] = 'https://news.ycombinator.com/item?id=%d' % item['id']
             end
 
-            block.call(item) if block
+            item
+          else
+            nil
           end
-        end
+        end.compact
+
+        block.call items if block
+      end
+    end
+  end
+
+  def self.fetch_items_each(list=:newstories, limit=10, &block)
+    self.fetch_items(list, limit) do |items|
+      items.each do |item|
+        block.call item if block
       end
     end
   end

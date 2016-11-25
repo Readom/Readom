@@ -64,14 +64,14 @@ class StoryScreen < UICollectionViewController
 
 private
   def set_data
-    @data = []
-    Readom.fetch_items(:topstories, 20) do |item|
-      @data << item
+    @data ||= []
+
+    Readom.fetch_items(:topstories, 20) do |items|
+      @data = items
 
       self.collectionView.reloadData
+      @refreshControl.endRefreshing
     end
-
-    @refreshControl.endRefreshing
   end
 
   def show_in_sfsvc(url, &block)
