@@ -86,8 +86,8 @@ private
   def set_data
     @data ||= []
 
-    Readom.fetch_items(current_topic, 20) do |items|
-      @notification.displayNotificationWithMessage('%s' % current_topic, forDuration: 0.8)
+    Readom.fetch_items(current_topic, 24) do |items|
+      @notification.displayNotificationWithMessage('%s' % current_topic, forDuration: 2.4)
 
       @data = items.sort{|x, y| y['time'] <=> x['time']}
 
