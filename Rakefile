@@ -92,8 +92,8 @@ Motion::Project::App.setup do |app|
   end
 
   puts "Name: #{app.name}"
-  puts "Using profile: #{app.provisioning_profile}"
-  puts "Using certificate: #{app.codesign_certificate}"
+  puts "Using profile: #{ENV['TRAVIS'] ? nil : app.provisioning_profile}"
+  puts "Using certificate: #{ENV['TRAVIS'] ? nil : app.codesign_certificate}"
 end
 
 # Remove this if you aren't using CDQ
