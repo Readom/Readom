@@ -27,4 +27,4 @@ gem 'motion-provisioning'
 gem 'ib'
 
 gem 'motion-awesome'
-gem 'sugarcube', :require => %w(sugarcube-awesome sugarcube-attributedstring)
+gem 'sugarcube', :require => %w(sugarcube-awesome sugarcube-attributedstring sugarcube-color)

@@ -31,6 +31,18 @@ class StoryScreen < UICollectionViewController
       find(cv).apply_style :collection_view
     end
 
+    @switch_list_btn = screen.append!(UIButton, :switch_list_btn)
+    @switch_list_btn.setAttributedTitle(:'bars'.awesome_icon(size: 24, color: [255, 102, 0].uicolor), forState:UIControlStateNormal)
+    @switch_list_btn.addTarget(self,
+      action: :switch_list,
+      forControlEvents: UIControlEventTouchUpInside)
+
+    @refresh_btn = screen.append!(UIButton, :refresh_btn)
+    @refresh_btn.setAttributedTitle(:random.awesome_icon(size: 24, color: [255, 102, 0].uicolor), forState:UIControlStateNormal)
+    @refresh_btn.addTarget(self,
+      action: :set_data,
+      forControlEvents: UIControlEventTouchUpInside)
+
     set_data unless @data
   end
 
@@ -72,6 +84,9 @@ private
       self.collectionView.reloadData
       @refreshControl.endRefreshing
     end
+  end
+
+  def switch_list
   end
 
   def show_in_sfsvc(url, &block)
