@@ -18,8 +18,8 @@ Motion::Project::App.setup do |app|
   #app.version = (`git rev-list HEAD --count`.strip.to_i).to_s
   #app.version = app.short_version
 
-  app.version = "1.0.0"
-  app.short_version = '0.%s' % Time.now.strftime('%Y%m%d.%H%M%S')
+  app.short_version = '1.0.0'
+  app.version = '0.%s' % Time.now.strftime('%y%m.%d%H%M')
 
   # RubyMotion by default selects the latest SDK you have installed,
   # if you would like to specify the SDK to assure consistency across multiple machines,
@@ -32,7 +32,7 @@ Motion::Project::App.setup do |app|
   # app.deployment_target = '8.0'
   app.deployment_target = '9.0'
 
-  app.resources_dirs += %w(resources/icons resources/splash)
+  app.resources_dirs += %w(resources/icons resources/splash resources/backgrounds)
   app.icons = Dir.glob("resources/icons/*.png").map{|icon| icon.split("/").last}
 
   app.device_family = [:iphone, :ipad]
@@ -56,6 +56,7 @@ Motion::Project::App.setup do |app|
   #   pod 'JGProgressHUD'
   #   pod 'SVProgressHUD'
   #   pod "FontasticIcons"
+    pod 'CWStatusBarNotification'
   end
 
   app.development do
@@ -82,8 +83,8 @@ Motion::Project::App.setup do |app|
       platform: :ios,
       type: :distribution)
 
-    app.short_version = app.version
-    app.version = '0.%s' % Time.now.strftime('%y%m%d.%H%M%S')
+    app.short_version = '1.0.1'
+    app.version = '0.%s' % Time.now.strftime('%y%m.%d%H%M')
     app.entitlements['beta-reports-active'] = true # For TestFlight
 
     # app.seed_id = "YOUR_SEED_ID"

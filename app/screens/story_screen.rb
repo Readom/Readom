@@ -15,6 +15,10 @@ class StoryScreen < UICollectionViewController
   end
 
   def on_load
+    @notification = CWStatusBarNotification.new
+    @notification.notificationLabelBackgroundColor = [255, 102, 0].uicolor
+    @notification.notificationLabelTextColor = color.white
+
     refresher = UIRefreshControl.new
     refresher.addTarget(self, action: 'set_data', forControlEvents: UIControlEventValueChanged)
     @refreshControl = refresher
@@ -30,6 +34,18 @@ class StoryScreen < UICollectionViewController
       cv.allowsMultipleSelection = false
       find(cv).apply_style :collection_view
     end
+
+    @switch_topic_btn = screen.append!(UIButton, :switch_topic_btn)
+    @switch_topic_btn.setAttributedTitle(:random.awesome_icon(size: 28, color: [255, 102, 0].uicolor), forState:UIControlStateNormal)
+    @switch_topic_btn.addTarget(self,
+      action: :switch_topic,
+      forControlEvents: UIControlEventTouchUpInside)
+
+    @refresh_btn = screen.append!(UIButton, :refresh_btn)
+    @refresh_btn.setAttributedTitle(:refresh.awesome_icon(size: 28, color: [255, 102, 0].uicolor), forState:UIControlStateNormal)
+    @refresh_btn.addTarget(self,
+      action: :set_data,
+      forControlEvents: UIControlEventTouchUpInside)
 
     set_data unless @data
   end
@@ -66,12 +82,34 @@ private
   def set_data
     @data ||= []
 
-    Readom.fetch_items(:topstories, 20) do |items|
-      @data = items
+    Readom.fetch_items(current_topic, 20) do |items|
+      @notification.displayNotificationWithMessage('%s' % current_topic, forDuration: 0.8)
+
+      @data = items.sort{|x, y| y['time'] <=> x['time']}
 
       self.collectionView.reloadData
       @refreshControl.endRefreshing
     end
+  end
+
+  def switch_topic
+    @current_topic_idx += 1
+    if @current_topic_idx >= topics.size
+      @current_topic_idx = 0
+    end
+
+    @notification.displayNotificationWithMessage('Switch to %s' % current_topic, forDuration: 1.5)
+
+    set_data
+  end
+
+  def current_topic
+    @current_topic_idx ||= 0
+    topics[@current_topic_idx]
+  end
+
+  def topics
+    [:topstories, :beststories, :newstories, :askstories, :showstories, :jobstories]
   end
 
   def show_in_sfsvc(url, &block)
