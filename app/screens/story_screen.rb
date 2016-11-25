@@ -119,8 +119,8 @@ private
   def show_in_sfsvc(url, &block)
     sfsViewController = SFSafariViewController.alloc.initWithURL(NSURL.URLWithString url, entersReaderIfAvailable: true)
     #sfsViewController.delegate = @targetViewController | self
-    #sfsViewController.preferredBarTintColor = UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 0.25)
-    #sfsViewController.preferredControlTintColor = UIColor.colorWithRed(0.45, green: 0.70, blue: 0.90, alpha: 0.25)
+    sfsViewController.preferredBarTintColor = [255, 102, 0].uicolor
+    sfsViewController.preferredControlTintColor = color.white
 
     self.presentViewController(sfsViewController,
       animated: true,
