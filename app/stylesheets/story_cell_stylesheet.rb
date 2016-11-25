@@ -25,16 +25,16 @@ module StoryCellStylesheet
   end
 
   def title(st)
-    st.frame = {w: cell_size[:w] - 1, h: cell_size[:h] - 11, t: 1}
+    st.frame = {w: cell_size[:w] - 1, h: cell_size[:h] - 12, t: 1}
     st.background_color = color(base: color.white, a: 0.5)
     st.line_break_mode = NSLineBreakByWordWrapping
     st.number_of_lines = 0
   end
 
   def info(st)
-    st.frame = {w: cell_size[:w] - 1, h: 9, t: cell_size[:h] - 10}
+    st.frame = {w: cell_size[:w] - 1, h: 10, t: cell_size[:h] - 11}
     st.background_color = color(base: color.white, a: 0.5)
-    st.font = UIFont.fontWithName('Arial', size: 8)
+    st.font = UIFont.fontWithName('Arial', size: 9)
     st.text_color = color(base: color.black, a: 0.75)
     st.line_break_mode = NSLineBreakByWordWrapping
     st.number_of_lines = 1
