@@ -1,15 +1,17 @@
 module StoryCellStylesheet
   def cell_size
-    full_width = screen.bounds.size.width
-    min_cell_width = 180
-    min_cell_height = 84
+    margin = ipad? ? 6 : 4
 
-    width = screen.bounds.size.width / 2 - 12
+    full_width = screen.bounds.size.width
+    min_cell_width = 195
+    min_cell_height = 85
+
+    width = screen.bounds.size.width / 2 - margin * 2
     if width < min_cell_width
-      width = full_width - 12
+      width = full_width - margin
     end
 
-    height = 25375 / width
+    height = 26575 / width
     if height < min_cell_height
       height = min_cell_height
     end

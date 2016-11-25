@@ -36,13 +36,13 @@ class StoryScreen < UICollectionViewController
     end
 
     @switch_topic_btn = screen.append!(UIButton, :switch_topic_btn)
-    @switch_topic_btn.setAttributedTitle(:random.awesome_icon(size: 24, color: [255, 102, 0].uicolor), forState:UIControlStateNormal)
+    @switch_topic_btn.setAttributedTitle(:random.awesome_icon(size: 28, color: [255, 102, 0].uicolor), forState:UIControlStateNormal)
     @switch_topic_btn.addTarget(self,
       action: :switch_topic,
       forControlEvents: UIControlEventTouchUpInside)
 
     @refresh_btn = screen.append!(UIButton, :refresh_btn)
-    @refresh_btn.setAttributedTitle(:refresh.awesome_icon(size: 24, color: [255, 102, 0].uicolor), forState:UIControlStateNormal)
+    @refresh_btn.setAttributedTitle(:refresh.awesome_icon(size: 28, color: [255, 102, 0].uicolor), forState:UIControlStateNormal)
     @refresh_btn.addTarget(self,
       action: :set_data,
       forControlEvents: UIControlEventTouchUpInside)
