@@ -92,7 +92,7 @@ private
 
     Readom.fetch_items(current_topic, 24) do |items|
       @refreshControl.endRefreshing
-      @notification.displayNotificationWithMessage('%s' % current_topic, forDuration: 2.4)
+      @notification.displayNotificationWithMessage('%s' % current_topic, forDuration: 1.5)
 
       @data = items.sort{|x, y| y['time'] <=> x['time']}
 
@@ -105,7 +105,7 @@ private
   end
 
   def reload_items
-    @notification.displayNotificationWithMessage('Reloading %s' % current_topic, forDuration: 1.5)
+    @notification.displayNotificationWithMessage('Reloading %s' % current_topic, forDuration: 0.8)
 
     set_data
   end
@@ -116,7 +116,7 @@ private
       @current_topic_idx = 0
     end
 
-    @notification.displayNotificationWithMessage('Switching to %s' % current_topic, forDuration: 1.5)
+    @notification.displayNotificationWithMessage('Switching to %s' % current_topic, forDuration: 0.8)
 
     set_data
   end
