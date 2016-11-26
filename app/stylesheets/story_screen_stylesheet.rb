@@ -31,15 +31,16 @@ class StoryScreenStylesheet < ApplicationStylesheet
   end
 
   def switch_topic_btn(st)
-    st.frame = {w: 28, h: 28, l: screen.bounds.origin.x + screen.bounds.size.width - 30, t: 35}
+    st.frame = {w: 28, h: 28, fr: 0, t: 35}
   end
 
   def refresh_btn(st)
-    st.frame = {w: 28, h: 28, l: screen.bounds.origin.x + screen.bounds.size.width - 30, t: 80}
+    st.frame = {w: 28, h: 28, fr: 0, t: 80}
   end
 
   def version_label(st)
+    st.frame = {w: 36, h: 10, fr: 0, t: 20}
+
     st.font = UIFont.fontWithName('Arial', size: 9)
-    st.frame = {w: 36, h: 10, l: screen.bounds.origin.x + screen.bounds.size.width - 36, t: 20}
   end
 end

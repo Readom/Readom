@@ -40,6 +40,7 @@ Motion::Project::App.setup do |app|
   app.interface_orientations = [:portrait, :portrait_upside_down, :landscape_left, :landscape_right]
   app.info_plist['UILaunchStoryboardName'] = 'LaunchScreen'
   app.info_plist['ITSAppUsesNonExemptEncryption'] = false
+  app.info_plist['UIStatusBarHidden'] = true
 
   app.files += Dir.glob(File.join(app.project_dir, 'lib/**/*.rb'))
 

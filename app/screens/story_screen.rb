@@ -78,7 +78,9 @@ class StoryScreen < UICollectionViewController
   def collectionView(view, didSelectItemAtIndexPath: index_path)
     cell = view.cellForItemAtIndexPath(index_path)
     # puts "Selected at section: #{index_path.section}, row: #{index_path.row}"
-    show_in_sfsvc(@data[index_path.row]) do end
+    find(cell.contentView).animations.blink
+
+    show_in_sfsvc(@data[index_path.row], cell) do end
   end
 
   # Remove the following if you're only using portrait
@@ -97,15 +99,20 @@ private
       @data = items.sort{|x, y| y['time'] <=> x['time']}
 
       self.collectionView.reloadData
+      find(self.collectionView).animations.slide_in(from_direction: :top)
     end
   end
 
   def version_label_clicked
     @notification.displayNotificationWithMessage('%s' % app.info_plist['VersionFingerprint'], forDuration: 5)
+
+    find(@version_label).animations.blink
   end
 
   def reload_items
     @notification.displayNotificationWithMessage('Reloading %s' % current_topic, forDuration: 0.8)
+
+    find(@refresh_btn).animations.blink
 
     set_data
   end
@@ -115,6 +122,8 @@ private
     if @current_topic_idx >= topics.size
       @current_topic_idx = 0
     end
+
+    find(@switch_topic_btn).animations.blink
 
     @notification.displayNotificationWithMessage('Switching to %s' % current_topic, forDuration: 0.8)
 
@@ -127,13 +136,14 @@ private
   end
 
   def topics
-    [:topstories, :beststories, :newstories, :askstories, :showstories, :jobstories]
+    [:newstories, :topstories, :beststories, :showstories, :askstories, :jobstories]
   end
 
-  def show_in_sfsvc(item, &block)
+  def show_in_sfsvc(item, cell, &block)
     sfsViewController = ReadomSafariViewController.alloc.initWithURL(NSURL.URLWithString item['url'], entersReaderIfAvailable: true)
     sfsViewController.delegate = sfsViewController
     sfsViewController.item = item
+    sfsViewController.cell = cell
     sfsViewController.preferredBarTintColor = [255, 102, 0].uicolor
     sfsViewController.preferredControlTintColor = color.white
 
