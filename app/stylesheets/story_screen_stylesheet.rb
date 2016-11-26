@@ -31,11 +31,11 @@ class StoryScreenStylesheet < ApplicationStylesheet
   end
 
   def switch_topic_btn(st)
-    st.frame = {w: 28, h: 28, l: screen.bounds.origin.x + screen.bounds.size.width - 30, t: 30}
+    st.frame = {w: 28, h: 28, l: screen.bounds.origin.x + screen.bounds.size.width - 30, t: 35}
   end
 
   def refresh_btn(st)
-    st.frame = {w: 28, h: 28, l: screen.bounds.origin.x + screen.bounds.size.width - 30, t: 60}
+    st.frame = {w: 28, h: 28, l: screen.bounds.origin.x + screen.bounds.size.width - 30, t: 80}
   end
 
   def version_label(st)
