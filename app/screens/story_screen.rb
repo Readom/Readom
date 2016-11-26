@@ -52,7 +52,7 @@ class StoryScreen < UICollectionViewController
     @version_label.sizeToFit
     @version_label.userInteractionEnabled = true
     tapGesture = UITapGestureRecognizer.alloc.initWithTarget(self, action: :version_label_clicked)
-    tapGesture.numberOfTapsRequired = 5
+    tapGesture.numberOfTapsRequired = 4
     @version_label.addGestureRecognizer(tapGesture)
 
     set_data unless @data
