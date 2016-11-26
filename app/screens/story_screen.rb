@@ -20,7 +20,7 @@ class StoryScreen < UICollectionViewController
     @notification.notificationLabelTextColor = color.white
 
     refresher = UIRefreshControl.new
-    refresher.addTarget(self, action: 'set_data', forControlEvents: UIControlEventValueChanged)
+    refresher.addTarget(self, action: 'reload_items', forControlEvents: UIControlEventValueChanged)
     @refreshControl = refresher
 
     collectionView.tap do |cv|
@@ -44,12 +44,16 @@ class StoryScreen < UICollectionViewController
     @refresh_btn = screen.append!(UIButton, :refresh_btn)
     @refresh_btn.setAttributedTitle(:refresh.awesome_icon(size: 28, color: [255, 102, 0].uicolor), forState:UIControlStateNormal)
     @refresh_btn.addTarget(self,
-      action: :set_data,
+      action: :reload_items,
       forControlEvents: UIControlEventTouchUpInside)
 
     @version_label = screen.append!(UILabel, :version_label)
     @version_label.attributedText = :anchor.awesome_icon(size: 9) + app.short_version
     @version_label.sizeToFit
+    @version_label.userInteractionEnabled = true
+    tapGesture = UITapGestureRecognizer.alloc.initWithTarget(self, action: :version_label_clicked)
+    tapGesture.numberOfTapsRequired = 5
+    @version_label.addGestureRecognizer(tapGesture)
 
     set_data unless @data
   end
@@ -87,13 +91,23 @@ private
     @data ||= []
 
     Readom.fetch_items(current_topic, 24) do |items|
+      @refreshControl.endRefreshing
       @notification.displayNotificationWithMessage('%s' % current_topic, forDuration: 2.4)
 
       @data = items.sort{|x, y| y['time'] <=> x['time']}
 
       self.collectionView.reloadData
-      @refreshControl.endRefreshing
     end
+  end
+
+  def version_label_clicked
+    @notification.displayNotificationWithMessage('%s' % app.info_plist['VersionFingerprint'], forDuration: 5)
+  end
+
+  def reload_items
+    @notification.displayNotificationWithMessage('Reloading %s' % current_topic, forDuration: 1.5)
+
+    set_data
   end
 
   def switch_topic
@@ -102,7 +116,7 @@ private
       @current_topic_idx = 0
     end
 
-    @notification.displayNotificationWithMessage('Switch to %s' % current_topic, forDuration: 1.5)
+    @notification.displayNotificationWithMessage('Switching to %s' % current_topic, forDuration: 1.5)
 
     set_data
   end

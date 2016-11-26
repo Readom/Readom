@@ -20,6 +20,8 @@ Motion::Project::App.setup do |app|
   #app.version = app.short_version
   app.version = '0.%s' % Time.now.strftime('%y%m.%d%H%M')
 
+  app.info_plist['VersionFingerprint'] = '%s/%s/%s' % [app.short_version, app.version, `git log -1 --format='format:%h'`.strip]
+
   # RubyMotion by default selects the latest SDK you have installed,
   # if you would like to specify the SDK to assure consistency across multiple machines,
   # you can do so like the following examples
