@@ -15,9 +15,14 @@ class StoryScreenStylesheet < ApplicationStylesheet
 
     images = ['Costa Rican Frog.jpg', 'Pensive Parakeet.jpg', 'Boston City Flow.jpg']
     bg_image = UIImage.imageNamed images.sample
-    bg_image.gaussian_blur(radius: 5)
-    bg_image.darken(brightness: -0.8, saturation: -0.2)
-    bg_image.scale_to_fill(window.bounds.size, position: [:center, :left, :right, :top, :top_left, :top_right, :bottom_left, :bottom_right].sample)
+
+    # scale
+    window_size = [window.bounds.size.width, window.bounds.size.height].max
+    bg_size = [window_size + rand(window_size), 12888].min # size nor greater than 12888
+    position = [:top_left, :top, :top_right, :left, :center, :right, :bottom_left, :bottom, :bottom_right].sample
+
+    bg_image = bg_image.gaussian_blur(radius: 2).scale_to_fill([bg_size, bg_size], position: position)
+
     st.background_color = bg_image.uicolor
 
     st.view.collectionViewLayout.tap do |cl|
