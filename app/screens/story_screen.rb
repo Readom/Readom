@@ -89,10 +89,10 @@ class StoryScreen < UICollectionViewController
   end
 
 private
-  def set_data
+  def set_data(count = 24)
     @data ||= []
 
-    Readom.fetch_items(current_topic, 24) do |items|
+    Readom.fetch_items(current_topic, count) do |items|
       @refreshControl.endRefreshing
       @notification.displayNotificationWithMessage('%s' % current_topic, forDuration: 1.5)
 
