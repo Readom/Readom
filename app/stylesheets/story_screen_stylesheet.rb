@@ -17,7 +17,7 @@ class StoryScreenStylesheet < ApplicationStylesheet
     bg_image = UIImage.imageNamed images.sample
 
     # scale
-    window_size = [window.bounds.size.width, window.bounds.size.height].max
+    window_size = [window.bounds.size.width, window.bounds.size.height].max + 20
     bg_size = [window_size + rand(window_size), 12888].min # size nor greater than 12888
     position = [:top_left, :top, :top_right, :left, :center, :right, :bottom_left, :bottom, :bottom_right].sample
 
