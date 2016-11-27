@@ -11,13 +11,18 @@ class StoryScreenStylesheet < ApplicationStylesheet
 
   def collection_view(st)
     st.view.contentInset = [@margin, 0, @margin, 0]
-    st.background_color = color.white
+    st.background_color = [255, 153, 0].uicolor
 
     images = ['Costa Rican Frog.jpg', 'Pensive Parakeet.jpg', 'Boston City Flow.jpg']
     bg_image = UIImage.imageNamed images.sample
-    bg_image.gaussian_blur(radius: 5)
-    bg_image.darken(brightness: -0.8, saturation: -0.2)
-    bg_image.scale_to_fill(window.bounds.size, position: :center)
+
+    # scale
+    window_size = [window.bounds.size.width, window.bounds.size.height].max
+    bg_size = [window_size + rand(window_size), 12888].min # size nor greater than 12888
+    position = [:top_left, :top, :top_right, :left, :center, :right, :bottom_left, :bottom, :bottom_right].sample
+
+    bg_image = bg_image.gaussian_blur(radius: 2).scale_to_fill([bg_size, bg_size], position: position)
+
     st.background_color = bg_image.uicolor
 
     st.view.collectionViewLayout.tap do |cl|
@@ -31,15 +36,16 @@ class StoryScreenStylesheet < ApplicationStylesheet
   end
 
   def switch_topic_btn(st)
-    st.frame = {w: 28, h: 28, l: screen.bounds.origin.x + screen.bounds.size.width - 30, t: 30}
+    st.frame = {w: 28, h: 28, fr: 0, t: 35}
   end
 
   def refresh_btn(st)
-    st.frame = {w: 28, h: 28, l: screen.bounds.origin.x + screen.bounds.size.width - 30, t: 60}
+    st.frame = {w: 28, h: 28, fr: 0, t: 80}
   end
 
   def version_label(st)
+    st.frame = {w: 36, h: 10, fr: 0, t: 20}
+
     st.font = UIFont.fontWithName('Arial', size: 9)
-    st.frame = {w: 36, h: 10, l: screen.bounds.origin.x + screen.bounds.size.width - 36, t: 20}
   end
 end

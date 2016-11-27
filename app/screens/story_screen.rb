@@ -20,7 +20,7 @@ class StoryScreen < UICollectionViewController
     @notification.notificationLabelTextColor = color.white
 
     refresher = UIRefreshControl.new
-    refresher.addTarget(self, action: 'set_data', forControlEvents: UIControlEventValueChanged)
+    refresher.addTarget(self, action: 'reload_items', forControlEvents: UIControlEventValueChanged)
     @refreshControl = refresher
 
     collectionView.tap do |cv|
@@ -44,12 +44,16 @@ class StoryScreen < UICollectionViewController
     @refresh_btn = screen.append!(UIButton, :refresh_btn)
     @refresh_btn.setAttributedTitle(:refresh.awesome_icon(size: 28, color: [255, 102, 0].uicolor), forState:UIControlStateNormal)
     @refresh_btn.addTarget(self,
-      action: :set_data,
+      action: :reload_items,
       forControlEvents: UIControlEventTouchUpInside)
 
     @version_label = screen.append!(UILabel, :version_label)
     @version_label.attributedText = :anchor.awesome_icon(size: 9) + app.short_version
     @version_label.sizeToFit
+    @version_label.userInteractionEnabled = true
+    tapGesture = UITapGestureRecognizer.alloc.initWithTarget(self, action: :version_label_clicked)
+    tapGesture.numberOfTapsRequired = 4
+    @version_label.addGestureRecognizer(tapGesture)
 
     set_data unless @data
   end
@@ -74,7 +78,11 @@ class StoryScreen < UICollectionViewController
   def collectionView(view, didSelectItemAtIndexPath: index_path)
     cell = view.cellForItemAtIndexPath(index_path)
     # puts "Selected at section: #{index_path.section}, row: #{index_path.row}"
-    show_in_sfsvc(@data[index_path.row]) do end
+    find(cell.contentView).animations.blink
+
+    show_in_sfsvc(@data[index_path.row]) do
+        find(cell.contentView).animations.blink
+    end
   end
 
   # Remove the following if you're only using portrait
@@ -83,17 +91,32 @@ class StoryScreen < UICollectionViewController
   end
 
 private
-  def set_data
+  def set_data(count = 24)
     @data ||= []
 
-    Readom.fetch_items(current_topic, 24) do |items|
-      @notification.displayNotificationWithMessage('%s' % current_topic, forDuration: 2.4)
+    Readom.fetch_items(current_topic, count) do |items|
+      @refreshControl.endRefreshing
+      @notification.displayNotificationWithMessage('%s' % current_topic, forDuration: 1.5)
 
       @data = items.sort{|x, y| y['time'] <=> x['time']}
 
       self.collectionView.reloadData
-      @refreshControl.endRefreshing
+      find(self.collectionView).animations.slide_in(from_direction: :top)
     end
+  end
+
+  def version_label_clicked
+    @notification.displayNotificationWithMessage('%s' % app.info_plist['VersionFingerprint'], forDuration: 5)
+
+    find(@version_label).animations.blink
+  end
+
+  def reload_items
+    @notification.displayNotificationWithMessage('Reloading %s' % current_topic, forDuration: 0.8)
+
+    find(@refresh_btn).animations.blink
+
+    set_data
   end
 
   def switch_topic
@@ -102,7 +125,9 @@ private
       @current_topic_idx = 0
     end
 
-    @notification.displayNotificationWithMessage('Switch to %s' % current_topic, forDuration: 1.5)
+    find(@switch_topic_btn).animations.blink
+
+    @notification.displayNotificationWithMessage('Switching to %s' % current_topic, forDuration: 0.8)
 
     set_data
   end
@@ -113,13 +138,14 @@ private
   end
 
   def topics
-    [:topstories, :beststories, :newstories, :askstories, :showstories, :jobstories]
+    [:newstories, :topstories, :beststories, :showstories, :askstories, :jobstories]
   end
 
   def show_in_sfsvc(item, &block)
     sfsViewController = ReadomSafariViewController.alloc.initWithURL(NSURL.URLWithString item['url'], entersReaderIfAvailable: true)
     sfsViewController.delegate = sfsViewController
     sfsViewController.item = item
+    sfsViewController.callback = block
     sfsViewController.preferredBarTintColor = [255, 102, 0].uicolor
     sfsViewController.preferredControlTintColor = color.white
 

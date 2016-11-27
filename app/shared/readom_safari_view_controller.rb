@@ -1,5 +1,5 @@
 class ReadomSafariViewController < SFSafariViewController
-  attr_accessor :item
+  attr_accessor :item, :callback
 
   # SFSafariViewController delegate
   def safariViewController(controller, didCompleteInitialLoad: didLoadSuccessfully)
@@ -14,5 +14,6 @@ class ReadomSafariViewController < SFSafariViewController
 
   def safariViewControllerDidFinish(controller)
     #Tells the delegate that the user dismissed the view.
+    @callback.call
   end
 end

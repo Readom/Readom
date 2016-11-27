@@ -13,13 +13,14 @@ Motion::Project::App.setup do |app|
   app.name = 'README'
   app.identifier = 'cc.mib.README'
 
-  #app.short_version = '0.1.0'
+  app.short_version = '1.0.2'
   # Get version from git
   #app.version = (`git rev-list HEAD --count`.strip.to_i).to_s
+  #app.version = `git log -1 --format='format:%h'`.strip
   #app.version = app.short_version
-
-  app.short_version = '1.0.0'
   app.version = '0.%s' % Time.now.strftime('%y%m.%d%H%M')
+
+  app.info_plist['VersionFingerprint'] = '%s/%s/%s' % [app.short_version, app.version, `git log -1 --format='format:%h'`.strip]
 
   # RubyMotion by default selects the latest SDK you have installed,
   # if you would like to specify the SDK to assure consistency across multiple machines,
@@ -39,6 +40,7 @@ Motion::Project::App.setup do |app|
   app.interface_orientations = [:portrait, :portrait_upside_down, :landscape_left, :landscape_right]
   app.info_plist['UILaunchStoryboardName'] = 'LaunchScreen'
   app.info_plist['ITSAppUsesNonExemptEncryption'] = false
+  app.info_plist['UIStatusBarHidden'] = true
 
   app.files += Dir.glob(File.join(app.project_dir, 'lib/**/*.rb'))
 
@@ -83,8 +85,6 @@ Motion::Project::App.setup do |app|
       platform: :ios,
       type: :distribution)
 
-    app.short_version = '1.0.1'
-    app.version = '0.%s' % Time.now.strftime('%y%m.%d%H%M')
     app.entitlements['beta-reports-active'] = true # For TestFlight
 
     # app.seed_id = "YOUR_SEED_ID"
