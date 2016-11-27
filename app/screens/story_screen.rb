@@ -80,7 +80,9 @@ class StoryScreen < UICollectionViewController
     # puts "Selected at section: #{index_path.section}, row: #{index_path.row}"
     find(cell.contentView).animations.blink
 
-    show_in_sfsvc(@data[index_path.row], cell) do end
+    show_in_sfsvc(@data[index_path.row]) do
+        find(cell.contentView).animations.blink
+    end
   end
 
   # Remove the following if you're only using portrait
@@ -139,11 +141,11 @@ private
     [:newstories, :topstories, :beststories, :showstories, :askstories, :jobstories]
   end
 
-  def show_in_sfsvc(item, cell, &block)
+  def show_in_sfsvc(item, &block)
     sfsViewController = ReadomSafariViewController.alloc.initWithURL(NSURL.URLWithString item['url'], entersReaderIfAvailable: true)
     sfsViewController.delegate = sfsViewController
     sfsViewController.item = item
-    sfsViewController.cell = cell
+    sfsViewController.callback = block
     sfsViewController.preferredBarTintColor = [255, 102, 0].uicolor
     sfsViewController.preferredControlTintColor = color.white
 
