@@ -6,7 +6,7 @@ module StoryCellStylesheet
 
     full_width = screen.bounds.size.width
     min_cell_width = 310
-    min_cell_height = 105
+    min_cell_height = ipad? ? 160 : 105
 
     width = screen.bounds.size.width / per_line - margin * 2
     if width < min_cell_width
