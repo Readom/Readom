@@ -109,6 +109,7 @@ private
     @notification.displayNotificationWithMessage('%s' % app.info_plist['VersionFingerprint'], forDuration: 5)
 
     find(@version_label).animations.blink
+    rmq.all.reapply_styles
   end
 
   def reload_items

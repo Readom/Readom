@@ -18,4 +18,8 @@ class AppDelegate < PM::Delegate
     # So that we can do stuff like style views before the rotation begins
     device.orientation = new_orientation
   end
+
+  def willAnimateRotationToInterfaceOrientation(orientation, duration: duration)
+    rmq.all.reapply_styles
+  end
 end

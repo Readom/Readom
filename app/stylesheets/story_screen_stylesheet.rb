@@ -31,7 +31,7 @@ class StoryScreenStylesheet < ApplicationStylesheet
       #cl.headerReferenceSize = [cell_size[:w], cell_size[:h]]
       cl.minimumInteritemSpacing = @margin
       cl.minimumLineSpacing = @margin
-      #cl.sectionInset = [0,0,0,0]
+      cl.sectionInset = [@margin, @margin, @margin, @margin]
     end
   end
 
