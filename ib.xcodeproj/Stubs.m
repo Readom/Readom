@@ -9,7 +9,16 @@
 @implementation StoryScreen
 @end
 
+@implementation ReadomActivity
+@end
+
+@implementation FavoriteActivity
+@end
+
 @implementation Readom
+@end
+
+@implementation ReadomSafariViewController
 @end
 
 @implementation UIViewStyler
