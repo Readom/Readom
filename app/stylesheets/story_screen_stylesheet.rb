@@ -17,7 +17,7 @@ class StoryScreenStylesheet < ApplicationStylesheet
     bg_image = UIImage.imageNamed images.sample
 
     # scale
-    window_size = [window.bounds.size.width, window.bounds.size.height].max
+    window_size = [window.bounds.size.width, window.bounds.size.height].max + 20
     bg_size = [window_size + rand(window_size), 12888].min # size nor greater than 12888
     position = [:top_left, :top, :top_right, :left, :center, :right, :bottom_left, :bottom, :bottom_right].sample
 
@@ -35,17 +35,17 @@ class StoryScreenStylesheet < ApplicationStylesheet
     end
   end
 
+  def version_label(st)
+    st.frame = {w: 36, h: 10, fl: 0, t: 20}
+
+    st.font = UIFont.fontWithName('Arial', size: 9)
+  end
+
   def switch_topic_btn(st)
-    st.frame = {w: 28, h: 28, fr: 0, t: 35}
+    st.frame = {w: 28, h: 28, fl: 0, t: 35}
   end
 
   def refresh_btn(st)
-    st.frame = {w: 28, h: 28, fr: 0, t: 80}
-  end
-
-  def version_label(st)
-    st.frame = {w: 36, h: 10, fr: 0, t: 20}
-
-    st.font = UIFont.fontWithName('Arial', size: 9)
+    st.frame = {w: 28, h: 28, fl: 0, t: 80}
   end
 end

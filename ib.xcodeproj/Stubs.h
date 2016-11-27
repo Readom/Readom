@@ -20,14 +20,38 @@
 @interface StoryScreen: UICollectionViewController
 -(IBAction) on_load;
 -(IBAction) numberOfSectionsInCollectionView:(id) view;
--(IBAction) set_data;
+-(IBAction) set_data:(id) count;
+-(IBAction) version_label_clicked;
+-(IBAction) reload_items;
 -(IBAction) switch_topic;
 -(IBAction) current_topic;
 -(IBAction) topics;
 
 @end
 
+@interface ReadomActivity: UIActivity
+-(IBAction) initialize;
+-(IBAction) activityType;
+-(IBAction) activityTitle;
+-(IBAction) activityImage;
+-(IBAction) canPerformWithActivityItems:(id) activityItems;
+-(IBAction) prepareWithActivityItems:(id) activityItems;
+-(IBAction) performActivity;
+
+@end
+
+@interface FavoriteActivity: ReadomActivity
+-(IBAction) initWithItem:(id) item;
+-(IBAction) performActivity;
+
+@end
+
 @interface Readom: NSObject
+@end
+
+@interface ReadomSafariViewController: SFSafariViewController
+-(IBAction) safariViewControllerDidFinish:(id) controller;
+
 @end
 
 @interface UIViewStyler: NSObject
@@ -49,6 +73,7 @@
 -(IBAction) collection_view:(id) st;
 -(IBAction) switch_topic_btn:(id) st;
 -(IBAction) refresh_btn:(id) st;
+-(IBAction) version_label:(id) st;
 
 @end
 
