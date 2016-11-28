@@ -27,7 +27,7 @@ class StoryScreenStylesheet < ApplicationStylesheet
 
   def collection_view(st)
     st.view.contentInset = [@margin[:y], 0, @margin[:y], 0]
-    st.background_color = color(base: ([204]*3).uicolor, a: 0.80)
+    st.background_color = color(base: color.white, a: 0.80)
 
     st.view.collectionViewLayout.tap do |cl|
       cl.itemSize = [cell_size[:w], cell_size[:h]]
