@@ -11,7 +11,7 @@ class StoryCell < UICollectionViewCell
 
   def set(item)
     unless item.nil?
-      @title.text = item['title']
+      @title.text = '%s' % item['title']
       @star_ico ||= :'star-o'.awesome_icon(size: 14)
       @user_ico ||= :user.awesome_icon(size: 14)
       @clock_ico ||= :'clock-o'.awesome_icon(size: 14)
