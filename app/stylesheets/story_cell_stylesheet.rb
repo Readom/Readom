@@ -44,8 +44,8 @@ module StoryCellStylesheet
     st.frame = {top: 1, left: 2, width: cell_size[:w] - 3, height: cell_size[:h] - 16}
 
     st.background_color = color(base: ([204]*3).uicolor, a: 0.15)
-    font = ['HelveticaNeue', 'HelveticaNeue-Bold', 'Helvetica', 'Helvetica-Bold', ].sample
-    st.font = UIFont.fontWithName('HelveticaNeue', size: 18)
+    font_name = ['HelveticaNeue', 'Helvetica'].sample + '-Bold'
+    st.font = UIFont.fontWithName(font_name, size: 18)
     st.text_color = color.black
     st.line_break_mode = NSLineBreakByWordWrapping
     st.number_of_lines = 0
