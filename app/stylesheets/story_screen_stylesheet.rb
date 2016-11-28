@@ -6,13 +6,12 @@ class StoryScreenStylesheet < ApplicationStylesheet
     # Add stylesheet specific setup stuff here.
     # Add application specific setup stuff in application_stylesheet.rb
 
-    @margin = ipad? ? 6 : 4
+    @margin = cell_margin
+
+    set_view_background_image
   end
 
-  def collection_view(st)
-    st.view.contentInset = [@margin, 0, @margin, 0]
-    st.background_color = [255, 153, 0].uicolor
-
+  def set_view_background_image
     images = ['Costa Rican Frog.jpg', 'Pensive Parakeet.jpg', 'Boston City Flow.jpg']
     bg_image = UIImage.imageNamed images.sample
 
@@ -23,15 +22,20 @@ class StoryScreenStylesheet < ApplicationStylesheet
 
     bg_image = bg_image.gaussian_blur(radius: 2).scale_to_fill([bg_size, bg_size], position: position)
 
-    st.background_color = bg_image.uicolor
+    screen.view.backgroundColor = bg_image.uicolor
+  end
+
+  def collection_view(st)
+    st.view.contentInset = [@margin[:y], 0, @margin[:y], 0]
+    st.background_color = color(base: ([204]*3).uicolor, a: 0.80)
 
     st.view.collectionViewLayout.tap do |cl|
       cl.itemSize = [cell_size[:w], cell_size[:h]]
       #cl.scrollDirection = UICollectionViewScrollDirectionHorizontal
       #cl.headerReferenceSize = [cell_size[:w], cell_size[:h]]
-      cl.minimumInteritemSpacing = @margin
-      cl.minimumLineSpacing = @margin
-      cl.sectionInset = [@margin, @margin, @margin, @margin]
+      cl.minimumInteritemSpacing = @margin[:x]
+      cl.minimumLineSpacing = @margin[:y]
+      cl.sectionInset = [@margin[:y], @margin[:x], @margin[:y], @margin[:x]]
     end
   end
 

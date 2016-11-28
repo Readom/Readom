@@ -13,7 +13,7 @@ Motion::Project::App.setup do |app|
   app.name = 'README'
   app.identifier = 'cc.mib.README'
 
-  app.short_version = '1.0.2'
+  app.short_version = '1.0.3'
   # Get version from git
   #app.version = (`git rev-list HEAD --count`.strip.to_i).to_s
   #app.version = `git log -1 --format='format:%h'`.strip

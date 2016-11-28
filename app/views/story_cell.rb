@@ -12,12 +12,12 @@ class StoryCell < UICollectionViewCell
   def set(item)
     unless item.nil?
       @title.text = item['title']
-      @star_ico ||= :'star-o'.awesome_icon(size: 9)
-      @user_ico ||= :user.awesome_icon(size: 9)
-      @clock_ico ||= :'clock-o'.awesome_icon(size: 9)
-      @info.attributedText = @star_ico + '%d' % item['score'] +
-        ' ' + @user_ico + '%s' % item['by'] +
-        ' ' + @clock_ico + '%s' % Time.at(item['time']).ago_in_words
+      @star_ico ||= :'star-o'.awesome_icon(size: 14)
+      @user_ico ||= :user.awesome_icon(size: 14)
+      @clock_ico ||= :'clock-o'.awesome_icon(size: 14)
+      @info.attributedText = @star_ico + ' %d  ' % item['score'] +
+        @user_ico + ' %s  ' % item['by'] +
+        @clock_ico + ' %s' % Time.at(item['time']).ago_in_words
     end
   end
 end
