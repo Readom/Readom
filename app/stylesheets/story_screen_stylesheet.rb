@@ -31,7 +31,7 @@ class StoryScreenStylesheet < ApplicationStylesheet
 
     st.view.collectionViewLayout.tap do |cl|
       cl.itemSize = [cell_size[:w], cell_size[:h]]
-      #cl.scrollDirection = UICollectionViewScrollDirectionHorizontal
+      cl.scrollDirection = [UICollectionViewScrollDirectionVertical, UICollectionViewScrollDirectionHorizontal].sample
       #cl.headerReferenceSize = [cell_size[:w], cell_size[:h]]
       cl.minimumInteritemSpacing = @margin[:x]
       cl.minimumLineSpacing = @margin[:y]
