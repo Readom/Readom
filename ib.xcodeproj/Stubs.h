@@ -71,9 +71,9 @@
 @interface StoryScreenStylesheet: ApplicationStylesheet
 -(IBAction) setup;
 -(IBAction) collection_view:(id) st;
+-(IBAction) version_label:(id) st;
 -(IBAction) switch_topic_btn:(id) st;
 -(IBAction) refresh_btn:(id) st;
--(IBAction) version_label:(id) st;
 
 @end
 
