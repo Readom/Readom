@@ -1,15 +1,13 @@
-class AppDelegate
-  def application(application, didFinishLaunchingWithOptions:launchOptions)
-    rootViewController = UIViewController.alloc.init
-    rootViewController.title = 'Readom'
-    rootViewController.view.backgroundColor = UIColor.whiteColor
+class AppDelegate < PM::Delegate
+  def on_load(app, options={})
+    open StoriesScreen.new nav_bar: true
 
-    navigationController = UINavigationController.alloc.initWithRootViewController(rootViewController)
-
-    @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
-    @window.rootViewController = navigationController
-    @window.makeKeyAndVisible
-
-    true
+    UINavigationBar.appearance.tintColor = :white.uicolor
+    UINavigationBar.appearance.barTintColor = [255, 102, 0].uicolor
+    UINavigationBar.appearance.setTitleTextAttributes(
+        NSForegroundColorAttributeName => :white.uicolor,
+        NSBaselineOffsetAttributeName => 0,
+        NSFontAttributeName => 'HelveticaNeue-Bold'.uifont(18)
+      )
   end
 end
