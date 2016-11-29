@@ -29,6 +29,8 @@ Motion::Project::App.setup do |app|
   app.info_plist['ITSAppUsesNonExemptEncryption'] = false
   app.info_plist['UIStatusBarHidden'] = true
 
+  app.info_plist['ReadomAPIBase'] = 'https://readom-api.herokuapp.com/news/v0/'
+
   app.files += Dir.glob(File.join(app.project_dir, 'lib/**/*.rb'))
   app.resources_dirs += %w(res/icons res/splash res/backgrounds)
   app.icons = Dir.glob("res/icons/*.png").map{|icon| icon.split("/").last}
