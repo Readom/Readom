@@ -15,3 +15,11 @@ nbproject
 .sass-cache
 .idea
 .dat*.*
+
+provisioning
+vendor/Pods
+*.swp
+*.orig
+resources/*.xcdatamodeld
+resources/fontawesome-webfont.ttf
+resources/fontawesome.plist
