@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/picapica/motion-acknowledgements.git
-  revision: e44a66d1dd55a7917d0e6419e9cad6ad6b8dcbc5
+  revision: 252a6e528907d04c2bb9fed68d7188a2ec593938
   specs:
     motion-acknowledgements (0.0.3)
 
@@ -64,7 +64,7 @@ GEM
       netrc (= 0.7.8)
     cocoapods-try (1.1.0)
     colored (1.2)
-    commander (4.4.0)
+    commander (4.4.1)
       highline (~> 1.7.2)
     credentials_manager (0.16.2)
       colored
