@@ -48,7 +48,11 @@ class StoriesCell < UICollectionViewCell
     if @item
       url = @item['url'].nsurl
 
-      @targetViewController.open WebScreen.create url: url, item: @item, reader: NSUserDefaults['readerViewEnabled']
+      @targetViewController.presentViewController(
+          WebScreen.create(url: url, item: @item, reader: NSUserDefaults['readerViewEnabled']),
+          animated: true,
+          completion: nil
+        )
     end
   end
 
@@ -56,7 +60,11 @@ class StoriesCell < UICollectionViewCell
     if @item
       url = @item['url'].nsurl
 
-      @targetViewController.open WebScreen.create url: url, item: @item, reader: false
+      @targetViewController.presentViewController(
+          WebScreen.create(url: url, item: @item, reader: false),
+          animated: true,
+          completion: nil
+        )
     end
   end
 
