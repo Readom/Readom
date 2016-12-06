@@ -94,7 +94,7 @@ class StoriesScreen < PM::Screen
   end
 
   def prefersStatusBarHidden
-    true
+    false
   end
 
 private
