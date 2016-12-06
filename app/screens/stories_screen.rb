@@ -85,6 +85,10 @@ class StoriesScreen < PM::Screen
     super
   end
 
+  def prefersStatusBarHidden
+    true
+  end
+
 private
   def set_data(topic = Readom.current_topic, count = 24)
     @data ||= []
