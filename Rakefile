@@ -80,8 +80,9 @@ end
 
 Motion::SettingsBundle.setup do |app|
   app.group 'Usage', footer: "Keep this ON to take advantage of 'Readers' view mode."
-  app.multivalue "Default List", key: "defaultReadomList", default: :topstories, values: [:newstories, :topstories, :beststories, :showstories, :askstories, :jobstories]
-
+  app.multivalue "Default List", key: "defaultReadomList", default: :topstories,
+    titles: [:New, :Top, :Best, :Show, :Ask, :Job],
+    values: [:newstories, :topstories, :beststories, :showstories, :askstories, :jobstories]
   app.toggle "Reader View", key: "readerViewEnabled", default: true
 
   app.group 'App', footer: "Version: %s" % $version_fingerprint.split('/').join(' - '), titles: 'titles'

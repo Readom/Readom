@@ -33,7 +33,7 @@ class StoriesScreen < PM::Screen
     self.navigationItem.titleView = @segc
 
     if @data.nil?
-      Readom.current_topic = NSUserDefaults['defaultReadomList'].to_sym
+      Readom.current_topic = (NSUserDefaults['defaultReadomList'] || :topstories).to_sym
       Readom.current_topic_idx do |idx|
         @segc.selectedSegmentIndex = idx
       end
