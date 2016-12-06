@@ -36,10 +36,10 @@ class StoriesCell < UICollectionViewCell
     @item = item
     @targetViewController = view_controller
 
-    @star_ico ||= :'star-o'.awesome_icon(size: 14)
-    @user_ico ||= :user.awesome_icon(size: 14)
-    @clock_ico ||= :'clock-o'.awesome_icon(size: 14)
-    @terminal_ico ||= :'terminal'.awesome_icon(size: 14)
+    @star_ico ||= :'star-o'.awesome_icon(size: 14, color: '#999999'.uicolor)
+    @user_ico ||= :user.awesome_icon(size: 14, color: '#999999'.uicolor)
+    @clock_ico ||= :'clock-o'.awesome_icon(size: 14, color: '#999999'.uicolor)
+    @web_ico ||= icon_string(:foundation, :web, size: 14, color: '#999999'.uicolor)
 
     if ! @item.nil?
       @title.text = '%s' % @item['title']
@@ -48,7 +48,7 @@ class StoriesCell < UICollectionViewCell
         @user_ico + ' %s ' % @item['by'] +
         @clock_ico + ' %s' % Time.at(@item['time']).ago_in_words
 
-      @domain.attributedText = @terminal_ico + ' %s' % @item['url'].nsurl.host.gsub(/^www\./, '')
+      @domain.attributedText = @web_ico + ' %s' % @item['url'].nsurl.host.gsub(/^www\./, '')
     end
   end
 
