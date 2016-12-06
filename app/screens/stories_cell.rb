@@ -7,14 +7,19 @@ class StoriesCell < UICollectionViewCell
     @item = @targetViewController = nil
 
     @layout = StoriesCellLayout.new(root: self.contentView).build
+
+    # labels
     @title = @layout.get(:title)
     @info = @layout.get(:info)
+    @domain = @layout.get(:domain)
+
+    # buttons
     @comments = @layout.get(:comments)
-    @web = @layout.get(:web)
+    @openurl = @layout.get(:openurl)
 
     [
       [@title, "title_clicked:", 1],
-      [@web, "web_clicked:", 1],
+      [@openurl, "openurl_clicked:", 1],
       [@comments, "comments_clicked:", 1]
     ].each do |obj_action_num|
       obj, action, num = obj_action_num
@@ -34,6 +39,7 @@ class StoriesCell < UICollectionViewCell
     @star_ico ||= :'star-o'.awesome_icon(size: 14)
     @user_ico ||= :user.awesome_icon(size: 14)
     @clock_ico ||= :'clock-o'.awesome_icon(size: 14)
+    @terminal_ico ||= :'terminal'.awesome_icon(size: 14)
 
     if ! @item.nil?
       @title.text = '%s' % @item['title']
@@ -41,6 +47,8 @@ class StoriesCell < UICollectionViewCell
       @info.attributedText = @star_ico + ' %d ' % @item['score'] +
         @user_ico + ' %s ' % @item['by'] +
         @clock_ico + ' %s' % Time.at(@item['time']).ago_in_words
+
+      @domain.attributedText = @terminal_ico + ' %s' % @item['url'].nsurl.host.gsub(/^www\./, '')
     end
   end
 
@@ -56,7 +64,7 @@ class StoriesCell < UICollectionViewCell
     end
   end
 
-  def web_clicked(sender)
+  def openurl_clicked(sender)
     if @item
       url = @item['url'].nsurl
 
