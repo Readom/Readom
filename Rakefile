@@ -38,10 +38,6 @@ Motion::Project::App.setup do |app|
 
   app.frameworks << 'SafariServices'
 
-  app.pods do
-    pod 'CWStatusBarNotification'
-  end
-
   app.development do
     app.codesign_certificate = ENV['TRAVIS'] ? nil : MotionProvisioning.certificate(
       type: :development,
