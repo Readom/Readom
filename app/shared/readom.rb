@@ -47,6 +47,14 @@ class Readom
     end
   end
 
+  def self.current_topic_idx(&block)
+    @current_topic_idx ||= 0
+
+    block.call(@current_topic_idx) if block
+
+    @current_topic_idx
+  end
+
   def self.current_topic(&block)
     @current_topic_idx ||= 0
     topic = topics[@current_topic_idx]

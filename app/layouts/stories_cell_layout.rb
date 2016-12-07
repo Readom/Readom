@@ -1,9 +1,10 @@
 class StoriesCellLayout < MotionKit::Layout
   def layout
     root :cell do
+      add UILabel, :domain
       add UILabel, :title
       add UILabel, :info
-      add UIImageView, :web
+      add UIImageView, :openurl
       add UIImageView, :comments
     end
   end
@@ -28,7 +29,7 @@ class StoriesCellLayout < MotionKit::Layout
     constraints do
       top.equals(:superview)
       left.equals(:superview).plus(10)
-      bottom.equals(:comments, :top)
+      bottom.equals(:domain, :top)
       center_x.equals(:superview)
     end
 
@@ -40,13 +41,12 @@ class StoriesCellLayout < MotionKit::Layout
     userInteractionEnabled true
   end
 
-  def info_style
-    # t: -, l: 4, b: 1, r: 1  h: 14
+  def domain_style
     constraints do
-      height.equals(:comments)
-      left.equals(:superview).plus(5)
-      bottom.equals(:comments)
-      right.equals(:web, :left).minus(2)
+      height.equals(:info)
+      left.equals(:info)
+      bottom.equals(:info, :top)
+      right.equals(:openurl, :left).minus(2)
     end
 
     font 'Georgia'.uifont(12)
@@ -55,28 +55,43 @@ class StoriesCellLayout < MotionKit::Layout
     numberOfLines 1
   end
 
-  def web_style
+  def info_style
+    # t: -, l: 4, b: 1, r: 1  h: 14
+    constraints do
+      height.is == 15
+      left.equals(:superview).plus(5)
+      bottom.equals(:comments)
+      right.equals(:openurl, :left).minus(2)
+    end
+
+    font 'Georgia'.uifont(12)
+    text_color '#303f49'.uicolor
+    lineBreakMode NSLineBreakByWordWrapping
+    numberOfLines 1
+  end
+
+  def openurl_style
     constraints do
       height.equals(:comments)
       width.equals(:comments)
       bottom.equals(:superview)
-      right.equals(:comments, :left).minus(10)
+      right.equals(:comments, :left).minus(5)
     end
 
-    image icon_image(:foundation, :web, size: 20, color: '#606f79'.uicolor)
+    image icon_image(:foundation, :link, size: 30, color: '#606f79'.uicolor)
 
     userInteractionEnabled true
   end
 
   def comments_style
     constraints do
-      height.is == 20
-      width.is == 20
+      height.is == 30
+      width.is == 30
       bottom.equals(:superview)
       right.equals(:superview).minus(2)
     end
 
-    image icon_image(:foundation, :comments, size: 20, color: '#606f79'.uicolor)
+    image icon_image(:foundation, :social_hacker_news, size: 30, color: '#606f79'.uicolor)
 
     userInteractionEnabled true
   end

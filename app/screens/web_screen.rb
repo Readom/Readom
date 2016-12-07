@@ -24,4 +24,8 @@ class WebScreen < SFSafariViewController
   def safariViewControllerDidFinish(controller)
     #Tells the delegate that the user dismissed the view.
   end
+
+  def prefersStatusBarHidden
+    true
+  end
 end
