@@ -7,14 +7,19 @@ class StoriesCell < UICollectionViewCell
     @item = @targetViewController = nil
 
     @layout = StoriesCellLayout.new(root: self.contentView).build
+
+    # labels
     @title = @layout.get(:title)
     @info = @layout.get(:info)
+    @domain = @layout.get(:domain)
+
+    # buttons
     @comments = @layout.get(:comments)
-    @web = @layout.get(:web)
+    @openurl = @layout.get(:openurl)
 
     [
       [@title, "title_clicked:", 1],
-      [@web, "web_clicked:", 1],
+      [@openurl, "openurl_clicked:", 1],
       [@comments, "comments_clicked:", 1]
     ].each do |obj_action_num|
       obj, action, num = obj_action_num
@@ -31,9 +36,10 @@ class StoriesCell < UICollectionViewCell
     @item = item
     @targetViewController = view_controller
 
-    @star_ico ||= :'star-o'.awesome_icon(size: 14)
-    @user_ico ||= :user.awesome_icon(size: 14)
-    @clock_ico ||= :'clock-o'.awesome_icon(size: 14)
+    @star_ico ||= :'star-o'.awesome_icon(size: 14, color: '#999999'.uicolor)
+    @user_ico ||= :user.awesome_icon(size: 14, color: '#999999'.uicolor)
+    @clock_ico ||= :'clock-o'.awesome_icon(size: 14, color: '#999999'.uicolor)
+    @web_ico ||= icon_string(:foundation, :web, size: 14, color: '#999999'.uicolor)
 
     if ! @item.nil?
       @title.text = '%s' % @item['title']
@@ -41,6 +47,8 @@ class StoriesCell < UICollectionViewCell
       @info.attributedText = @star_ico + ' %d ' % @item['score'] +
         @user_ico + ' %s ' % @item['by'] +
         @clock_ico + ' %s' % Time.at(@item['time']).ago_in_words
+
+      @domain.attributedText = @web_ico + ' %s' % @item['url'].nsurl.host.gsub(/^www\./, '')
     end
   end
 
@@ -48,15 +56,23 @@ class StoriesCell < UICollectionViewCell
     if @item
       url = @item['url'].nsurl
 
-      @targetViewController.open WebScreen.create url: url, item: @item, reader: NSUserDefaults['readerViewEnabled']
+      @targetViewController.presentViewController(
+          WebScreen.create(url: url, item: @item, reader: NSUserDefaults['readerViewEnabled']),
+          animated: true,
+          completion: nil
+        )
     end
   end
 
-  def web_clicked(sender)
+  def openurl_clicked(sender)
     if @item
       url = @item['url'].nsurl
 
-      @targetViewController.open WebScreen.create url: url, item: @item, reader: false
+      @targetViewController.presentViewController(
+          WebScreen.create(url: url, item: @item, reader: false),
+          animated: true,
+          completion: nil
+        )
     end
   end
 

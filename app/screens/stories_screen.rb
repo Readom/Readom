@@ -9,6 +9,8 @@ class StoriesScreen < PM::Screen
   def on_load
     self.view.backgroundColor = '#fff0e6'.uicolor
 
+    set_nav_bar_button :right, image: icon_image(:foundation, :widget, size: 18, color: '#606f79'.uicolor), action: :open_settings
+
     collection = @layout.get(:collection)
     collection.dataSource = self
     collection.delegate = self
@@ -30,7 +32,13 @@ class StoriesScreen < PM::Screen
     @segc.addTarget(self, action: 'topic_seg_changed:', forControlEvents: UIControlEventValueChanged)
     self.navigationItem.titleView = @segc
 
-    set_data unless @data
+    if @data.nil?
+      Readom.current_topic = (NSUserDefaults['defaultReadomList'] || :topstories).to_sym
+      Readom.current_topic_idx do |idx|
+        @segc.selectedSegmentIndex = idx
+      end
+      set_data(Readom.current_topic)
+    end
   end
 
   def will_appear
@@ -85,6 +93,10 @@ class StoriesScreen < PM::Screen
     super
   end
 
+  def prefersStatusBarHidden
+    false
+  end
+
 private
   def set_data(topic = Readom.current_topic, count = 24)
     @data ||= []
@@ -117,5 +129,9 @@ private
 
   def refresh_control_changed(sender)
     set_data
+  end
+
+  def open_settings
+    UIApplicationOpenSettingsURLString.nsurl.open
   end
 end

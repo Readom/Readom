@@ -9,5 +9,12 @@ class AppDelegate < PM::Delegate
         NSBaselineOffsetAttributeName => 0,
         NSFontAttributeName => 'HelveticaNeue-Bold'.uifont(18)
       )
+    UINavigationBar.appearance.setBackIndicatorImage icon_image(:awesome, :arrow_circle_left, size: 20, color: :white.uicolor)
+    UINavigationBar.appearance.setBackIndicatorTransitionMaskImage icon_image(:awesome, :arrow_circle_o_left, size: 20, color: :white.uicolor)
+  end
+
+  def application(application, didFinishLaunchingWithOptions:launchOptions)
+    NSThread.sleepForTimeInterval 1.2
+    super
   end
 end
