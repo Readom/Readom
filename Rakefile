@@ -8,7 +8,7 @@ begin
 rescue LoadError
 end
 
-$short_version = '1.0'
+$short_version = '1.1'
 $version = '0.%s' % Time.now.strftime('%y%m.%d%H%M')
 $version_fingerprint = '%s/%s/%s' % [$short_version, $version, `git log -1 --format='format:%h'`.strip]
 
