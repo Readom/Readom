@@ -108,9 +108,11 @@ private
       @refreshControl.endRefreshing
       @layout.get(:collection).fade_in
 
+      sore_key = topic == :newstories ? 'time' : 'score'
+
       @data = [{
           :topic => topic,
-          :items => items.sort{|x, y| y['time'] <=> x['time']}
+          :items => items.sort{|x, y| y[sore_key] <=> x[sore_key]}
         }]
 
       @layout.get(:collection).reloadData
