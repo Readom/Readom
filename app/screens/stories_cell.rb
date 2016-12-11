@@ -9,18 +9,21 @@ class StoriesCell < UICollectionViewCell
     @layout = StoriesCellLayout.new(root: self.contentView).build
 
     # labels
-    @title = @layout.get(:title)
-    @info = @layout.get(:info)
     @domain = @layout.get(:domain)
+    @title = @layout.get(:title)
+    @time_ago = @layout.get(:time_ago)
+
+    @score_number = @layout.get(:score_number)
+    #@score_title = @layout.get(:score_title)
 
     # buttons
-    @comments = @layout.get(:comments)
-    @openurl = @layout.get(:openurl)
+    @yc_button = @layout.get(:yc_button)
+    @url_button = @layout.get(:url_button)
 
     [
       [@title, "title_clicked:", 1],
-      [@openurl, "openurl_clicked:", 1],
-      [@comments, "comments_clicked:", 1]
+      [@url_button, "url_button_clicked:", 1],
+      [@yc_button, "yc_button_clicked:", 1]
     ].each do |obj_action_num|
       obj, action, num = obj_action_num
 
@@ -36,19 +39,16 @@ class StoriesCell < UICollectionViewCell
     @item = item
     @targetViewController = view_controller
 
-    @star_ico ||= :'star-o'.awesome_icon(size: 14, color: '#999999'.uicolor)
+    @source_ico ||= :home.awesome_icon(size: 14, color: '#999999'.uicolor)
     @user_ico ||= :user.awesome_icon(size: 14, color: '#999999'.uicolor)
     @clock_ico ||= :'clock-o'.awesome_icon(size: 14, color: '#999999'.uicolor)
-    @web_ico ||= icon_string(:foundation, :web, size: 14, color: '#999999'.uicolor)
 
     if ! @item.nil?
+      @domain.attributedText = @source_ico + ' %s' % @item['url'].nsurl.host.gsub(/^www\./, '')
       @title.text = '%s' % @item['title']
-
-      @info.attributedText = @star_ico + ' %d ' % @item['score'] +
-        @user_ico + ' %s ' % @item['by'] +
+      @score_number.text = '%s' % @item['score']
+      @time_ago.attributedText = @user_ico + ' %s ' % @item['by'] +
         @clock_ico + ' %s' % Time.at(@item['time']).ago_in_words
-
-      @domain.attributedText = @web_ico + ' %s' % @item['url'].nsurl.host.gsub(/^www\./, '')
     end
   end
 
@@ -64,7 +64,7 @@ class StoriesCell < UICollectionViewCell
     end
   end
 
-  def openurl_clicked(sender)
+  def url_button_clicked(sender)
     if @item
       url = @item['url'].nsurl
 
@@ -76,7 +76,7 @@ class StoriesCell < UICollectionViewCell
     end
   end
 
-  def comments_clicked(sender)
+  def yc_button_clicked(sender)
     if @item
       url = @item['item_url'].nsurl
 
