@@ -1,5 +1,5 @@
 class StoriesScreen < PM::Screen
-  title 'Stories'
+  title 'Stories'._
 
   def load_view
     @layout = StoriesLayout.new
@@ -14,7 +14,7 @@ class StoriesScreen < PM::Screen
     collection = @layout.get(:collection)
     collection.dataSource = self
     collection.delegate = self
-    collection.allowsSelection = true
+    collection.allowsSelection = false
     collection.allowsMultipleSelection = false
     [StoriesCell].each do |cell_class|
       collection.registerClass(cell_class, forCellWithReuseIdentifier: cell_class::REUSE_ID)
@@ -25,10 +25,10 @@ class StoriesScreen < PM::Screen
     @refreshControl.addTarget(self, action: 'refresh_control_changed:', forControlEvents: UIControlEventValueChanged)
     collection.addSubview(@refreshControl)
 
-    @segc = UISegmentedControl.plain Readom.topic_titles
+    @segc = UISegmentedControl.plain Readom.topic_titles.map {|t| t._ }
     @segc.tintColor = :white.uicolor
     @segc.momentary = false
-    @segc.selectedSegmentIndex = 0
+    #@segc.selectedSegmentIndex = 0
     @segc.addTarget(self, action: 'topic_seg_changed:', forControlEvents: UIControlEventValueChanged)
     self.navigationItem.titleView = @segc
 
@@ -116,7 +116,7 @@ private
         }]
 
       @layout.get(:collection).reloadData
-      self.title = '%s Stories' % Readom.current_topic_title
+      self.title = '%s %s' % [Readom.current_topic_title._, 'Stories'._]
     end
   end
 
