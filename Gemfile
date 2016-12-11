@@ -19,3 +19,5 @@ gem 'moticons'
 
 gem 'motion-acknowledgements', :github => 'picapica/motion-acknowledgements'
 gem 'motion-settings-bundle', :github => 'picapica/motion-settings-bundle'
+
+gem 'json', '~> 2.0'
