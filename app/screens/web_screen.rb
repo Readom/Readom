@@ -1,16 +1,19 @@
 class WebScreen < AXWebViewController
-  def self.create(params={})
-    @item = params[:item]
-    url = params[:url]
-    reader = params[:reader]
+  class <<self
+    def create(params={})
+      item = params[:item]
+      url = params[:url]
+      reader = params[:reader]
 
-    sfsvc = self.alloc.initWithURL url, entersReaderIfAvailable: reader
-    sfsvc.delegate = self
-    sfsvc.preferredBarTintColor = [255, 102, 0].uicolor
-    sfsvc.preferredControlTintColor = :white.uicolor
+      sfsvc = self.alloc.initWithURL url, entersReaderIfAvailable: reader
+      sfsvc.item = item
+      sfsvc.delegate = self
+      sfsvc.preferredBarTintColor = UINavigationBar.appearance.barTintColor
+      sfsvc.preferredControlTintColor = UINavigationBar.appearance.tintColor
 
-    sfsvc
-  end
+      sfsvc
+    end
+  end # end class method
 
   # SFSafariViewController delegate
   def safariViewController(controller, didCompleteInitialLoad: didLoadSuccessfully)

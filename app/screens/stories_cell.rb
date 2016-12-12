@@ -14,7 +14,6 @@ class StoriesCell < UICollectionViewCell
     @time_ago = @layout.get(:time_ago)
 
     @score_number = @layout.get(:score_number)
-    #@score_title = @layout.get(:score_title)
 
     # buttons
     @yc_button = @layout.get(:yc_button)
@@ -54,33 +53,34 @@ class StoriesCell < UICollectionViewCell
 
   def title_clicked(sender)
     if @item
-      url = @item['url'].nsurl
-
-      @targetViewController.presentViewController(
-          WebScreen.create(url: url, item: @item, reader: NSUserDefaults['readerViewEnabled']),
-          animated: true,
-          completion: nil
+      @targetViewController.open(
+          WebScreen.create(url: @item['url'].nsurl,
+              item: @item,
+              reader: NSUserDefaults['readerViewEnabled']
+            ),
+          modal: true
         )
     end
   end
 
   def url_button_clicked(sender)
     if @item
-      url = @item['url'].nsurl
-
-      @targetViewController.presentViewController(
-          WebScreen.create(url: url, item: @item, reader: false),
-          animated: true,
-          completion: nil
+      @targetViewController.open(
+          WebScreen.create(url: @item['url'].nsurl,
+              item: @item,
+              reader: false
+            ),
+          modal: true
         )
     end
   end
 
   def yc_button_clicked(sender)
     if @item
-      url = @item['item_url'].nsurl
-
-      @targetViewController.open WebScreen.create url: url, item: @item, reader: false
+      @targetViewController.open WebScreen.create(url: @item['item_url'].nsurl,
+          item: @item,
+          reader: false
+        )
     end
   end
 end
