@@ -2,8 +2,7 @@ if NSFoundationVersionNumber >= NSFoundationVersionNumber_iOS_9_0
 
   class AXWebViewController < SFSafariViewController
 
-    attr_accessor :item, :url, :delegate
-    attr_accessor :preferredBarTintColor, :preferredControlTintColor
+    attr_accessor :item, :url
 
   end
 
