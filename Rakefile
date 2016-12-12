@@ -20,7 +20,7 @@ Motion::Project::App.setup do |app|
   app.short_version = $short_version
   app.version = $version
 
-  app.deployment_target = '9.0'
+  app.deployment_target = '8.0'
   app.device_family = [:iphone, :ipad]
   app.interface_orientations = [:portrait, :portrait_upside_down, :landscape_left, :landscape_right]
 
@@ -37,6 +37,7 @@ Motion::Project::App.setup do |app|
   app.info_plist['BackgroudImages'] = Dir.glob("res/backgrounds/*.jpg").map{|img| img.split("/").last}
 
   app.frameworks << 'SafariServices'
+  app.frameworks << 'WebKit'
 
   app.development do
     app.codesign_certificate = ENV['TRAVIS'] ? nil : MotionProvisioning.certificate(

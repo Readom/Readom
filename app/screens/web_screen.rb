@@ -1,4 +1,4 @@
-class WebScreen < SFSafariViewController
+class WebScreen < AXWebViewController
   def self.create(params={})
     @item = params[:item]
     url = params[:url]
