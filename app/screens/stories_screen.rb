@@ -98,7 +98,11 @@ class StoriesScreen < PM::Screen
   end
 
 private
-  def set_data(topic: Readom.current_topic, count: 24, pull: false)
+  def set_data(params = {})
+    topic = params.fetch :topic, Readom.current_topic
+    count = params.fetch :count, 24
+    pull = params.fetch :pull, false
+
     @data ||= {}
     @data[topic] ||= []
 
