@@ -109,14 +109,19 @@ private
 
     pull = true if @data[topic].size == 0
 
-    @layout.get(:collection).setContentOffset [@layout.get(:collection).contentOffset.x, -@layout.get(:collection).contentInset.top], animated:true
+    offset = pull ?
+      [@layout.get(:collection).contentOffset.x, - @refreshControl.frame.size.height - @layout.get(:collection).contentInset.top]
+      :
+      [@layout.get(:collection).contentOffset.x, - @layout.get(:collection).contentInset.top]
+
+    @layout.get(:collection).setContentOffset offset, animated:true
     @layout.get(:collection).fade_out(opacity: 0.3)
 
     if pull
       @refreshControl.beginRefreshing
       Readom.fetch_items(topic, count) do |items|
         @refreshControl.endRefreshing
-        @layout.get(:collection).fade_in
+        @layout.get(:collection).fade_in(0.1)
 
         sore_key = topic == :newstories ? 'time' : 'score'
 
@@ -126,7 +131,7 @@ private
         self.title = '%s %s' % [Readom.current_topic_title._, 'Stories'._]
       end
     else
-      @layout.get(:collection).fade_in
+      @layout.get(:collection).fade_in(0.1)
       @layout.get(:collection).reloadData
       self.title = '%s %s' % [Readom.current_topic_title._, 'Stories'._]
     end
