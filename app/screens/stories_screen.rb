@@ -109,6 +109,7 @@ private
 
     pull = true if @data[topic].size == 0
 
+    @layout.get(:collection).setContentOffset [@layout.get(:collection).contentOffset.x, -@layout.get(:collection).contentInset.top], animated:true
     @layout.get(:collection).fade_out(opacity: 0.3)
 
     if pull
