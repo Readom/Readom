@@ -54,33 +54,38 @@ class StoriesCell < UICollectionViewCell
   def title_clicked(sender)
     if @item
       @targetViewController.open(
-          WebScreen.create(url: @item['url'].nsurl,
-              item: @item,
-              reader: NSUserDefaults['readerViewEnabled']
-            ),
-          modal: true
-        )
+        WebScreen.create(
+          url: @item['url'].nsurl,
+          item: @item,
+          reader: NSUserDefaults['readerViewEnabled']
+        ),
+        modal: true
+      )
     end
   end
 
   def url_button_clicked(sender)
     if @item
       @targetViewController.open(
-          WebScreen.create(url: @item['url'].nsurl,
-              item: @item,
-              reader: false
-            ),
-          modal: true
-        )
+        WebScreen.create(
+          url: @item['url'].nsurl,
+          item: @item,
+          reader: false
+        ),
+        modal: true
+      )
     end
   end
 
   def yc_button_clicked(sender)
     if @item
-      @targetViewController.open WebScreen.create(url: @item['item_url'].nsurl,
+      @targetViewController.open(
+        WebScreen.create(
+          url: @item['item_url'].nsurl,
           item: @item,
           reader: false
         )
+      )
     end
   end
 end
