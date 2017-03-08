@@ -9,7 +9,8 @@ class StoriesScreen < PM::Screen
   def on_load
     self.view.backgroundColor = '#fff0e6'.uicolor
 
-    set_nav_bar_button :right, image: icon_image(:foundation, :widget, size: 18, color: '#606f79'.uicolor), action: :open_settings
+    set_nav_bar_button :left, image: icon_image(:foundation, :widget, size: 18, color: '#606f79'.uicolor), action: :open_settings
+    set_nav_bar_button :right, image: icon_image(:foundation, :refresh, size: 18, color: '#606f79'.uicolor), action: 'refresh_button_clicked:'
 
     collection = @layout.get(:collection)
     collection.dataSource = self
@@ -37,7 +38,7 @@ class StoriesScreen < PM::Screen
       Readom.current_topic_idx do |idx|
         @segc.selectedSegmentIndex = idx
       end
-      set_data(Readom.current_topic)
+      set_data(pull: true)
     end
   end
 
@@ -51,16 +52,16 @@ class StoriesScreen < PM::Screen
   end
 
   def numberOfSectionsInCollectionView(collectionView)
-    @data.count
+    1
   end
 
   def collectionView(collectionView, numberOfItemsInSection: section)
-    @data[section][:items].count
+    @data[Readom.current_topic].count
   end
 
   def collectionView(collectionView, cellForItemAtIndexPath: index)
     reuse_id = StoriesCell::REUSE_ID
-    item = @data[index.section][:items][index.row]
+    item = @data[Readom.current_topic][index.row]
     cell = collectionView.dequeueReusableCellWithReuseIdentifier reuse_id,
       forIndexPath: index
     cell.setItem item, targetViewController: self
@@ -98,23 +99,39 @@ class StoriesScreen < PM::Screen
   end
 
 private
-  def set_data(topic = Readom.current_topic, count = 24)
-    @data ||= []
+  def set_data(params = {})
+    topic = params.fetch :topic, Readom.current_topic
+    count = params.fetch :count, 24
+    pull = params.fetch :pull, false
 
-    @refreshControl.beginRefreshing
+    @data ||= {}
+    @data[topic] ||= []
+
+    pull = true if @data[topic].size == 0
+
+    offset = pull ?
+      [@layout.get(:collection).contentOffset.x, - @refreshControl.frame.size.height - @layout.get(:collection).contentInset.top]
+      :
+      [@layout.get(:collection).contentOffset.x, - @layout.get(:collection).contentInset.top]
+
+    @layout.get(:collection).setContentOffset offset, animated:true
     @layout.get(:collection).fade_out(opacity: 0.3)
 
-    Readom.fetch_items(topic, count) do |items|
-      @refreshControl.endRefreshing
-      @layout.get(:collection).fade_in
+    if pull
+      @refreshControl.beginRefreshing
+      Readom.fetch_items(topic, count) do |items|
+        @refreshControl.endRefreshing
+        @layout.get(:collection).fade_in(0.1)
 
-      sore_key = topic == :newstories ? 'time' : 'score'
+        sore_key = topic == :newstories ? 'time' : 'score'
 
-      @data = [{
-          :topic => topic,
-          :items => items.sort{|x, y| y[sore_key] <=> x[sore_key]}
-        }]
+        @data[topic] = items.sort{|x, y| y[sore_key] <=> x[sore_key]}
 
+        @layout.get(:collection).reloadData
+        self.title = '%s %s' % [Readom.current_topic_title._, 'Stories'._]
+      end
+    else
+      @layout.get(:collection).fade_in(0.1)
       @layout.get(:collection).reloadData
       self.title = '%s %s' % [Readom.current_topic_title._, 'Stories'._]
     end
@@ -126,12 +143,14 @@ private
 
     Readom.current_topic = selected_topic
 
-    set_data
+    set_data(pull: false)
   end
 
-  def refresh_control_changed(sender)
-    set_data
+  def force_refresh(sender)
+    set_data(pull: true)
   end
+  alias :refresh_control_changed :force_refresh
+  alias :refresh_button_clicked :force_refresh
 
   def open_settings
     UIApplicationOpenSettingsURLString.nsurl.open
