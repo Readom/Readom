@@ -7,11 +7,11 @@ branches:
     - release
     - master
 before_install:
-  - sudo motion update
   - gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
   - rvm get stable --auto-dotfiles
   - rvm use 2.4 --install --binary --fuzzy
   - (ruby --version)
+  - sudo motion update
 gemfile:
   - Gemfile
 script:
