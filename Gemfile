@@ -13,3 +13,8 @@ gem 'sugarcube', require: %w[
   sugarcube-repl
   sugarcube-to_s
 ]
+
+gem 'motion-cocoapods'
+gem 'motion-provisioning'
+gem 'motion-acknowledgements', :github => 'picapica/motion-acknowledgements'
+gem 'motion-settings-bundle', :github => 'picapica/motion-settings-bundle'
