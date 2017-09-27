@@ -11,6 +11,7 @@ gem 'sugarcube', require: %w[
   sugarcube-awesome
   sugarcube-localized
   sugarcube-repl
+  sugarcube-nsuserdefaults
   sugarcube-to_s
 ]
 
