@@ -18,7 +18,7 @@ Motion::Project::App.setup do |app|
   app.name = 'Reading'
 
   # version for your app
-  app.version = '1.0'
+  app.version = '0.1.0'
 
   # you'll want to target the lowest version of the sdk that supports the apis you're leveraging. RubyMotion Starter can only target the lastest iOS SDK.
   # app.deployment_target = '9.0'
@@ -28,6 +28,10 @@ Motion::Project::App.setup do |app|
 
   # add additional frameworks here
   # app.frameworks << "StoreKit"
+
+  app.pods do
+    pod 'hpple', git: 'https://github.com/topfunky/hpple'
+  end
 
   # resonable defaults
   app.device_family = [:iphone, :ipad]
