@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7qc-MC-maJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="t0C-GU-Rbu">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="vqV-5I-fcj">
+            <objects>
+                <navigationController id="t0C-GU-Rbu" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PCA-gN-S6n">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="7qc-MC-maJ" kind="relationship" relationship="rootViewController" id="zdR-VY-GvJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kPj-KE-bLr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1094" y="81"/>
+        </scene>
         <!--Items Screen-->
         <scene sceneID="eaJ-Hp-9QS">
             <objects>
@@ -40,6 +57,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Nn9-gQ-5IU" kind="show" identifier="ShowItem" id="PKy-gL-tTn"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -47,10 +67,67 @@
                             <outlet property="delegate" destination="7qc-MC-maJ" id="fUT-Tb-eOh"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="O3w-cf-ovk"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZF-LN-t6N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-121" y="82"/>
+        </scene>
+        <!--Item Screen-->
+        <scene sceneID="6XK-Dg-dha">
+            <objects>
+                <viewController id="Nn9-gQ-5IU" customClass="ItemScreen" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6Gq-5w-eSh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Iv0-jE-3ou">
+                                <rect key="frame" x="10" y="10" width="355" height="647"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="titleLabel" text="Title Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vH-v3-1wh" userLabel="Title">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="262.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="DPw-Mn-Gtu">
+                                        <rect key="frame" x="0.0" y="262.5" width="355" height="384.5"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nkz-I6-RXV">
+                                                <rect key="frame" x="0.0" y="0.0" width="177.5" height="384.5"/>
+                                                <state key="normal" title="Next"/>
+                                                <connections>
+                                                    <action selector="next_item:" destination="Nn9-gQ-5IU" eventType="touchUpInside" id="UCK-N2-Nvz"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9De-fC-Ue9">
+                                                <rect key="frame" x="177.5" y="0.0" width="177.5" height="384.5"/>
+                                                <state key="normal" title="Like"/>
+                                                <connections>
+                                                    <action selector="favorite_item:" destination="Nn9-gQ-5IU" eventType="touchUpInside" id="T1b-VV-ojW"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Iv0-jE-3ou" secondAttribute="bottom" constant="10" id="VeT-8j-Jcp"/>
+                            <constraint firstItem="Iv0-jE-3ou" firstAttribute="top" secondItem="6Gq-5w-eSh" secondAttribute="top" constant="10" id="VeW-bx-g7g"/>
+                            <constraint firstAttribute="trailing" secondItem="Iv0-jE-3ou" secondAttribute="trailing" constant="10" id="dqO-Gl-oNW"/>
+                            <constraint firstItem="Iv0-jE-3ou" firstAttribute="leading" secondItem="6Gq-5w-eSh" secondAttribute="leading" constant="10" id="xhY-1U-pZC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fvQ-bO-yRt"/>
+                    </view>
+                    <connections>
+                        <outlet property="titleLabel" destination="3vH-v3-1wh" id="3tM-il-Yjo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="all-GW-xDo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-122" y="869"/>
         </scene>
     </scenes>
 </document>
