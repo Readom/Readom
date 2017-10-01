@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/Lax/sugarcube.git
+  revision: 99a58f1ec7f2a1827690f16c90a7aea30d924967
+  specs:
+    sugarcube (3.4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -60,7 +66,6 @@ GEM
     netrc (0.7.8)
     rake (12.1.0)
     ruby-macho (1.1.0)
-    sugarcube (3.4.0)
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -79,7 +84,7 @@ DEPENDENCIES
   ib
   motion-cocoapods
   rake
-  sugarcube
+  sugarcube!
 
 BUNDLED WITH
    1.16.0.pre.2

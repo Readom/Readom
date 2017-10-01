@@ -16,3 +16,4 @@ nbproject
 .idea
 .dat*.*
 vendor/Pods/
+ib.xcodeproj/
