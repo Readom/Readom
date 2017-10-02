@@ -14,9 +14,9 @@
         <scene sceneID="vqV-5I-fcj">
             <objects>
                 <navigationController title="Reading" navigationBarHidden="YES" id="t0C-GU-Rbu" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" alpha="0.94999999999999996" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="PCA-gN-S6n">
+                    <navigationBar key="navigationBar" alpha="0.94999999999999996" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PCA-gN-S6n">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" cocoaTouchSystemColor="lightTextColor"/>
+                        <color key="tintColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="7qc-MC-maJ" kind="relationship" relationship="rootViewController" id="zdR-VY-GvJ"/>
@@ -86,10 +86,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zbq-sH-jpl">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="776.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
                                         <subviews>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="titleLabel" text="Title Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vH-v3-1wh" userLabel="Title">
-                                                <rect key="frame" x="10" y="10" width="355" height="756.33333333333337"/>
+                                                <rect key="frame" x="10" y="10" width="355" height="758"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -107,10 +107,10 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="DPw-Mn-Gtu">
-                                        <rect key="frame" x="0.0" y="784.33333333333348" width="375" height="27.666666666666629"/>
+                                        <rect key="frame" x="0.0" y="786" width="375" height="26"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nkz-I6-RXV">
-                                                <rect key="frame" x="0.0" y="0.0" width="177.66666666666666" height="27.666666666666629"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="177.66666666666666" height="26"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <state key="normal" title="Next">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -120,7 +120,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9De-fC-Ue9">
-                                                <rect key="frame" x="197.66666666666663" y="0.0" width="177.33333333333337" height="27.666666666666629"/>
+                                                <rect key="frame" x="197.66666666666663" y="0.0" width="177.33333333333337" height="26"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                 <state key="normal" title="Like">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

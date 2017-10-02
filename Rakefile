@@ -46,6 +46,7 @@ Motion::Project::App.setup do |app|
   app.interface_orientations = [:portrait, :portrait_upside_down, :landscape_left, :landscape_right]
   app.info_plist['UIRequiresFullScreen'] = true
   app.info_plist['ITSAppUsesNonExemptEncryption'] = false
+  app.info_plist['UILaunchStoryboardName'] = 'launch_screen'
 
   app.development do
   # Dev, create a development certificate at: https://developer.apple.com/account/ios/certificate/development
