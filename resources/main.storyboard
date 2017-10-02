@@ -58,7 +58,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Nn9-gQ-5IU" kind="show" identifier="ShowItem" id="PKy-gL-tTn"/>
+                                    <segue destination="Nn9-gQ-5IU" kind="showDetail" identifier="ShowItem" action="showViewController:sender:" id="PKy-gL-tTn"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -82,26 +82,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Iv0-jE-3ou">
-                                <rect key="frame" x="10" y="10" width="355" height="647"/>
+                                <rect key="frame" x="10" y="10" width="375" height="647"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="titleLabel" text="Title Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3vH-v3-1wh" userLabel="Title">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="262.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="262.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="DPw-Mn-Gtu">
-                                        <rect key="frame" x="0.0" y="262.5" width="355" height="384.5"/>
+                                        <rect key="frame" x="0.0" y="262.5" width="375" height="384.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nkz-I6-RXV">
-                                                <rect key="frame" x="0.0" y="0.0" width="177.5" height="384.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="384.5"/>
                                                 <state key="normal" title="Next"/>
                                                 <connections>
                                                     <action selector="next_item:" destination="Nn9-gQ-5IU" eventType="touchUpInside" id="UCK-N2-Nvz"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9De-fC-Ue9">
-                                                <rect key="frame" x="177.5" y="0.0" width="177.5" height="384.5"/>
+                                                <rect key="frame" x="177.5" y="0.0" width="187.5" height="384.5"/>
                                                 <state key="normal" title="Like"/>
                                                 <connections>
                                                     <action selector="favorite_item:" destination="Nn9-gQ-5IU" eventType="touchUpInside" id="T1b-VV-ojW"/>

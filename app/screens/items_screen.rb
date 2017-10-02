@@ -1,108 +1,88 @@
 class ItemsScreen < UITableViewController
   extend IB
 
-  attr_accessor :currentIndexPath
+  attr_accessor :items, :idx
 
   def viewDidLoad
     super
 
-    fetch_items
+    @items = []
+    @idx = 0
+
+    select_idx(:next)
   end
 
   def tableView(tableView, numberOfRowsInSection: section)
-    items.size
+    @items.size
   end
 
   def tableView(tableView, cellForRowAtIndexPath: indexPath)
-    @reuseIdentifier ||= 'ItemCell'
-    cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier)
-    cell.item = items[indexPath.row]
-
-    cell
+    cell(indexPath)
   end
 
   def prepareForSegue(segue, sender:sender)
     if segue.identifier == 'ShowItem'
       @item_vc = segue.destinationViewController
       @item_vc.delegate = self
-
       @item_vc.item = sender.item
+      @idx = self.tableView.indexPathForSelectedRow.row
     end
   end
+
+  # def performSegueWithIdentifier(segue, sender:sender)
+  #   super
+  # end
 
   def favorite_item(sender)
     next_item(sender)
   end
 
   def next_item(sender)
-    if currentIndexPath.row >= items.size - 1
-      fetch_items(morelink)
-    end
-    return if currentIndexPath.row >= items.size - 1
+    select_idx(:next)
+  end
 
-    nextIndexPath = NSIndexPath.indexPathForRow(currentIndexPath.row + 1, inSection:currentIndexPath.section)
-    cell = self.tableView.cellForRowAtIndexPath(nextIndexPath) || begin
-      cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier)
-      cell.item = items[indexPath.row]
+  def select_idx(idx=nil)
+    idx = fetch_next_idx if idx.nil? or idx == :next
+    indexPath = NSIndexPath.indexPathForRow(idx, inSection:0)
 
-      cell
+    if self.navigationController.viewControllers[-1] != self
+      self.navigationController.popViewControllerAnimated false
     end
 
-    self.navigationController.popViewControllerAnimated false
-    self.performSegueWithIdentifier('ShowItem', sender: cell)
-    self.tableView.selectRowAtIndexPath(nextIndexPath, animated: false, scrollPosition: UITableViewScrollPositionMiddle)
-
-    @currentIndexPath = nextIndexPath
+    self.tableView.selectRowAtIndexPath(indexPath, animated: false, scrollPosition: UITableViewScrollPositionMiddle)
+    self.performSegueWithIdentifier 'ShowItem', sender: cell(indexPath)
   end
 
   private
 
-  def fetch_items(link=nil)
-    doc(link)
+  def cell(indexPath)
+    @reuseIdentifier ||= 'ItemCell'
+
+    self.tableView.cellForRowAtIndexPath(indexPath) || begin
+      cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier)
+      cell.item = @items[indexPath.row]
+
+      cell
+    end
+  end
+
+  def fetch_next_idx
+    if @idx + 1 >= @items.size
+      fetch_items
+      @idx = 0
+    else
+      @idx += 1
+    end
+
+    @idx
+  end
+
+  def fetch_items
+    items = HN.shared_instance.more.items
 
     if items.size > 0
+      @items = items
       self.tableView.reloadData
-
-      self.performSegueWithIdentifier('ShowItem', sender: self.tableView.cellForRowAtIndexPath(currentIndexPath))
     end
-  end
-
-  def currentIndexPath
-    @currentIndexPath ||= begin
-      indexPath = self.tableView.indexPathForSelectedRow || NSIndexPath.indexPathForRow(0, inSection:0)
-      NSIndexPath.indexPathForRow(indexPath.row, inSection:indexPath.section)
-    end
-  end
-
-  def items
-    @items ||= doc.searchWithXPathQuery("//tr[@class='athing']").map do |e|
-      link = e.searchWithXPathQuery("//a[@class='storylink']").first
-
-      {
-        id: e[:id],
-        title: link.text,
-        url: link[:href].nsurl(baseurl).absoluteString
-      }.to_object
-    end
-  end
-
-  def morelink
-    @morelink ||= doc.searchWithXPathQuery("//a[@class='morelink']").first
-    @morelink[:href].nsurl(baseurl)
-  end
-
-  def doc(link=nil)
-    link ||= baseurl
-
-    @doc ||= begin
-      doc = TFHpple.alloc.initWithHTMLData link.nsurl.nsdata
-      @items = @morelink = nil
-
-      doc
-    end
-  end
-
-  def baseurl
-    @baseurl ||= "https://news.ycombinator.com".nsurl
   end
 end
