@@ -17,3 +17,5 @@ nbproject
 .dat*.*
 vendor/Pods/
 ib.xcodeproj/
+provisioning/
+vendor/cache/

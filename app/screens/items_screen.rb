@@ -59,7 +59,7 @@ class ItemsScreen < UITableViewController
     @reuseIdentifier ||= 'ItemCell'
 
     self.tableView.cellForRowAtIndexPath(indexPath) || begin
-      cell = tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier)
+      cell = self.tableView.dequeueReusableCellWithIdentifier(@reuseIdentifier)
       cell.item = @items[indexPath.row]
 
       cell

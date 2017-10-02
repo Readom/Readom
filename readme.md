@@ -108,4 +108,18 @@ mogrify -resize 167x167 "83.5x83.5~ipad@2x.png"
 popd
 ```
 
+# Launch Images
+
+```
+mogrify -resize 1125x2436 "Default-2436h@3x.png"
+mogrify -resize 750x1334 "Default-375w-667h@2x.png"
+mogrify -resize 1242x2208 "Default-414w-736h@3x.png"
+mogrify -resize 640x1136 "Default-568h@2x.png"
+mogrify -resize 750x1334 "Default-667h@2x.png"
+mogrify -resize 1242x2208 "Default-736h@3x.png"
+mogrify -resize 768x1024 "Default-ipad.png"
+mogrify -resize 1536x2048 "Default-ipad@2x.png"
+mogrify -resize 640x960 "Default.png"
+```
+
 For more information about Asset Catalogs, refer to this link: https://developer.apple.com/library/content/documentation/Xcode/Reference/xcode_ref-Asset_Catalog_Format/
