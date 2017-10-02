@@ -7,7 +7,7 @@ class ItemScreen < UIViewController
   def viewDidLoad
     super
 
-    titleLabel.text = @item.title
+    titleLabel.text = @item[:title]
   end
 
   def viewWillAppear(animated)

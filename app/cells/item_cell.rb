@@ -6,7 +6,7 @@ class ItemCell < UITableViewCell
   def item=(item)
     @item = item
 
-    self.textLabel.text = @item.title
+    self.textLabel.text = @item[:title]
     self.detailTextLabel.text = @item.id
 
     self.textLabel.numberOfLines = 0
