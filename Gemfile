@@ -11,4 +11,4 @@ gem 'sugarcube', require: %w[
   sugarcube-foundation
   sugarcube-nsdata
   sugarcube-repl
-], github: 'Lax/sugarcube'
+], github: 'rubymotion/sugarcube'
