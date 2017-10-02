@@ -15,3 +15,7 @@ nbproject
 .sass-cache
 .idea
 .dat*.*
+
+/Gemfile.lock
+/resources/Settings.bundle/
+/vendor/Pods/
