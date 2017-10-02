@@ -1,0 +1,21 @@
+os: osx
+osx_image: xcode9
+language: objective-c
+branches:
+  only:
+    - travis
+    - dev
+    - release
+    - master
+before_install:
+  - curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+  - rvm get latest --auto-dotfiles
+  - rvm use 2.4 --install --binary --fuzzy
+  - (ruby --version)
+  - sudo motion update
+gemfile:
+  - Gemfile
+script:
+  - bundle install --jobs=3 --retry=3
+  - bundle exec rake pod:install
+  - bundle exec rake clean spec device_name='iPhone X'
