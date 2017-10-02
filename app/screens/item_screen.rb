@@ -8,10 +8,20 @@ class ItemScreen < UIViewController
     super
 
     titleLabel.text = @item[:title]
+
+    tapGesture = UITapGestureRecognizer.alloc.initWithTarget(self, action: 'show_web_screen')
+    tapGesture.numberOfTapsRequired = 1
+    titleLabel.addGestureRecognizer tapGesture
   end
 
   def viewWillAppear(animated)
     super
+  end
+
+  def show_web_screen
+    web_screen = WebScreen.create(@item)
+
+    self.presentModalViewController(web_screen, animated: false)
   end
 
   def favorite_item(sender)

@@ -35,6 +35,7 @@ Motion::Project::App.setup do |app|
 
   # add additional frameworks here
   # app.frameworks << "StoreKit"
+  app.frameworks << 'SafariServices'
 
   app.pods do
     pod 'hpple', git: 'https://github.com/topfunky/hpple'
