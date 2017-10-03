@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/Lax/motion-awesome.git
+  revision: c46ed36f620ff8ed7332706163a50ac3f7ee94de
+  branch: awesome-4.7.0
+  specs:
+    motion-awesome (0.0.6)
+      motion-map
+
+GIT
   remote: git://github.com/rubymotion/sugarcube.git
   revision: 7cc62a38c195440f24dab14d90e3ac07d07092a4
   specs:
@@ -152,6 +160,7 @@ GEM
     molinillo (0.5.7)
     motion-cocoapods (1.9.0)
       cocoapods (>= 1.0.0)
+    motion-map (0.0.4)
     motion-provisioning (0.0.7)
       spaceship (~> 0.38)
     multi_json (1.12.2)
@@ -219,6 +228,7 @@ PLATFORMS
 
 DEPENDENCIES
   ib
+  motion-awesome!
   motion-cocoapods
   motion-provisioning
   rake

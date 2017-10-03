@@ -43,7 +43,7 @@ class ItemsScreen < UITableViewController
 
   def select_idx(idx=nil)
     idx = fetch_next_idx if idx.nil? or idx == :next
-    indexPath = NSIndexPath.indexPathForRow(idx, inSection:0)
+    indexPath = [0, idx].nsindexpath
 
     if self.navigationController.viewControllers[-1] != self
       self.navigationController.popViewControllerAnimated false

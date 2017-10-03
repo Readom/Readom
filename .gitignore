@@ -15,7 +15,10 @@ nbproject
 .sass-cache
 .idea
 .dat*.*
-vendor/Pods/
-ib.xcodeproj/
-provisioning/
-vendor/cache/
+
+provisioning
+vendor/cache
+vendor/Pods
+ib.xcodeproj
+resources/fontawesome-webfont.ttf
+resources/fontawesome.plist
