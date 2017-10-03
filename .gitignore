@@ -17,12 +17,8 @@ nbproject
 .dat*.*
 
 provisioning
+vendor/cache
 vendor/Pods
-*.swp
-*.orig
-resources/*.xcdatamodeld
+ib.xcodeproj
 resources/fontawesome-webfont.ttf
 resources/fontawesome.plist
-resources/Settings.bundle
-*.storyboardc
-ib.xcodeproj

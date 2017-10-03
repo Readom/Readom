@@ -1,23 +1,20 @@
 source 'https://rubygems.org'
 
 gem 'rake'
-# Add your dependencies here:
-
 gem 'motion-provisioning'
 gem 'motion-cocoapods'
 gem 'ib'
 
-gem 'ProMotion'
-
-gem 'RackMotion'
-gem 'afmotion'
-gem 'motion-awesome'
-gem 'motion-kit'
-gem 'sugarcube', :require => 'sugarcube-all'
-gem 'geomotion', :require => 'geomotion'
-gem 'moticons'
-
-gem 'motion-acknowledgements', :github => 'picapica/motion-acknowledgements'
-gem 'motion-settings-bundle', :github => 'picapica/motion-settings-bundle'
-
-gem 'json', '~> 2.0'
+gem 'motion-awesome', github: 'Lax/motion-awesome', branch: 'awesome-4.7.0'
+gem 'sugarcube', require: %w[
+  sugarcube-anonymous
+  sugarcube-awesome
+  sugarcube-color
+  sugarcube-foundation
+  sugarcube-indexpath
+  sugarcube-localized
+  sugarcube-nsdata
+  sugarcube-nsuserdefaults
+  sugarcube-repl
+  sugarcube-ui
+], github: 'rubymotion/sugarcube'

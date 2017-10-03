@@ -1,4 +1,4 @@
-describe "Application 'Readom'" do
+describe "Application 'Reading'" do
   before do
     @app = UIApplication.sharedApplication
   end
