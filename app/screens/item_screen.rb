@@ -7,7 +7,7 @@ class ItemScreen < UIViewController
   def viewDidLoad
     super
 
-    titleLabel.text = @item[:title]
+    titleLabel.text = @item.title
 
     tapGesture = UITapGestureRecognizer.alloc.initWithTarget(self, action: 'show_web_screen')
     tapGesture.numberOfTapsRequired = 1
