@@ -1,19 +1,17 @@
-class WebScreen < AXWebViewController
-  class <<self
-    def create(params={})
-      item = params[:item]
-      url = params[:url]
-      reader = params[:reader]
+class WebScreen < SFSafariViewController
 
-      sfsvc = self.alloc.initWithURL url, entersReaderIfAvailable: reader
-      sfsvc.item = item
-      sfsvc.delegate = self
-      sfsvc.preferredBarTintColor = UINavigationBar.appearance.barTintColor
-      sfsvc.preferredControlTintColor = UINavigationBar.appearance.tintColor
+  def self.create(params={})
+    url = params[:url]
 
-      sfsvc
-    end
-  end # end class method
+    sfsvc = self.alloc.initWithURL url.nsurl, entersReaderIfAvailable: true
+    sfsvc.delegate = self
+    sfsvc.preferredBarTintColor = UINavigationBar.appearance.barTintColor
+    sfsvc.preferredControlTintColor = UINavigationBar.appearance.tintColor
+
+    sfsvc
+  end
+
+  attr_accessor :url, :delegate
 
   # SFSafariViewController delegate
   def safariViewController(controller, didCompleteInitialLoad: didLoadSuccessfully)
@@ -31,4 +29,5 @@ class WebScreen < AXWebViewController
   def prefersStatusBarHidden
     true
   end
+
 end
