@@ -37,7 +37,7 @@ Motion::Project::App.setup do |app|
   app.frameworks << 'SafariServices'
 
   app.pods do
-    pod 'hpple', git: 'https://github.com/topfunky/hpple.git'
+    pod 'hpple', git: 'https://github.com/topfunky/hpple'
   end
 
   # resonable defaults

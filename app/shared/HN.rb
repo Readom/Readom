@@ -37,8 +37,12 @@ class HN
       doc = TFHpple.alloc.initWithHTMLData story_url.nsurl.nsdata
       doc.searchWithXPathQuery("//table[@class='comment-tree']/tr[@class='athing comtr ']").map do |e|
         id = e[:id]
-        user_id = e.peekAtSearchWithXPathQuery("//*[@class='comhead']/a[@class='hnuser']").text
-        content = e.peekAtSearchWithXPathQuery("//*[@class='comment']/span[@class]").text
+
+        user_id = e.peekAtSearchWithXPathQuery("//*[@class='comhead']/a[@class='hnuser']")
+        user_id = user_id.text if user_id
+
+        content = e.peekAtSearchWithXPathQuery("//*[@class='comment']/span[@class]")
+        content = content.text if content
 
         # <div class="comment">
         #   <span class="c00">

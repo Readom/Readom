@@ -29,7 +29,17 @@ class ItemScreen < UIViewController
     tapGesture.numberOfTapsRequired = 1
     commentLabel.addGestureRecognizer tapGesture
 
-    commentLabel.text = comments.sample.content if comments.size > 0
+    Dispatch::Queue.new('load_comments').async do
+      if comments.size > 0
+        Dispatch::Queue.main.sync do
+          commentLabel.text = comments.sample.content
+        end
+      else
+        Dispatch::Queue.main.sync do
+          commentLabel.text = 'No comments.'._
+        end
+      end
+    end
   end
 
   def comments
