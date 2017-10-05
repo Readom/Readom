@@ -16,6 +16,12 @@ class ItemScreen < UIViewController
     super
   end
 
+  def viewWillDisappear(animated)
+    super
+
+    load_comments_queue.cancelAllOperations
+  end
+
   def load_title
     tapGesture = UITapGestureRecognizer.alloc.initWithTarget(self, action: 'show_web_screen')
     tapGesture.numberOfTapsRequired = 1
@@ -29,7 +35,7 @@ class ItemScreen < UIViewController
     tapGesture.numberOfTapsRequired = 1
     commentLabel.addGestureRecognizer tapGesture
 
-    Dispatch::Queue.new('load_comments').async do
+    load_comments_queue.addOperationWithBlock(-> {
       if comments.size > 0
         Dispatch::Queue.main.sync do
           commentLabel.text = comments.sample.content
@@ -39,11 +45,21 @@ class ItemScreen < UIViewController
           commentLabel.text = 'No comments.'._
         end
       end
-    end
+    })
   end
 
   def comments
     @comments ||= @item.comments || [Comment.new]
+  end
+
+  def load_comments_queue
+    @load_comments_queue ||= begin
+      queue = NSOperationQueue.new
+      queue.name = 'load_comments_queue'
+      queue.maxConcurrentOperationCount = 1
+
+      queue
+    end
   end
 
   def show_web_screen
