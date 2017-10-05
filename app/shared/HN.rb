@@ -44,23 +44,6 @@ class HN
         content = e.peekAtSearchWithXPathQuery("//*[@class='comment']/span[@class]")
         content = content.text if content
 
-        # <div class="comment">
-        #   <span class="c00">
-        #     The key achievement, imho:
-        #     <p>&gt; In the mid-1970s, Rainer Weiss had already analysed possible sources of background noise that would disturb measurements, and had also designed a detector, a laser-based interferometer, which would overcome this noise.</p>
-        #     <p>Over 40 years ago, Weiss figured out <i>how</i> to do it. And finally, within his lifetime, he got to see it happen and actually work.
-        #       <span>
-        #               </span>
-        #     </p>
-        #     <div class="reply">
-        #       <p><font size="1">
-        #                       <u><a href="reply?id=15391304&amp;goto=item%3Fid%3D15391282%2315391304">reply</a></u>
-        #                   </font>
-        #       </p>
-        #     </div>
-        #   </span>
-        # </div>
-
         Comment.new id: id, user_id: user_id, content: content
       end
     end
