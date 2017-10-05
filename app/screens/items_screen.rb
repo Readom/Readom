@@ -68,7 +68,7 @@ class ItemsScreen < UITableViewController
 
   def fetch_next_idx
     if @idx + 1 >= @items.size
-      fetch_items
+      Dispatch.once { fetch_items }
       @idx = 0
     else
       @idx += 1

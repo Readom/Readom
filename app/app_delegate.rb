@@ -25,6 +25,6 @@ class AppDelegate
         NSFontAttributeName => 'HelveticaNeue-Bold'.uifont(18)
       )
     UINavigationBar.appearance.setBackIndicatorImage :arrow_circle_left.awesome_icon(size: 20, color: :white.uicolor)
-    UINavigationBar.appearance.setBackIndicatorTransitionMaskImage :arrow_circle_o_left.awesome_icon(size: 20, color: :white.uicolor)
+    # UINavigationBar.appearance.setBackIndicatorTransitionMaskImage :arrow_circle_o_left.awesome_icon(size: 20, color: :white.uicolor)
   end
 end
