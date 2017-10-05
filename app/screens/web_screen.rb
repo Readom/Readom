@@ -2,6 +2,7 @@ class WebScreen < SFSafariViewController
 
   def self.create(url)
     sfsvc = self.alloc.initWithURL url.nsurl, entersReaderIfAvailable: true
+    sfsvc.url = url.nsurl
     sfsvc.delegate = self
     sfsvc.preferredBarTintColor = UINavigationBar.appearance.barTintColor
     sfsvc.preferredControlTintColor = UINavigationBar.appearance.tintColor

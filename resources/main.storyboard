@@ -28,7 +28,7 @@
         <!--Items Screen-->
         <scene sceneID="eaJ-Hp-9QS">
             <objects>
-                <tableViewController id="7qc-MC-maJ" customClass="ItemsScreen" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ItemsScreen" id="7qc-MC-maJ" customClass="ItemsScreen" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rly-R8-3ZA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,7 +76,7 @@
         <!--Item Screen-->
         <scene sceneID="6XK-Dg-dha">
             <objects>
-                <viewController id="Nn9-gQ-5IU" customClass="ItemScreen" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ItemScreen" id="Nn9-gQ-5IU" customClass="ItemScreen" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6Gq-5w-eSh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -1,5 +1,6 @@
 class AppDelegate
   def application(application, didFinishLaunchingWithOptions:launchOptions)
+
     setup_ui
 
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)

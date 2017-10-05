@@ -45,7 +45,7 @@ class ItemsScreen < UITableViewController
     idx = fetch_next_idx if idx.nil? or idx == :next
     indexPath = [0, idx].nsindexpath
 
-    if self.navigationController.viewControllers[-1] != self
+    if self.navigationController and self.navigationController.viewControllers[-1] != self
       self.navigationController.popViewControllerAnimated false
     end
 
@@ -68,7 +68,7 @@ class ItemsScreen < UITableViewController
 
   def fetch_next_idx
     if @idx + 1 >= @items.size
-      Dispatch.once { fetch_items }
+      Dispatch::Queue.new('fetch_items').sync { fetch_items }
       @idx = 0
     else
       @idx += 1
