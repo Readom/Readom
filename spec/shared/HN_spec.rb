@@ -1,7 +1,9 @@
 describe 'HN' do
 
-  it "HN shared_instance" do
-    HN.shared_instance.should.be.instance_of HN
+  describe '#shared_instance' do
 
+    it "is a HN instance" do
+      HN.shared_instance.should.be.instance_of HN
+    end
   end
 end
