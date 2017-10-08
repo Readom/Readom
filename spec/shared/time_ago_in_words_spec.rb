@@ -4,7 +4,10 @@ describe 'TimeAgoInWords' do
     @sample_words = "1 day and 1 hour ago"
   end
 
-  it "time translate to words" do
-    @sample_time.ago_in_words.should == @sample_words
+  describe '#ago_in_words' do
+
+    it "should translate to words" do
+      @sample_time.ago_in_words.should == @sample_words
+    end
   end
 end
