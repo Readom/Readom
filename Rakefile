@@ -38,6 +38,7 @@ Motion::Project::App.setup do |app|
 
   app.pods do
     pod 'hpple', git: 'https://github.com/topfunky/hpple'
+    pod 'BarrageRenderer'
   end
 
   # resonable defaults
