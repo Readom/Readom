@@ -1,6 +1,6 @@
 describe 'UVID' do
 
-  describe '#uvid' do
+  describe '.uvid' do
 
     it "get the same uvid value" do
       previous = UVID.uvid
