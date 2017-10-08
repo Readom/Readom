@@ -22,3 +22,4 @@ vendor/Pods
 ib.xcodeproj
 resources/fontawesome-webfont.ttf
 resources/fontawesome.plist
+resources/Settings.bundle/

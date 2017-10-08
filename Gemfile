@@ -5,7 +5,10 @@ gem 'motion-provisioning'
 gem 'motion-cocoapods'
 gem 'ib'
 
-gem 'motion-awesome', github: 'Lax/motion-awesome', branch: 'awesome-4.7.0'
+gem 'motion-acknowledgements', github: 'picapica/motion-acknowledgements'
+gem 'motion-settings-bundle', github: 'picapica/motion-settings-bundle'
+
+gem 'motion-awesome', github: 'derailed/motion-awesome'
 gem 'sugarcube', require: %w[
   sugarcube-anonymous
   sugarcube-awesome
