@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/derailed/motion-awesome.git
-  revision: d4af7e95db462eaa8e2775cffbf9fb04b54b2c5e
-  specs:
-    motion-awesome (0.0.6)
-      motion-map
-
-GIT
   remote: git://github.com/picapica/motion-acknowledgements.git
   revision: 252a6e528907d04c2bb9fed68d7188a2ec593938
   specs:
@@ -172,6 +165,8 @@ GEM
     mini_magick (4.5.1)
     minitest (5.10.3)
     molinillo (0.5.7)
+    motion-awesome (0.0.7)
+      motion-map
     motion-cocoapods (1.9.0)
       cocoapods (>= 1.0.0)
     motion-map (0.0.4)
@@ -245,7 +240,7 @@ PLATFORMS
 DEPENDENCIES
   ib
   motion-acknowledgements!
-  motion-awesome!
+  motion-awesome
   motion-cocoapods
   motion-provisioning
   motion-settings-bundle!
