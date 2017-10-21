@@ -8,7 +8,7 @@ gem 'ib'
 gem 'motion-acknowledgements', github: 'picapica/motion-acknowledgements'
 gem 'motion-settings-bundle', github: 'picapica/motion-settings-bundle'
 
-gem 'motion-awesome'
+gem 'motion-awesome', github: 'derailed/motion-awesome'
 gem 'sugarcube', require: %w[
   sugarcube-anonymous
   sugarcube-awesome
