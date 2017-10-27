@@ -1,40 +1,23 @@
 class HN
 
-  class User
+  class Item
 
-    attr_accessor :id, :name
-
-    def initialize(params)
-      @id = params[:id]
-      @name = params[:name]
-    end
-  end
-
-  class Comment
-
-    attr_accessor :id, :user_id, :content
-
-    def initialize(params)
-      @id = params[:id]
-      @user_id = params[:user_id]
-      @content = params[:content]
-    end
-  end
-
-  class Story
-
-    attr_accessor :id, :title, :url
+    attr_accessor :id
+    attr_accessor :title, :url
+    attr_accessor :user_id, :content
 
     def initialize(params)
       @id = params[:id]
       @title = params[:title]
       @url = params[:url]
+      @user_id = params[:user_id]
+      @content = params[:content]
     end
 
     def comments
       @comments ||= []
 
-      doc = TFHpple.alloc.initWithHTMLData story_url.nsurl.nsdata
+      doc = TFHpple.alloc.initWithHTMLData item_url.nsurl.nsdata
       doc.searchWithXPathQuery("//table[@class='comment-tree']/tr[@class='athing comtr ']").map do |e|
         id = e[:id]
 
@@ -44,13 +27,13 @@ class HN
         content = e.peekAtSearchWithXPathQuery("//*[@class='comment']/span[@class]")
         content = content.text if content
 
-        Comment.new id: id, user_id: user_id, content: content
+        Item.new id: id, user_id: user_id, content: content
       end
     end
 
     private
 
-    def story_url
+    def item_url
       'https://news.ycombinator.com/item?id=%s' % @id
     end
   end
@@ -69,7 +52,7 @@ class HN
     @morepage = nil
   end
 
-  def more
+  def load_next_page
     doc = TFHpple.alloc.initWithHTMLData(
       ( @morepage.nil? ? baseurl.nsurl : @morepage.nsurl(baseurl) ).nsdata
     )
@@ -78,7 +61,7 @@ class HN
     @items = doc.searchWithXPathQuery("//tr[@class='athing']").map do |e|
       link = e.peekAtSearchWithXPathQuery("//a[@class='storylink']")
 
-      Story.new id: e[:id],
+      Item.new id: e[:id],
             title: link.text,
               url: link[:href].nsurl(baseurl).absoluteString
     end
@@ -89,6 +72,6 @@ class HN
   private
 
   def baseurl
-    @baseurl ||= "https://news.ycombinator.com".nsurl
+    "https://news.ycombinator.com/news".nsurl
   end
 end
