@@ -1,7 +1,7 @@
 describe ItemScreen do
 
   before do
-    controller.item = HN::Story.new({id: '1', title: 'title1', url: 'https://news.ycombinator.com/item?id=1'})
+    controller.item = HN::Item.new({id: '1', title: 'title1', url: 'https://news.ycombinator.com/item?id=1'})
   end
 
   tests ItemScreen, :storyboard => 'main', :id => 'ItemScreen'
