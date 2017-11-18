@@ -78,7 +78,7 @@ class ItemsScreen < UITableViewController
   end
 
   def fetch_items
-    items = HN.shared_instance.more.items
+    items = HN.shared_instance.load_next_page.items
 
     if items.size > 0
       @items = items

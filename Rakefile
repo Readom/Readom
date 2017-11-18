@@ -129,3 +129,20 @@ def force_64bit_only!(app)
   app.archs['iPhoneOS'] = ['arm64']
   app.info_plist['UIRequiredDeviceCapabilities'] = ['arm64']
 end
+
+Motion::SettingsBundle.setup do |app|
+  app.group 'Usage', footer: "Keep this ON to take advantage of 'Readers' view mode."
+  app.multivalue "Default List", key: "defaultReadomList", default: :topstories,
+                                 titles: [:New, :Top, :Best, :Show, :Ask, :Job],
+                                 values: [:newstories, :topstories, :beststories, :showstories, :askstories, :jobstories]
+  app.toggle "Reader View", key: "readerViewEnabled", default: true
+
+  app.group 'Login', footer: ""
+  app.text "Name", key: "username"
+  app.text "Password", key: "password", secure: true
+
+  app.group 'App', footer: "Version: %s" % $version_fingerprint.split('/').join(' - '), titles: 'titles'
+  app.child "Acknowledgements" do |ack|
+    ack.child "CocoaPods", Title: 'CocoaPods' do end
+  end
+end
