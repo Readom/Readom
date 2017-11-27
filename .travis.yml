@@ -10,7 +10,7 @@ branches:
 before_install:
   - curl -sSL https://rvm.io/mpapis.asc | gpg --import -
   - rvm get latest --auto-dotfiles
-  - rvm use 2.4 --install --binary --fuzzy
+  - rvm use ruby-head --default --install --binary --fuzzy
   - (ruby --version)
   - sudo motion update
 gemfile:
