@@ -20,7 +20,7 @@ gem 'sugarcube', require: %w[
   sugarcube-nsuserdefaults
   sugarcube-repl
   sugarcube-ui
-], github: 'rubymotion/sugarcube'
+]
 
 # for testing
 gem 'motion-stump'
