@@ -27,7 +27,7 @@ Motion::Project::App.setup do |app|
 
   # you'll want to target the lowest version of the sdk that supports the apis you're leveraging. RubyMotion Starter can only target the lastest iOS SDK.
   # app.deployment_target = '9.0'
-  app.deployment_target = '10.0'
+  app.deployment_target = '11.0'
 
   # before deploying to the app store you'll need an app identifier (which can be set up via https://developer.apple.com/account/ios/identifier/bundle)
   # app.identifier = ''
