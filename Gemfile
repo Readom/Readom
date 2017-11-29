@@ -5,8 +5,8 @@ gem 'motion-provisioning'
 gem 'motion-cocoapods'
 gem 'ib'
 
-gem 'motion-acknowledgements', github: 'picapica/motion-acknowledgements'
-gem 'motion-settings-bundle', github: 'picapica/motion-settings-bundle'
+gem 'motion-acknowledgements'
+gem 'motion-settings-bundle'
 
 gem 'motion-awesome'
 gem 'sugarcube', require: %w[
