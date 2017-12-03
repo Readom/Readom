@@ -1,4 +1,5 @@
 # Readom - Random TOP Hacker News [![Build Status](https://travis-ci.org/Readom/Readom.svg?branch=master)](https://travis-ci.org/Readom/Readom)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FReadom%2FReadom.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FReadom%2FReadom?ref=badge_shield)
 
 ### README iOS App
 
@@ -156,3 +157,7 @@ popd
 ```
 
 For more information about Asset Catalogs, refer to this link: https://developer.apple.com/library/content/documentation/Xcode/Reference/xcode_ref-Asset_Catalog_Format/
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FReadom%2FReadom.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FReadom%2FReadom?ref=badge_large)
