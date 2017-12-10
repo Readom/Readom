@@ -19,7 +19,7 @@ Motion::Project::App.setup do |app|
   force_64bit_only!(app)
 
   # name of your app that will show on up the device
-  app.name = 'README'
+  app.name = 'Reading'
 
   # version for your app
   app.short_version = $short_version
@@ -27,9 +27,10 @@ Motion::Project::App.setup do |app|
 
   # you'll want to target the lowest version of the sdk that supports the apis you're leveraging. RubyMotion Starter can only target the lastest iOS SDK.
   # app.deployment_target = '9.0'
-  app.deployment_target = '10.0'
+  app.deployment_target = '11.0'
 
   # before deploying to the app store you'll need an app identifier (which can be set up via https://developer.apple.com/account/ios/identifier/bundle)
+  # app.identifier = ''
   app.identifier = 'cc.mib.README'
 
   # add additional frameworks here
@@ -44,11 +45,10 @@ Motion::Project::App.setup do |app|
   # resonable defaults
   app.device_family = [:iphone, :ipad]
   app.interface_orientations = [:portrait, :portrait_upside_down, :landscape_left, :landscape_right]
-
-  app.info_plist['VersionFingerprint'] = $version_fingerprint
-  app.info_plist['UILaunchStoryboardName'] = 'launch_screen'
   app.info_plist['UIRequiresFullScreen'] = true
   app.info_plist['ITSAppUsesNonExemptEncryption'] = false
+  app.info_plist['VersionFingerprint'] = $version_fingerprint
+  app.info_plist['UILaunchStoryboardName'] = 'launch_screen'
 
   app.development do
     app.codesign_certificate = ENV['TRAVIS'] ? nil : MotionProvisioning.certificate(
@@ -94,6 +94,7 @@ Motion::Project::App.setup do |app|
   # TestFlight builds. It is strongly recommend that you do a
   # TestFlight build and run on a device before doing a release build
   # for App Store consumption.
+  # app.entitlements['beta-reports-active'] = true
     app.entitlements['beta-reports-active'] = true
   end
 
@@ -117,7 +118,7 @@ def define_icon_defaults!(app)
   app.info_plist['CFBundleIcons~ipad'] = {
     'CFBundlePrimaryIcon' => {
       'CFBundleIconName' => 'AppIcon',
-      'CFBundleIconFiles' => ['AppIcon76x76', 'AppIcon83.5x83.5']
+      'CFBundleIconFiles' => ['AppIcon60x60', 'AppIcon76x76']
     }
   }
 end

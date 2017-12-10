@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/derailed/motion-awesome.git
-  revision: d4af7e95db462eaa8e2775cffbf9fb04b54b2c5e
-  specs:
-    motion-awesome (0.0.6)
-      motion-map
-
-GIT
   remote: git://github.com/picapica/motion-acknowledgements.git
   revision: 252a6e528907d04c2bb9fed68d7188a2ec593938
   specs:
@@ -18,16 +11,10 @@ GIT
     motion-settings-bundle (0.3.0)
       plist (~> 3.1)
 
-GIT
-  remote: git://github.com/rubymotion/sugarcube.git
-  revision: 7cc62a38c195440f24dab14d90e3ac07d07092a4
-  specs:
-    sugarcube (3.4.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
-    CFPropertyList (2.3.5)
+    CFPropertyList (2.3.6)
     activesupport (4.2.10)
       i18n (~> 0.7)
       minitest (~> 5.1)
@@ -98,7 +85,7 @@ GEM
     faraday_middleware (0.12.2)
       faraday (>= 0.7.4, < 1.0)
     fastimage (2.1.0)
-    fastlane (2.66.2)
+    fastlane (2.68.2)
       CFPropertyList (>= 2.3, < 3.0.0)
       addressable (>= 2.3, < 3.0.0)
       babosa (>= 1.0.2, < 2.0.0)
@@ -172,6 +159,8 @@ GEM
     mini_magick (4.5.1)
     minitest (5.10.3)
     molinillo (0.5.7)
+    motion-awesome (0.0.7)
+      motion-map
     motion-cocoapods (1.9.0)
       cocoapods (>= 1.0.0)
     motion-map (0.0.4)
@@ -185,7 +174,7 @@ GEM
     nap (1.1.0)
     netrc (0.11.0)
     os (0.9.6)
-    plist (3.3.0)
+    plist (3.4.0)
     public_suffix (2.0.5)
     rake (12.3.0)
     representable (3.0.4)
@@ -213,6 +202,7 @@ GEM
       fastimage (>= 1.6)
       multi_xml (~> 0.5)
       plist (>= 3.1.0, < 4.0.0)
+    sugarcube (3.4.2)
     terminal-notifier (1.8.0)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
@@ -245,15 +235,15 @@ PLATFORMS
 DEPENDENCIES
   ib
   motion-acknowledgements!
-  motion-awesome!
+  motion-awesome
   motion-cocoapods
   motion-provisioning
   motion-settings-bundle!
   motion-stump
   rake
-  sugarcube!
+  sugarcube
   webstub
 
 
 BUNDLED WITH
-   1.16.0.pre.2
+   1.16.0
