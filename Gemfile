@@ -25,3 +25,4 @@ gem 'sugarcube', require: %w[
 # for testing
 gem 'motion-stump'
 gem "webstub"
+gem 'rubyzip', '>= 1.2.2'
