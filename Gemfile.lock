@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/picapica/motion-acknowledgements.git
-  revision: 252a6e528907d04c2bb9fed68d7188a2ec593938
-  specs:
-    motion-acknowledgements (0.0.3)
-
-GIT
   remote: git://github.com/picapica/motion-settings-bundle.git
   revision: 20d006de42353f089aeca0021fd09942002c00a8
   specs:
@@ -159,6 +153,7 @@ GEM
     mini_magick (4.5.1)
     minitest (5.10.3)
     molinillo (0.5.7)
+    motion-acknowledgements (0.0.4)
     motion-awesome (0.0.7)
       motion-map
     motion-cocoapods (1.9.0)
@@ -234,7 +229,7 @@ PLATFORMS
 
 DEPENDENCIES
   ib
-  motion-acknowledgements!
+  motion-acknowledgements
   motion-awesome
   motion-cocoapods
   motion-provisioning
@@ -245,6 +240,5 @@ DEPENDENCIES
   sugarcube
   webstub
 
-
 BUNDLED WITH
-   1.16.0
+   1.16.2
