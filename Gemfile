@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rake'
+gem 'rake', '>= 12.3.3'
 gem 'motion-provisioning'
-gem 'motion-cocoapods'
+gem 'motion-cocoapods', '~> 1.11'
 gem 'ib'
 
 gem 'motion-acknowledgements'
-gem 'motion-settings-bundle', github: 'picapica/motion-settings-bundle'
+gem 'motion-settings-bundle'
 
 gem 'motion-awesome'
 gem 'sugarcube', require: %w[
@@ -25,4 +25,5 @@ gem 'sugarcube', require: %w[
 # for testing
 gem 'motion-stump'
 gem "webstub"
-gem 'rubyzip', '>= 1.2.2'
+gem 'rubyzip', '>= 2.0.0'
+gem 'tzinfo', '>= 1.2.10'
