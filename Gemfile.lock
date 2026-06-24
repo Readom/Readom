@@ -57,7 +57,7 @@ GEM
     colored2 (3.1.2)
     commander (5.0.0)
       highline (~> 3.0.0)
-    concurrent-ruby (1.3.6)
+    concurrent-ruby (1.3.7)
     credentials_manager (0.16.4)
       colored
       commander (>= 4.3.5)
